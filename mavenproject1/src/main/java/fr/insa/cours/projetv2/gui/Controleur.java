@@ -9,7 +9,7 @@ import fr.insa.cours.projetv2mod.AppuiDouble;
 import fr.insa.cours.projetv2mod.AppuiEncastre;
 import fr.insa.cours.projetv2mod.AppuiSimple;
 import fr.insa.cours.projetv2mod.Barre;
-import fr.insa.cours.projetv2mod.Figure;
+import fr.insa.cours.projetv2mod.Treilli;
 import fr.insa.cours.projetv2mod.Groupe;
 import fr.insa.cours.projetv2mod.Noeud;
 import fr.insa.cours.projetv2mod.NoeudSimple;
@@ -28,13 +28,13 @@ import javafx.scene.input.MouseEvent;
 public class Controleur {
     
     private Point pclick;
-    private Figure proche;
+    private Treilli proche;
     private double MAX_VALUE = 50;
     private Point p1;
     private Point p2;
     private Point p3;
     
-    private List<Figure> selection;
+    private List<Treilli> selection;
     
     private mainPane vue;
     private int etat;
@@ -99,7 +99,7 @@ public class Controleur {
          
        } else if (this.etat==30){
            pclick = new Point(t.getX(), t.getY());
-           Figure proche = this.vue.getModel().plusProche(pclick, MAX_VALUE);
+           Treilli proche = this.vue.getModel().plusProche(pclick, MAX_VALUE);
            if(proche instanceof TriangleTerrain){
               int p1 = ((TriangleTerrain) proche).distancePointInt(pclick);
               SegmentTerrain segment = ((TriangleTerrain) proche).distancePointSegment(pclick);
@@ -114,7 +114,7 @@ public class Controleur {
            
        } else if (this.etat==40){
            pclick = new Point(t.getX(), t.getY());
-           Figure proche = this.vue.getModel().plusProche(pclick, MAX_VALUE);
+           Treilli proche = this.vue.getModel().plusProche(pclick, MAX_VALUE);
            if(proche instanceof TriangleTerrain){
               int p1 = ((TriangleTerrain) proche).distancePointInt(pclick);
               SegmentTerrain segment = ((TriangleTerrain) proche).distancePointSegment(pclick);
@@ -129,7 +129,7 @@ public class Controleur {
            
        } else if (this.etat==50){
            pclick = new Point(t.getX(), t.getY());
-           Figure proche = this.vue.getModel().plusProche(pclick, MAX_VALUE);
+           Treilli proche = this.vue.getModel().plusProche(pclick, MAX_VALUE);
            if(proche instanceof TriangleTerrain){
               int p1 = ((TriangleTerrain) proche).distancePointInt(pclick);
               SegmentTerrain segment = ((TriangleTerrain) proche).distancePointSegment(pclick);
@@ -152,7 +152,7 @@ public class Controleur {
        
         } else if (this.etat==70){ 
             pclick = new Point(t.getX(), t.getY());
-            Figure proche = this.vue.getModel().NoeudplusProche(pclick, MAX_VALUE);
+            Treilli proche = this.vue.getModel().NoeudplusProche(pclick, MAX_VALUE);
             if(proche instanceof Noeud){
                 this.selection.add(proche);
                 System.out.println(this.selection.get(0));
@@ -161,7 +161,7 @@ public class Controleur {
             }
         } else if (this.etat==71){ 
             pclick = new Point(t.getX(), t.getY()); 
-            Figure proche = this.vue.getModel().plusProche(pclick, MAX_VALUE);
+            Treilli proche = this.vue.getModel().plusProche(pclick, MAX_VALUE);
             if(proche instanceof Noeud){
                 int id = 1;
                 Groupe model = this.vue.getModel();
@@ -182,7 +182,7 @@ public class Controleur {
     
     
 
-    public List<Figure> getSelection() {
+    public List<Treilli> getSelection() {
         return selection;
     }
 

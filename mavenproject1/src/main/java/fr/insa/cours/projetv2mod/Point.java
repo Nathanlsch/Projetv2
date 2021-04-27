@@ -6,6 +6,7 @@
 package fr.insa.cours.projetv2mod;
 
 import fr.insa.cours.projetv2.recup.Lire;
+import javafx.scene.canvas.GraphicsContext;
 
 
 /**
@@ -158,5 +159,7 @@ public static Point DemandePoint(){
     return point;
   
 }
+
+   
 
 }

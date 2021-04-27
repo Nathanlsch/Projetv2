@@ -22,6 +22,7 @@ public class SegmentTerrain extends FigureSimple {
     private Point fin;
     
     
+    
     public SegmentTerrain(){
         super(Color.BLACK);
         this.debut = new Point();

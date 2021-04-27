@@ -18,15 +18,15 @@ import javafx.scene.canvas.GraphicsContext;
  */
 
 
-public class Groupe extends Figure {
+public class Groupe extends Treilli {
     
-    private List<Figure> contient;
+    private List<Treilli> contient;
     
     public Groupe() {
-        this.contient = new ArrayList<Figure>();
+        this.contient = new ArrayList<Treilli>();
     }
 
-    public void add(Figure f) {
+    public void add(Treilli f) {
         if (f.getGroupe() != this) {
             if (f.getGroupe() != null) {
                 throw new Error("figure déja dans un autre groupe");
@@ -36,7 +36,7 @@ public class Groupe extends Figure {
         }
     }
     
-    public void remove(Figure f) {
+    public void remove(Treilli f) {
         if (f.getGroupe() != this) {
             throw new Error("la figure n'est pas dans le groupe");
         }
@@ -44,14 +44,14 @@ public class Groupe extends Figure {
         f.setGroupe(null);
     }
     
-    public void removeAll(List<Figure> lf) {
-        for(Figure f : lf) {
+    public void removeAll(List<Treilli> lf) {
+        for(Treilli f : lf) {
             this.remove(f);
         }
     }
     
     public void clear() {
-        List<Figure> toRemove = new ArrayList<>(this.contient);
+        List<Treilli> toRemove = new ArrayList<>(this.contient);
         this.removeAll(toRemove);
     }
 
@@ -85,17 +85,17 @@ public class Groupe extends Figure {
         return res;
     }
  
-    public Figure plusProche(Point p, double distMax) {
+    public Treilli plusProche(Point p, double distMax) {
         if (this.contient.isEmpty()) {
             return null;
         } else {
-            Figure fmin = this.contient.get(0);
+            Treilli fmin = this.contient.get(0);
             double min = fmin.distancePoint(p);
             if (fmin instanceof Noeud){
                 min = min-0.5*min;
             }
             for (int i =1;i<this.contient.size(); i++){
-             Figure fcur = this.contient.get(i);
+             Treilli fcur = this.contient.get(i);
              double cur = fcur.distancePoint(p);
              if (fcur instanceof Noeud){
                 cur = cur-0.5*cur;
@@ -165,22 +165,22 @@ public class Groupe extends Figure {
 
     @Override
     public void dessine(GraphicsContext context) {
-        for(Figure f : this.contient){
+        for(Treilli f : this.contient){
             f.dessine(context);
         }
     }
 
     @Override
     public void dessineSelection(GraphicsContext context) {
-       for(Figure f : this.contient){
+       for(Treilli f : this.contient){
             f.dessineSelection(context); 
     }
    }
 
-    public Figure NoeudplusProche(Point pclick, double MAX_VALUE) {
+    public Treilli NoeudplusProche(Point pclick, double MAX_VALUE) {
         int z=0;
         double min=0;
-        Figure fmin = new SegmentTerrain();
+        Treilli fmin = new SegmentTerrain();
         if (this.contient.isEmpty()) {
             return null;
         } else {
@@ -195,7 +195,7 @@ public class Groupe extends Figure {
             }
         }
         for (int i =z ;i<this.contient.size(); i++){
-             Figure fcur = this.contient.get(i);
+             Treilli fcur = this.contient.get(i);
             if (fcur instanceof Noeud){
                 double cur = fcur.distancePoint(pclick);
                  if(cur<min){

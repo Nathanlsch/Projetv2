@@ -5,6 +5,7 @@
  */
 package fr.insa.cours.projetv2mod;
 
+import java.util.Map;
 import javafx.scene.paint.Color;
 
 
@@ -12,12 +13,14 @@ import javafx.scene.paint.Color;
  *
  * @author francois
  */
-public abstract class FigureSimple extends Figure {
+public abstract class FigureSimple extends Treilli {
     
+    private int id;
     private Color couleur;
 
     public FigureSimple(Color couleur) {
         this.couleur = couleur;
+ 
     }
 
     public Color getCouleur() {
