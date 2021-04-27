@@ -156,6 +156,7 @@ public class Controleur {
             if(proche instanceof Noeud){
                 this.selection.add(proche);
                 System.out.println(this.selection.get(0));
+                this.vue.redrawAll(); 
                 this.changeEtat(71);
             }
         } else if (this.etat==71){ 

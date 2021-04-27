@@ -6,8 +6,8 @@
 package fr.insa.cours.projetv2mod;
 
 
-import static fr.insa.cours.projetv2mod.NoeudSimple.RAYON_IN_DRAW;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.paint.Color;
 
 /**
  *
@@ -58,7 +58,9 @@ public class Appui extends Noeud {
 
     @Override
     public void dessineSelection(GraphicsContext context) {
-        System.out.println("Appui select");
+        Point p = this.getcoordAppui(this.getP1(),this.getTriangleTerrain(),this.getPosSurSegment());
+        context.setFill(Color.WHITE);
+        context.fillOval(p.getPx()-RAYON_IN_DRAW, p.getPy()-RAYON_IN_DRAW, 2*RAYON_IN_DRAW, 2*RAYON_IN_DRAW);  
     }
 
  
