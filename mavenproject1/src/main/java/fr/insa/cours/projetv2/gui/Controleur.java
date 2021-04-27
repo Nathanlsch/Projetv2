@@ -19,7 +19,9 @@ import fr.insa.cours.projetv2mod.TriangleTerrain;
 import java.util.ArrayList;
 import java.util.List;
 import javafx.event.ActionEvent;
+import javafx.scene.Scene;
 import javafx.scene.input.MouseEvent;
+import javafx.stage.Stage;
 
 /**
  *
@@ -104,10 +106,9 @@ public class Controleur {
               int p1 = ((TriangleTerrain) proche).distancePointInt(pclick);
               SegmentTerrain segment = ((TriangleTerrain) proche).distancePointSegment(pclick);
               Point p = segment.distancePointDonnePoint(pclick);
-              int id = 1;
               Groupe model = this.vue.getModel();
               double alpha = ((segment.getDebut().distancePoint(p))/segment.getDebut().distancePoint(segment.getFin()));
-              model.add(new AppuiSimple(id,(TriangleTerrain) proche,p1,alpha));
+              model.add(new AppuiSimple((TriangleTerrain) proche,p1,alpha));
               this.vue.redrawAll();
               this.changeEtat(30);
            }
@@ -119,10 +120,9 @@ public class Controleur {
               int p1 = ((TriangleTerrain) proche).distancePointInt(pclick);
               SegmentTerrain segment = ((TriangleTerrain) proche).distancePointSegment(pclick);
               Point p = segment.distancePointDonnePoint(pclick);
-              int id = 1;
               Groupe model = this.vue.getModel();
               double alpha = ((segment.getDebut().distancePoint(p))/segment.getDebut().distancePoint(segment.getFin()));
-              model.add(new AppuiDouble(id,(TriangleTerrain) proche,p1,alpha));
+              model.add(new AppuiDouble((TriangleTerrain) proche,p1,alpha));
               this.vue.redrawAll();
               this.changeEtat(40);  
            }
@@ -134,10 +134,9 @@ public class Controleur {
               int p1 = ((TriangleTerrain) proche).distancePointInt(pclick);
               SegmentTerrain segment = ((TriangleTerrain) proche).distancePointSegment(pclick);
               Point p = segment.distancePointDonnePoint(pclick);
-              int id = 1;
               Groupe model = this.vue.getModel();
               double alpha = ((segment.getDebut().distancePoint(p))/segment.getDebut().distancePoint(segment.getFin()));
-              model.add(new AppuiEncastre(id,(TriangleTerrain) proche,p1,alpha));
+              model.add(new AppuiEncastre((TriangleTerrain) proche,p1,alpha));
               this.vue.redrawAll();
               this.changeEtat(50);
             }
@@ -145,9 +144,8 @@ public class Controleur {
        } else if (this.etat==60){    
        double px = t.getX();
        double py = t.getY();
-       int id = 1;
        Groupe model = this.vue.getModel();
-       model.add(new NoeudSimple(id,px,py));
+       model.add(new NoeudSimple(px,py));
        this.vue.redrawAll();  
        
         } else if (this.etat==70){ 
@@ -163,10 +161,9 @@ public class Controleur {
             pclick = new Point(t.getX(), t.getY()); 
             Treilli proche = this.vue.getModel().plusProche(pclick, MAX_VALUE);
             if(proche instanceof Noeud){
-                int id = 1;
                 Groupe model = this.vue.getModel();
                 System.out.println(this.selection.get(0));
-                model.add(new Barre(id,(Noeud) this.selection.get(0),(Noeud) proche));
+                model.add(new Barre((Noeud) this.selection.get(0),(Noeud) proche));
                 this.vue.redrawAll(); 
                 this.changeEtat(70);
             }
@@ -215,8 +212,13 @@ public class Controleur {
     }
 
     void menuNew(ActionEvent t) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        /*Stage nouveau = new Stage();
+        nouveau.setTitle("Nouveau");
+        Scene sc = new Scene(new mainPane(), 800, 600);
+        nouveau.setScene(sc);
+        nouveau.show();*/
     }
+    
     
     void menuSave(ActionEvent t) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.

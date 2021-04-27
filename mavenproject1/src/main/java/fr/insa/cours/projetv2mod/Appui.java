@@ -20,8 +20,9 @@ public class Appui extends Noeud {
     private int p1;
     private double posSurSegment;
 
-     public Appui(int id, TriangleTerrain triangleTerrain, int p1, double posSurSegment) {
-        super(id);
+     public Appui(TriangleTerrain triangleTerrain, int p1, double posSurSegment) {
+        super();
+        this.Identificateur(num);
         this.triangleTerrain = triangleTerrain;
         this.p1 = p1;
         this.posSurSegment = posSurSegment;
@@ -87,6 +88,11 @@ public class Appui extends Noeud {
     public Point getcoordAppui() {
        Point res =  this.getcoordAppui(p1, triangleTerrain, posSurSegment);
        return res;
+    }
+
+    @Override
+    public void Identificateur(Numeroteur<Treilli> num) {
+        this.setId(num.creeID(this));
     }
 
        

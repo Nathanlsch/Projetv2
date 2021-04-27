@@ -17,13 +17,13 @@ import javafx.scene.paint.Color;
 
 public class AppuiSimple extends Appui {
 
-    public AppuiSimple(int id, TriangleTerrain triangleTerrain, int p1, double posSurSegment) {
-        super(id, triangleTerrain, p1, posSurSegment);
+    public AppuiSimple(TriangleTerrain triangleTerrain, int p1, double posSurSegment) {
+        super(triangleTerrain, p1, posSurSegment);
     }
     
         @Override
     public String toString() {
-        return "AppuiSimple;" + this.getId() + ";" + this.getTriangleTerrain().getIdTriangle() + ";" + this.getP1() + ";" + this.getPosSurSegment() + ";" ;
+        return "AppuiSimple;" + this.getId() + ";" + this.getTriangleTerrain().getId() + ";" + this.getP1() + ";" + this.getPosSurSegment() + ";" ;
     }
     
     @Override

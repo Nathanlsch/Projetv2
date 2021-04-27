@@ -20,17 +20,20 @@ public class SegmentTerrain extends FigureSimple {
     
     private Point debut;
     private Point fin;
+    private int id;
     
     
     
     public SegmentTerrain(){
         super(Color.BLACK);
+        this.Identificateur(num);
         this.debut = new Point();
         this.fin = new Point();
     }
     
     public SegmentTerrain(Point debut,Point fin){
         super(Color.BLACK);
+        this.Identificateur(num);
         this.debut = debut;
         this.fin = fin;
     }
@@ -132,6 +135,11 @@ public class SegmentTerrain extends FigureSimple {
      */
     public Point getFin() {
         return fin;
+    }
+    
+    @Override
+    public void Identificateur(Numeroteur<Treilli> num) {
+        this.id = num.creeID(this);
     }
     
 }

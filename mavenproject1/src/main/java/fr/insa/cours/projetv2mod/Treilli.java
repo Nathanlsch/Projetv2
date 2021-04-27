@@ -17,6 +17,8 @@ public abstract class Treilli {
      * null si aucun Groupe
      */
     private Groupe groupe;
+    
+    public static Numeroteur<Treilli> num = new Numeroteur();
 
     public Groupe getGroupe() {
         return groupe;
@@ -40,6 +42,27 @@ public abstract class Treilli {
     public abstract double distancePoint(Point p2);
 
     public abstract void dessineSelection(GraphicsContext context); 
+        
+   public abstract void Identificateur(Numeroteur<Treilli> num);
+   
+    
+        
+        
+    
+
+    /**
+     * @return the num
+     */
+    public Numeroteur<Treilli> getNum() {
+        return num;
+    }
+
+    /**
+     * @param num the num to set
+     */
+    public void setNum(Numeroteur<Treilli> num) {
+        this.num = num;
+    }
         
     
         

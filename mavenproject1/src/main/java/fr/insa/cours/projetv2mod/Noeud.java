@@ -15,10 +15,8 @@ public abstract class Noeud extends FigureSimple{
     
     private int id;
 
-    public Noeud(int id) {
-        super(Color.BLACK);
-        this.id = id;
-             
+    public Noeud() {
+      super(Color.BLACK);       
     }
 
     public int getId() {
@@ -30,5 +28,7 @@ public abstract class Noeud extends FigureSimple{
     }
     
     public abstract Point getcoordAppui();
+    
+    
 
 }

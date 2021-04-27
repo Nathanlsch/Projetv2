@@ -20,11 +20,11 @@ public class Numeroteur<TO> {
     
     private int prochainID;
     
-    private Numeroteur() {
+    public Numeroteur() {
         this(0);
     }
     
-    private Numeroteur(int prochainId) {
+    public Numeroteur(int prochainId) {
         this.prochainID = prochainId;
         this.idversObjet = new TreeMap<>();
         this.objetversId = new HashMap<>();
@@ -36,7 +36,7 @@ public class Numeroteur<TO> {
         }
         this.idversObjet.put(this.prochainID, obj);
         this.objetversId.put(obj, this.prochainID);
-        this.prochainID = this.prochainID+1;
+        this.prochainID = this.prochainID + 1;
         return this.prochainID-1;
     }
    

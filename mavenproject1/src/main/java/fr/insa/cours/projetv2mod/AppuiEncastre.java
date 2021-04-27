@@ -15,8 +15,8 @@ import javafx.scene.paint.Color;
  */
 public class AppuiEncastre extends Appui {
 
-    public AppuiEncastre(int id, TriangleTerrain triangleTerrain, int p1, double posSurSegment) {
-        super(id, triangleTerrain, p1, posSurSegment);
+    public AppuiEncastre( TriangleTerrain triangleTerrain, int p1, double posSurSegment) {
+        super(triangleTerrain, p1, posSurSegment);
     }
     
     @Override

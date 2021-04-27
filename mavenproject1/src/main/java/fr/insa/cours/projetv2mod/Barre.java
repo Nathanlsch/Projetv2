@@ -21,16 +21,16 @@ public class Barre extends FigureSimple{
     private Noeud nfin;
     private TypeDeBarre typeDeBarre;
 
-    public Barre(int id, Noeud ndepart, Noeud nfin) {
+    public Barre(Noeud ndepart, Noeud nfin) {
         super(Color.BLACK);
-        this.id = id;
+        this.Identificateur(num);
         this.ndepart = ndepart; 
         this.nfin = nfin; 
     }
     
-    public Barre(int id, Noeud ndepart, Noeud nfin, TypeDeBarre typeDeBarre) {
+    public Barre(Noeud ndepart, Noeud nfin, TypeDeBarre typeDeBarre) {
         super(Color.BLACK);
-        this.id = id;
+        this.Identificateur(num);
         this.ndepart = ndepart; 
         this.nfin = nfin;
         this.typeDeBarre = typeDeBarre;
@@ -90,6 +90,11 @@ public class Barre extends FigureSimple{
                     y1 + up * (y2 - y1));
             return p4.distancePoint(p);
         }
+    }
+    
+    @Override
+    public void Identificateur(Numeroteur<Treilli> num) {
+        this.id = num.creeID(this);
     }
     
 }

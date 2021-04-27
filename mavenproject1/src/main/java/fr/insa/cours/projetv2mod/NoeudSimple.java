@@ -14,12 +14,13 @@ import javafx.scene.paint.Color;
  */
 public class NoeudSimple extends Noeud {
     
+    
     public static double RAYON_IN_DRAW = 5;
     private double px;
     private double py; 
      
-    public NoeudSimple (int id, double px, double py) {
-    super(id);
+    public NoeudSimple (double px, double py) {
+    this.Identificateur(num);
     this.px = px;
     this.py = py;    
 }
@@ -66,5 +67,10 @@ public class NoeudSimple extends Noeud {
     public Point getcoordAppui() {
         Point res = new Point(this.px,this.py);
         return res;
+    }
+    
+    @Override
+    public void Identificateur(Numeroteur<Treilli> num) {
+        this.setId(num.creeID(this));
     }
 }

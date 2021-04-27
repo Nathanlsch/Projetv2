@@ -60,13 +60,17 @@ public class Groupe extends Treilli {
     }
     
  public static Groupe groupeTest() {
-        NoeudSimple n1 = new NoeudSimple(1,11,15);
-        NoeudSimple n2 = new NoeudSimple(2,100, 20);
-        NoeudSimple n3 = new NoeudSimple(3,120, 100);
-        NoeudSimple n4 = new NoeudSimple(4,10, 110);
-        NoeudSimple n5 = new NoeudSimple(5,60, 50);
+        NoeudSimple n1 = new NoeudSimple(11,15);
+        System.out.println(n1.getId());
+        NoeudSimple n2 = new NoeudSimple(100, 20);
+        System.out.println(n2.getId());
+        NoeudSimple n3 = new NoeudSimple(120, 100);
+        NoeudSimple n4 = new NoeudSimple(10, 110);
+        NoeudSimple n5 = new NoeudSimple(60, 50);
         Point p1 = new Point(10,10);
+        System.out.println(p1.getId());
         Point p2 = new Point(100, 10);
+        System.out.println(p2.getId());
         Point p3 = new Point(100, 100);
         Point p4 = new Point(10, 100);
         Point p5 = new Point(50, 50);
@@ -160,7 +164,7 @@ public class Groupe extends Treilli {
 
     
     public static void main(String[] args) {
-        menuTexte();
+        groupeTest();
     }
 
     @Override
@@ -210,6 +214,11 @@ public class Groupe extends Treilli {
                 return null;
             }
         }
+
+    @Override
+    public void Identificateur(Numeroteur<Treilli> num) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
     }
 
 

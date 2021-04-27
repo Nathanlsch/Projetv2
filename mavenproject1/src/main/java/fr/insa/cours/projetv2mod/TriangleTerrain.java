@@ -23,11 +23,12 @@ public class TriangleTerrain extends FigureSimple{
     private SegmentTerrain Segment1;
     private SegmentTerrain Segment2;
     private SegmentTerrain Segment3;
-    private int idTriangle;
+    private int id;
  
     
     public TriangleTerrain (Point p1,Point p2, Point p3){
     super(Color.BLACK);
+    this.Identificateur(num);
     this.Point1 = p1;
     this.Point2 = p2;
     this.Point3 = p3;
@@ -60,8 +61,8 @@ public class TriangleTerrain extends FigureSimple{
         return Segment3;
     }
 
-    public int getIdTriangle() {
-        return idTriangle;
+    public int getId() {
+        return id;
     }
 
     @Override
@@ -79,7 +80,7 @@ public class TriangleTerrain extends FigureSimple{
            Point p3 = Point.DemandePoint();
            System.out.println("Donner id");
            TriangleTerrain triangle = new TriangleTerrain(p1,p2,p3);
-           triangle.idTriangle = Lire.s();
+           triangle.id = Lire.s();
            
            System.out.println(triangle.toString());
            return triangle;
@@ -141,6 +142,11 @@ public class TriangleTerrain extends FigureSimple{
         this.Segment1.dessineSelection(context);
         this.Segment2.dessineSelection(context);
         this.Segment3.dessineSelection(context);
+    }
+    
+    @Override
+    public void Identificateur(Numeroteur<Treilli> num) {
+        this.id = num.creeID(this);
     }
    
 }

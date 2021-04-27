@@ -7,23 +7,30 @@ package fr.insa.cours.projetv2mod;
 
 import fr.insa.cours.projetv2.recup.Lire;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.paint.Color;
 
 
 /**
  *
  * @author francois
  */
-public class Point  {
+public final class Point extends FigureSimple{
 
     private double px;
     private double py;
+    private int id;
+    
 
     public Point() {
+        super(Color.BLACK);
+        this.Identificateur(num);
         this.px=0;
         this.py=0;
     }
 
     public Point(double px, double py) {
+        super(Color.BLACK);
+        this.Identificateur(num);
         this.px=px;
         this.py=py;
      }
@@ -159,6 +166,29 @@ public static Point DemandePoint(){
     return point;
   
 }
+
+
+    @Override
+    public void dessine(GraphicsContext context) {
+        
+    }
+
+    @Override
+    public void dessineSelection(GraphicsContext context) {
+        
+    }
+
+    @Override
+    public void Identificateur(Numeroteur<Treilli> num) {
+        this.id = num.creeID(this);
+    }
+
+    /**
+     * @return the id
+     */
+    public int getId() {
+        return id;
+    }
 
    
 
