@@ -25,16 +25,6 @@ public class mainPane extends BorderPane {
     private Groupe model;
     private Controleur controleur;
     
-    
-    //Variable menu 
-    private Button boutton1;
-    private Menu menu;
-    private MenuBar menuBar;
-    private Menu subMenu;
-    private MenuItem menuItem1;
-    private MenuItem menuItem2;
-    //Fin variable menu 
-    
     //Variable Dessin
     private DessinCanvas cvtest;
     
@@ -56,26 +46,6 @@ public mainPane(Groupe model){
     
     this.model = model;
     this.controleur = new Controleur(this);
-   
-    
-   //Création du menu 
-   menuBar = new MenuBar();
-   menu = new Menu("Fichier");
-   subMenu = new Menu("Nouveau treilli");
-   menuItem1 = new MenuItem("test");
-   subMenu.getItems().add(menuItem1);
-   menu.getItems().add(subMenu);
-   
-   menuItem2 = new MenuItem("Ouvrir treilli");
-   menu.getItems().add(menuItem2);
-   
-   menuBar.getMenus().add(menu);
-   
-   HBox Menu = new HBox(menuBar);
-   this.setTop(Menu);
-    
-   //Fin du menu
-   
    
    //Boite gauche
    Select = new RadioButton("Select");

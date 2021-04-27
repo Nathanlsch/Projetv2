@@ -213,5 +213,23 @@ public class Controleur {
     void Barre(ActionEvent t) {
         this.changeEtat(70);
     }
+
+    void menuNew(ActionEvent t) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+    
+    void menuSave(ActionEvent t) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+    
+    void menuSaveAs(ActionEvent t) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+    
+    void menuOpen(ActionEvent t) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+    
+    
     }
 
