@@ -38,7 +38,7 @@ public class AppuiEncastre extends Appui {
         if(! Save.contains(this)){
             Save.add(this);
             this.getTriangleTerrain().save(w);
-        w.append("AppuieEncastre;"+this.getId()+";"+this.getTriangleTerrain().getId()+";"+this.getP1()+";"+this.getPosSurSegment()+";"+ FigureSimple.saveColor(this.getCouleur())+"\n");
+        w.append("AppuiEncastre;"+this.getId()+";"+this.getTriangleTerrain().getId()+";"+this.getP1()+";"+this.getPosSurSegment()+";"+ FigureSimple.saveColor(this.getCouleur())+"\n");
         }
     }
     

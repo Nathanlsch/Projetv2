@@ -7,10 +7,9 @@ package fr.insa.cours.projetv2.gui;
  */
 
 
+import fr.insa.cours.projetv2mod.Groupe;
 import javafx.application.Application;
-import javafx.scene.Group;
 import javafx.scene.Scene;
-import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 /**
  *
@@ -25,16 +24,13 @@ public class main extends Application {
 
     @Override
     public void start(Stage stage) {
-        stage.setTitle("Projetv2");
-        Group root = new Group();
-        BorderPane bp = new BorderPane();
-        mainPane main = new mainPane();
-        MainMenu menu = new MainMenu(main);
-        bp.setTop(menu);
-        bp.setCenter(main);
-        Scene sc = new Scene(bp,800,600);
+        Scene sc = new Scene(new mainPane(stage),800,600);
         stage.setScene(sc);
+        stage.setTitle("Nouveau");
         stage.show();
     }
+    
+
+    
 
 }

@@ -45,7 +45,7 @@ public class AppuiSimple extends Appui {
         if(! Save.contains(this)){
             Save.add(this);
             this.getTriangleTerrain().save(w);
-        w.append("AppuieSimple;"+this.getId()+";"+this.getTriangleTerrain().getId()+";"+this.getP1()+";"+this.getPosSurSegment()+";"+ FigureSimple.saveColor(this.getCouleur())+"\n");
+        w.append("AppuiSimple;"+this.getId()+";"+this.getTriangleTerrain().getId()+";"+this.getP1()+";"+this.getPosSurSegment()+";"+ FigureSimple.saveColor(this.getCouleur())+"\n");
         }
     }
     

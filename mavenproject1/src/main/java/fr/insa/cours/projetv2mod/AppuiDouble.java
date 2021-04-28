@@ -44,7 +44,7 @@ public class AppuiDouble extends Appui {
         if(! Save.contains(this)){
             Save.add(this);
             this.getTriangleTerrain().save(w);
-        w.append("AppuieDouble;"+this.getId()+";"+this.getTriangleTerrain().getId()+";"+this.getP1()+";"+this.getPosSurSegment()+";"+ FigureSimple.saveColor(this.getCouleur())+"\n");
+        w.append("AppuiDouble;"+this.getId()+";"+this.getTriangleTerrain().getId()+";"+this.getP1()+";"+this.getPosSurSegment()+";"+ FigureSimple.saveColor(this.getCouleur())+"\n");
         }
     }
     

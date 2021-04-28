@@ -16,11 +16,16 @@ import fr.insa.cours.projetv2mod.NoeudSimple;
 import fr.insa.cours.projetv2mod.Point;
 import fr.insa.cours.projetv2mod.SegmentTerrain;
 import fr.insa.cours.projetv2mod.TriangleTerrain;
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import javafx.event.ActionEvent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.input.MouseEvent;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
 /**
@@ -210,26 +215,74 @@ public class Controleur {
     void Barre(ActionEvent t) {
         this.changeEtat(70);
     }
+    
+    void realSave(File f) {
+        try {
+            this.vue.getModel().sauvegarde(f);
+            this.vue.setCurFile(f);
+            this.vue.getInStage().setTitle(f.getName());
+        } catch (IOException ex) {
+            Alert alert = new Alert(AlertType.ERROR);
+            alert.setTitle("Erreur");
+            alert.setHeaderText("Problème durant la sauvegarde");
+            alert.setContentText(ex.getLocalizedMessage());
 
-    void menuNew(ActionEvent t) {
-        /*Stage nouveau = new Stage();
-        nouveau.setTitle("Nouveau");
-        Scene sc = new Scene(new mainPane(), 800, 600);
+            alert.showAndWait();
+        } finally {
+            this.changeEtat(20);
+        }
+    }
+
+    void menuNouveau(ActionEvent t) {
+        Stage nouveau = new Stage();
+        Scene sc = new Scene(new mainPane(nouveau),800,600);
         nouveau.setScene(sc);
-        nouveau.show();*/
+        nouveau.setTitle("Nouveau");
+        nouveau.show();
     }
     
     
     void menuSave(ActionEvent t) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        if (this.vue.getCurFile() == null) {
+            this.menuSaveAs(t);
+        } else {
+            this.realSave(this.vue.getCurFile());
+        }
     }
     
     void menuSaveAs(ActionEvent t) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        FileChooser chooser = new FileChooser();
+        File f = chooser.showSaveDialog(this.vue.getInStage());
+        if (f != null) {
+            this.realSave(f);
+        }
     }
     
     void menuOpen(ActionEvent t) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        FileChooser chooser = new FileChooser();
+        File f = chooser.showOpenDialog(this.vue.getInStage());
+        if (f != null) {
+            try {
+                System.out.println("Avant");
+                Treilli lue = Treilli.lecture(f);
+                System.out.println("Apres");
+                Groupe glu = (Groupe) lue;
+                Stage nouveau = new Stage();
+                nouveau.setTitle(f.getName());
+                Scene sc = new Scene(new mainPane(nouveau, f, glu), 800, 600);
+                nouveau.setScene(sc);
+                nouveau.show();
+            } catch (Exception ex) {
+                Alert alert = new Alert(AlertType.ERROR);
+                alert.setTitle("Erreur");
+                alert.setHeaderText("Problème durant la sauvegarde");
+                alert.setContentText(ex.getLocalizedMessage());
+
+                alert.showAndWait();
+            } finally {
+                this.changeEtat(20);
+            }
+        }
     }
     
     

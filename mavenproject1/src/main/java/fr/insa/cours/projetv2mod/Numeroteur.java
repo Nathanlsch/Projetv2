@@ -62,7 +62,7 @@ public class Numeroteur<TO> {
      
     public TO getObj(int id){
        if(! this.idExist(id)){
-            throw new Error("Identificateur existant");
+            throw new Error("Identificateur non existant");
         } else { 
            return this.idversObjet.get(id);
        }

@@ -6,15 +6,12 @@
 package fr.insa.cours.projetv2.gui;
 
 import fr.insa.cours.projetv2mod.Groupe;
-import javafx.scene.control.Button;
-import javafx.scene.control.Menu;
-import javafx.scene.control.MenuBar;
-import javafx.scene.control.MenuItem;
+import java.io.File;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.ToggleGroup;
+import javafx.stage.Stage;
 
 /**
  *
@@ -24,6 +21,10 @@ public class mainPane extends BorderPane {
     
     private Groupe model;
     private Controleur controleur;
+     private Stage inStage;
+    private File curFile;
+    
+    private MainMenu menu;
     
     //Variable Dessin
     private DessinCanvas cvtest;
@@ -37,15 +38,25 @@ public class mainPane extends BorderPane {
     private RadioButton NoeudSimple;
     private RadioButton Barre;
     
+public mainPane(Stage inStage) {
+        this(inStage, new Groupe());
+    }
 
+    public mainPane(Stage inStage, Groupe model) {
+        this(inStage, null, model);
+    }
 
-public mainPane(){
-    this(new Groupe());
-}    
-public mainPane(Groupe model){ 
+   
+    public mainPane(Stage inStage, File fromFile, Groupe model){ 
+    
+    this.inStage = inStage;
+    this.curFile = fromFile;
     
     this.model = model;
     this.controleur = new Controleur(this);
+    
+    this.menu = new MainMenu(this);
+    this.setTop(this.menu);
    
    //Boite gauche
    Select = new RadioButton("Select");
@@ -129,6 +140,18 @@ public mainPane(Groupe model){
      */
     public void setControleur(Controleur controleur) {
         this.controleur = controleur;
+    }
+    
+    public Stage getInStage() {
+        return inStage;
+    }
+    
+    public File getCurFile() {
+        return curFile;
+    }
+    
+     public void setCurFile(File curFile) {
+        this.curFile = curFile;
     }
     
 }
