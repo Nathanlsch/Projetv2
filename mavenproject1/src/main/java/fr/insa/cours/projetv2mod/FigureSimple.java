@@ -14,8 +14,7 @@ import javafx.scene.paint.Color;
  * @author francois
  */
 public abstract class FigureSimple extends Treilli {
-    
-    private int id;
+
     private Color couleur;
 
     public FigureSimple(Color couleur) {
@@ -35,5 +34,10 @@ public abstract class FigureSimple extends Treilli {
         return c.getRed()+";"+c.getGreen()+";"+c.getBlue();
     }
     
-    
+    static Color parseColor(String sr, String sv, String sb) {
+        double rouge = Double.parseDouble(sr);
+        double vert = Double.parseDouble(sv);
+        double bleu = Double.parseDouble(sb);
+        return Color.color(rouge, vert, bleu);
+    }
 }

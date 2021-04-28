@@ -29,6 +29,14 @@ public abstract class Appui extends Noeud {
         this.p1 = p1;
         this.posSurSegment = posSurSegment;
     }
+     
+     public Appui(int id, TriangleTerrain triangleTerrain, int p1, double posSurSegment, Color col) {
+        super(col);
+        this.setId(id);
+        this.triangleTerrain = triangleTerrain;
+        this.p1 = p1;
+        this.posSurSegment = posSurSegment;
+    }
 
     public TriangleTerrain getTriangleTerrain() {
         return triangleTerrain;

@@ -59,6 +59,27 @@ public class Numeroteur<TO> {
             return this.creeID(obj);
         }
     }
+     
+    public TO getObj(int id){
+       if(! this.idExist(id)){
+            throw new Error("Identificateur existant");
+        } else { 
+           return this.idversObjet.get(id);
+       }
+    }
+    
+    public boolean idExist(int id){
+        return this.idversObjet.containsKey(id);
+    }
+            
+    public void associe(int id,TO obj){
+        if(this.idExist(id)){
+            throw new Error("Identificateur existant");
+        } else {
+            this.idversObjet.put(id, obj);
+            this.objetversId.put(obj, id);
+        }
+    }
     
     
 }

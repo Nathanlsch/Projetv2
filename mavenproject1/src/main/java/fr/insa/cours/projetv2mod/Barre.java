@@ -31,6 +31,13 @@ public class Barre extends FigureSimple{
         this.nfin = nfin; 
     }
     
+    public Barre(int id, Noeud ndepart, Noeud nfin, Color col) {
+        super(col);
+        this.id = id;
+        this.ndepart = ndepart; 
+        this.nfin = nfin; 
+    }
+    
     public Barre(Noeud ndepart, Noeud nfin, TypeDeBarre typeDeBarre) {
         super(Color.BLACK);
         this.Identificateur(num);

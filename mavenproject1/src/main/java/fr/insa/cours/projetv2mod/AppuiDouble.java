@@ -22,6 +22,10 @@ public class AppuiDouble extends Appui {
     public AppuiDouble(TriangleTerrain triangleTerrain, int p1, double posSurSegment) {
         super(triangleTerrain, p1, posSurSegment);
     }
+    
+    public AppuiDouble(int id, TriangleTerrain triangleTerrain, int p1, double posSurSegment, Color col) {
+        super(id, triangleTerrain, p1, posSurSegment, col);
+    }
 
     @Override
     public String toString() {

@@ -40,6 +40,13 @@ public class SegmentTerrain extends FigureSimple {
         this.fin = fin;
     }
     
+    public SegmentTerrain(int id,Point debut,Point fin, Color col){
+        super(col);
+        this.id = id;
+        this.debut = debut;
+        this.fin = fin;
+    }
+    
     public double longueur() {
         SegmentTerrain s2;
         return this.getDebut().distancePoint(this.getFin());

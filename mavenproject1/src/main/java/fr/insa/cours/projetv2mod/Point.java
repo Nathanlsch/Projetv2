@@ -36,6 +36,13 @@ public final class Point extends FigureSimple{
         this.px=px;
         this.py=py;
      }
+    
+    public Point(int id,double px, double py, Color col) {
+        super(col);
+        this.id = id;
+        this.px=px;
+        this.py=py;
+     }
 
     public double getPx() {
         return this.px;

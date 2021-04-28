@@ -39,6 +39,17 @@ public class TriangleTerrain extends FigureSimple{
     this.Segment2 = new SegmentTerrain(p2, p3);
     this.Segment3 = new SegmentTerrain(p3, p1);
 }
+    
+    public TriangleTerrain (int id ,Point p1,Point p2, Point p3,SegmentTerrain s1,SegmentTerrain s2,SegmentTerrain s3, Color col){
+    super(col);
+    this.Point1 = p1;
+    this.Point2 = p2;
+    this.Point3 = p3;
+    this.Segment1 = s1;
+    this.Segment2 = s2;
+    this.Segment3 = s3;
+    this.id = id;
+    }
 
     public Point getPoint1() {
         return Point1;
@@ -70,7 +81,7 @@ public class TriangleTerrain extends FigureSimple{
 
     @Override
     public String toString() {
-        return "Triangle;("+Point1.getPx() + ";" + Point1.getPy() + ");(" +Point2.getPx() + ";" + Point2.getPy() + ");(" + +Point3.getPx() + ";" + Point3.getPy() + ")";
+        return "Triangle;"+this.id+";("+Point1.getPx() + ";" + Point1.getPy() + ");(" +Point2.getPx() + ";" + Point2.getPy() + ");(" + +Point3.getPx() + ";" + Point3.getPy() + ")";
     }
    
    public static TriangleTerrain DemandeTriangle(){

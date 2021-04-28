@@ -24,6 +24,10 @@ public class AppuiSimple extends Appui {
         super(triangleTerrain, p1, posSurSegment);
     }
     
+    public AppuiSimple(int id, TriangleTerrain triangleTerrain, int p1, double posSurSegment, Color col) {
+        super(id, triangleTerrain, p1, posSurSegment, col);
+    }
+    
         @Override
     public String toString() {
         return "AppuiSimple;" + this.getId() + ";" + this.getTriangleTerrain().getId() + ";" + this.getP1() + ";" + this.getPosSurSegment() + ";" ;

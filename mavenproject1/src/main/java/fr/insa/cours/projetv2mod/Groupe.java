@@ -33,6 +33,12 @@ public class Groupe extends Treilli {
         this.contient = new ArrayList<Treilli>();
         this.Identificateur(num);
     }
+    
+    public Groupe(int id) {
+        this.contient = new ArrayList<Treilli>();
+        this.id = id;
+    }
+    
 
     public void add(Treilli f) {
         if (f.getGroupe() != this) {
@@ -81,7 +87,9 @@ public class Groupe extends Treilli {
         TriangleTerrain t1 = new TriangleTerrain(p1,p2,p3);
         TriangleTerrain t2 = new TriangleTerrain(p1,p3,p4);
         TriangleTerrain t3 = new TriangleTerrain(p5,p2,p1);
+        Barre b1 = new Barre(n1,n2);
         Groupe res = new Groupe();
+        res.add(b1);
         res.add(n1);
         res.add(n2);
         res.add(n3);
@@ -95,6 +103,15 @@ public class Groupe extends Treilli {
             throw new Error("problème : "+ex.getMessage());
         }
         return res;
+    }
+ 
+    public static void testLecture(){
+        try {
+            Treilli lue = Treilli.lecture(new File("Groupe1.txt"));
+            System.out.print("Treilli lue : "+ lue);
+        } catch (IOException ex) {
+            throw new Error(ex);
+        }
     }
  
     public Treilli plusProche(Point p, double distMax) {
@@ -172,7 +189,7 @@ public class Groupe extends Treilli {
 
     
     public static void main(String[] args) {
-        groupeTest();
+        testLecture();
     }
 
     @Override
@@ -243,9 +260,22 @@ public class Groupe extends Treilli {
         }
     }
     
-    
-    
-    
+    public static String indente(String toIndente, String prefix) {
+        return prefix + toIndente.replaceAll("\n", "\n" + prefix);
     }
+    
+ @Override
+    public String toString() {
+        String res = "Groupe {\n";
+        for (int i = 0; i < this.contient.size(); i++) {
+            res = res + indente(this.contient.get(i).toString(), "  ") + "\n";
+        }
+        return res + "}";
+    }
+        
+    }
+    
+    
+    
 
 

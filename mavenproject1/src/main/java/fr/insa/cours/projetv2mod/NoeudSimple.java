@@ -27,6 +27,13 @@ public class NoeudSimple extends Noeud {
     this.px = px;
     this.py = py;    
 }
+    
+    public NoeudSimple (int id, double px, double py, Color col) {
+        super(col);
+        this.px = px;
+        this.py = py;
+        this.setId(id);
+    }
 
     @Override
     public String toString() {

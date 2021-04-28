@@ -22,6 +22,10 @@ public class AppuiEncastre extends Appui {
         super(triangleTerrain, p1, posSurSegment);
     }
     
+    public AppuiEncastre( int id, TriangleTerrain triangleTerrain, int p1, double posSurSegment, Color col) {
+        super(id, triangleTerrain, p1, posSurSegment, col);
+    }
+    
     @Override
     public void dessine(GraphicsContext context) {
         Point p = this.getcoordAppui(this.getP1(),this.getTriangleTerrain(),this.getPosSurSegment());
