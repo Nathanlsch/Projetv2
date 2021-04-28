@@ -7,6 +7,8 @@ package fr.insa.cours.projetv2mod;
 
 //import fr.insa.cours.projet_treilli.*;
 
+import java.io.IOException;
+import java.io.Writer;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
 
@@ -140,6 +142,24 @@ public class SegmentTerrain extends FigureSimple {
     @Override
     public void Identificateur(Numeroteur<Treilli> num) {
         this.id = num.creeID(this);
+    }
+    
+    @Override
+    public void save(Writer w) throws IOException {
+        if(! Save.contains(this)){
+        this.debut.save(w);
+        this.fin.save(w);
+        Save.add(this);
+        w.append("SegmentTerrain;"+this.getId()+";"+this.debut.getId()+";"+this.fin.getId()+";"
+                + FigureSimple.saveColor(this.getCouleur())+"\n");
+        }
+    }
+
+    /**
+     * @return the id
+     */
+    public int getId() {
+        return id;
     }
     
 }

@@ -5,6 +5,9 @@
  */
 package fr.insa.cours.projetv2mod;
 
+import static fr.insa.cours.projetv2mod.Treilli.Save;
+import java.io.IOException;
+import java.io.Writer;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
 
@@ -73,4 +76,13 @@ public class NoeudSimple extends Noeud {
     public void Identificateur(Numeroteur<Treilli> num) {
         this.setId(num.creeID(this));
     }
+    
+    @Override
+    public void save(Writer w) throws IOException {
+        if(! Save.contains(this)){
+            Save.add(this);
+        w.append("NoeudSimple;"+this.getId()+";"+this.px+";"+this.py+";"+ FigureSimple.saveColor(this.getCouleur())+"\n");
+        }
+    }
+  
 }

@@ -6,6 +6,9 @@
 package fr.insa.cours.projetv2mod;
 
 import fr.insa.cours.projetv2.recup.Lire;
+import static fr.insa.cours.projetv2mod.Treilli.Save;
+import java.io.IOException;
+import java.io.Writer;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
 
@@ -147,6 +150,21 @@ public class TriangleTerrain extends FigureSimple{
     @Override
     public void Identificateur(Numeroteur<Treilli> num) {
         this.id = num.creeID(this);
+    }
+    
+    @Override
+    public void save(Writer w) throws IOException {
+        if(! Save.contains(this)){
+        this.Point1.save(w);
+        this.Point2.save(w);
+        this.Point3.save(w);
+        this.Segment1.save(w);
+        this.Segment2.save(w);
+        this.Segment3.save(w);
+        Save.add(this);
+        w.append("TriangleTerrain;"+this.id+";"+this.Point1.getId()+";"+this.Point2.getId()+";"+this.Point3.getId()+";"
+                +this.Segment1.getId()+";"+this.Segment2.getId()+";"+this.Segment3.getId()+";"+ FigureSimple.saveColor(this.getCouleur())+"\n");
+        }
     }
    
 }

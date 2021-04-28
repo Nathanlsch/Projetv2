@@ -5,6 +5,12 @@
  */
 package fr.insa.cours.projetv2mod;
 
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.Writer;
+import java.util.ArrayList;
 import javafx.scene.canvas.GraphicsContext;
 
 /**
@@ -19,6 +25,8 @@ public abstract class Treilli {
     private Groupe groupe;
     
     public static Numeroteur<Treilli> num = new Numeroteur();
+    
+    public static ArrayList<Treilli> Save = new ArrayList<Treilli>();
 
     public Groupe getGroupe() {
         return groupe;
@@ -43,9 +51,15 @@ public abstract class Treilli {
 
     public abstract void dessineSelection(GraphicsContext context); 
         
-   public abstract void Identificateur(Numeroteur<Treilli> num);
+    public abstract void Identificateur(Numeroteur<Treilli> num);
    
+    public abstract void save(Writer w) throws IOException;
     
+    public void sauvegarde(File fout) throws IOException{
+        try (BufferedWriter bout = new BufferedWriter(new FileWriter(fout))){
+            this.save(bout);
+        }
+    }
         
         
     

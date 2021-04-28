@@ -5,6 +5,9 @@
  */
 package fr.insa.cours.projetv2mod;
 
+import static fr.insa.cours.projetv2mod.Treilli.Save;
+import java.io.IOException;
+import java.io.Writer;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
 
@@ -95,6 +98,15 @@ public class Barre extends FigureSimple{
     @Override
     public void Identificateur(Numeroteur<Treilli> num) {
         this.id = num.creeID(this);
+    }
+    
+        @Override
+    public void save(Writer w) throws IOException {
+        if(! Save.contains(this)){
+            this.ndepart.save(w);
+            this.nfin.save(w);
+             w.append("Barre;"+this.getId()+";"+this.ndepart.getId()+";"+this.nfin.getId()+";"+ FigureSimple.saveColor(this.getCouleur())+"\n");
+        }
     }
     
 }

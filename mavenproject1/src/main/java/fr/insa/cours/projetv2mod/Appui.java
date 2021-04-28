@@ -6,6 +6,8 @@
 package fr.insa.cours.projetv2mod;
 
 
+import java.io.IOException;
+import java.io.Writer;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
 
@@ -13,7 +15,7 @@ import javafx.scene.paint.Color;
  *
  * @author Steven
  */
-public class Appui extends Noeud {
+public abstract class Appui extends Noeud {
     
     public static double RAYON_IN_DRAW = 5;
     private TriangleTerrain triangleTerrain; 
@@ -94,8 +96,6 @@ public class Appui extends Noeud {
     public void Identificateur(Numeroteur<Treilli> num) {
         this.setId(num.creeID(this));
     }
-
-       
-    
+  
     
 }

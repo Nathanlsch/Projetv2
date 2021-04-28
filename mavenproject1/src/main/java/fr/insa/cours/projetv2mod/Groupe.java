@@ -1,8 +1,14 @@
 package fr.insa.cours.projetv2mod;
 
 import fr.insa.cours.projetv2.recup.Lire;
+import static fr.insa.cours.projetv2mod.Treilli.Save;
+import java.io.File;
+import java.io.IOException;
+import java.io.Writer;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.scene.canvas.GraphicsContext;
 
 /*
@@ -21,9 +27,11 @@ import javafx.scene.canvas.GraphicsContext;
 public class Groupe extends Treilli {
     
     private List<Treilli> contient;
+    private int id;
     
     public Groupe() {
         this.contient = new ArrayList<Treilli>();
+        this.Identificateur(num);
     }
 
     public void add(Treilli f) {
@@ -61,16 +69,12 @@ public class Groupe extends Treilli {
     
  public static Groupe groupeTest() {
         NoeudSimple n1 = new NoeudSimple(11,15);
-        System.out.println(n1.getId());
         NoeudSimple n2 = new NoeudSimple(100, 20);
-        System.out.println(n2.getId());
         NoeudSimple n3 = new NoeudSimple(120, 100);
         NoeudSimple n4 = new NoeudSimple(10, 110);
         NoeudSimple n5 = new NoeudSimple(60, 50);
         Point p1 = new Point(10,10);
-        System.out.println(p1.getId());
         Point p2 = new Point(100, 10);
-        System.out.println(p2.getId());
         Point p3 = new Point(100, 100);
         Point p4 = new Point(10, 100);
         Point p5 = new Point(50, 50);
@@ -85,7 +89,11 @@ public class Groupe extends Treilli {
         res.add(t3);
         res.add(t2);
         res.add(t1);
-        
+        try {
+            res.sauvegarde(new File("Groupe1.txt"));
+        } catch (IOException ex) {
+            throw new Error("problème : "+ex.getMessage());
+        }
         return res;
     }
  
@@ -217,8 +225,27 @@ public class Groupe extends Treilli {
 
     @Override
     public void Identificateur(Numeroteur<Treilli> num) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        this.id = num.creeID(this);
     }
+    
+    @Override
+    public void save(Writer w) throws IOException {
+        if(! Save.contains(this)){
+            Save.add(this);
+        for(Treilli t : this.contient){
+            t.save(w);
+        }
+        w.append("Groupe;"+this.id);
+        for(Treilli t : this.contient){
+            w.append(";"+num.getID(t));
+        }
+        w.append("\n");
+        }
+    }
+    
+    
+    
+    
     }
 
 

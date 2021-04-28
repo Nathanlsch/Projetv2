@@ -31,6 +31,9 @@ public abstract class FigureSimple extends Treilli {
         this.couleur = couleur;
     }
     
+    public static String saveColor(Color c){
+        return c.getRed()+";"+c.getGreen()+";"+c.getBlue();
+    }
     
     
 }

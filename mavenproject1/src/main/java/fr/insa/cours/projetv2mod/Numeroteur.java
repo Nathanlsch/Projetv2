@@ -44,7 +44,15 @@ public class Numeroteur<TO> {
         return this.objetversId.containsKey(obj);
     }
     
-    public int getOucreeID(TO obj) {
+    public int getID(TO obj) {
+        if(this.objExist(obj)){
+            return this.objetversId.get(obj);
+        } else {
+            throw new Error("Objet "+ obj+" inconnu dans numéroteur");
+        }
+    }
+    
+     public int getOucreeID(TO obj) {
         if(this.objExist(obj)){
             return this.objetversId.get(obj);
         } else {

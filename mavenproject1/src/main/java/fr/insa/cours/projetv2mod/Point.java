@@ -6,6 +6,8 @@
 package fr.insa.cours.projetv2mod;
 
 import fr.insa.cours.projetv2.recup.Lire;
+import java.io.IOException;
+import java.io.Writer;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
 
@@ -188,6 +190,16 @@ public static Point DemandePoint(){
      */
     public int getId() {
         return id;
+    }
+
+    @Override
+    public void save(Writer w) throws IOException {
+        if(! Save.contains(this)){
+           Save.add(this);
+         w.append("Point;"+this.id+";"+this.px+";"+this.py+";"
+                 + FigureSimple.saveColor(this.getCouleur())+"\n");   
+        }
+       
     }
 
    
