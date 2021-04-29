@@ -28,6 +28,7 @@ public abstract class Treilli {
      */
     private Groupe groupe;
     
+    
     public static Numeroteur<Treilli> num = new Numeroteur();
     
     public static Numeroteur<Treilli> num2 = new Numeroteur();

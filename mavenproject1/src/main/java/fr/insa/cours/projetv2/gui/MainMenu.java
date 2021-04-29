@@ -39,7 +39,24 @@ public class MainMenu extends MenuBar{
             this.main.getControleur().menuOpen(t);
         });
         file.getItems().addAll(nouveau,save,saveAs,ouvrir);
-        this.getMenus().addAll(file);
+        
+        Menu ZoneDeTexte = new Menu("Zone de texte");
+        MenuItem Activer = new MenuItem("Activer");
+        Activer.setOnAction((t) -> {
+            this.main.getControleur().activer(t);
+        });
+        MenuItem Desactiver = new MenuItem("Désactiver");
+        Desactiver.setOnAction((t) -> {
+            this.main.getControleur().desactiver(t);
+        });
+        ZoneDeTexte.getItems().addAll(Activer,Desactiver);
+        
+        
+        
+        
+        
+        
+        this.getMenus().addAll(file, ZoneDeTexte);
         
     }
     

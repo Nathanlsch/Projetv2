@@ -10,6 +10,7 @@ import java.io.File;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.control.RadioButton;
+import javafx.scene.control.TextArea;
 import javafx.scene.control.ToggleGroup;
 import javafx.stage.Stage;
 
@@ -37,6 +38,7 @@ public class mainPane extends BorderPane {
     private RadioButton AppuiEncastre;
     private RadioButton NoeudSimple;
     private RadioButton Barre;
+    private TextArea test;
     
 public mainPane(Stage inStage) {
         this(inStage, new Groupe());
@@ -51,12 +53,19 @@ public mainPane(Stage inStage) {
     
     this.inStage = inStage;
     this.curFile = fromFile;
+    this.test = new TextArea();
+    test.setPrefHeight(200);
+    test.setPrefWidth(200);
+    test.setEditable(false);
+ 
+    this.setRight(this.test);
     
     this.model = model;
     this.controleur = new Controleur(this);
     
     this.menu = new MainMenu(this);
     this.setTop(this.menu);
+    
    
    //Boite gauche
    Select = new RadioButton("Select");
@@ -110,6 +119,7 @@ public mainPane(Stage inStage) {
     this.cvtest = new DessinCanvas(this);
     this.setCenter(this.cvtest);
     
+    
     this.cvtest.setOnMouseClicked((t) -> {
        System.out.println("click");
     });
@@ -152,6 +162,13 @@ public mainPane(Stage inStage) {
     
      public void setCurFile(File curFile) {
         this.curFile = curFile;
+    }
+
+    /**
+     * @return the test
+     */
+    public TextArea getTest() {
+        return test;
     }
     
 }

@@ -26,6 +26,7 @@ public class Groupe extends Treilli {
     
     private List<Treilli> contient;
     private int id;
+    private Terrain terrain;
     
     public Groupe() {
         this.contient = new ArrayList<Treilli>();
@@ -280,6 +281,20 @@ public class Groupe extends Treilli {
             res = res + indente(this.contient.get(i).toString(), "  ") + "\n";
         }
         return res + "}";
+    }
+
+    /**
+     * @return the terrain
+     */
+    public Terrain getTerrain() {
+        return terrain;
+    }
+
+    /**
+     * @param terrain the terrain to set
+     */
+    public void setTerrain(Terrain terrain) {
+        this.terrain = terrain;
     }
         
     }

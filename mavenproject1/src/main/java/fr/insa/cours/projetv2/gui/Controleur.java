@@ -15,6 +15,7 @@ import fr.insa.cours.projetv2mod.Noeud;
 import fr.insa.cours.projetv2mod.NoeudSimple;
 import fr.insa.cours.projetv2mod.Point;
 import fr.insa.cours.projetv2mod.SegmentTerrain;
+import fr.insa.cours.projetv2mod.Terrain;
 import fr.insa.cours.projetv2mod.TriangleTerrain;
 import java.io.File;
 import java.io.IOException;
@@ -35,6 +36,7 @@ import javafx.stage.Stage;
 public class Controleur {
     
     private Point pclick;
+    private Point pclick2;
     private Treilli proche;
     private double MAX_VALUE = 50;
     private Point p1;
@@ -49,6 +51,7 @@ public class Controleur {
     public Controleur(mainPane vue){
         this.vue = vue;
         this.selection = new ArrayList<>();
+        this.changeEtat(80);
     }
     
     public void changeEtat(int nouvelEtat){
@@ -171,9 +174,17 @@ public class Controleur {
                 this.selection.clear();
                 this.vue.redrawAll(); 
                 this.changeEtat(70);
-            }
-            
-            
+            }  
+        } else if (this.etat==80){
+          pclick = new Point(t.getX(), t.getY()); 
+          this.changeEtat(81);
+        } else if(this.etat == 81) {
+          pclick2 = new Point(t.getX(), t.getY());
+          Terrain terrain = new Terrain(pclick,pclick2);
+          vue.getModel().setTerrain(terrain);
+          vue.getModel().add(terrain);
+          this.vue.redrawAll(); 
+          this.changeEtat(10);
         }
      
        
@@ -190,6 +201,7 @@ public class Controleur {
 
     void boutonSelect(ActionEvent t) {
         this.changeEtat(10);
+        this.vue.getTest().appendText("Bouton select"+"\n");
     }
 
     void boutonTriangleTerrain(ActionEvent t) {
@@ -239,6 +251,7 @@ public class Controleur {
         nouveau.setScene(sc);
         nouveau.setTitle("Nouveau");
         nouveau.show();
+        this.changeEtat(80);
     }
     
     
@@ -283,6 +296,14 @@ public class Controleur {
                 this.changeEtat(20);
             }
         }
+    }
+
+    void desactiver(ActionEvent t) {
+        this.vue.getTest().setVisible(false);
+    }
+    
+     void activer(ActionEvent t) {
+        this.vue.getTest().setVisible(true);
     }
     
     
