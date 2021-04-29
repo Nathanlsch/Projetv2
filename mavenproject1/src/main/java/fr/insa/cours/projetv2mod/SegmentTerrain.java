@@ -97,17 +97,6 @@ public class SegmentTerrain extends FigureSimple {
         return "[" + this.getDebut() +
                 "," + this.getFin().toString() + "]";
     }
-    
-    public static void main(String[] args) {
-        SegmentTerrain s1;
-        s1 = new SegmentTerrain(new Point(1,2),new Point(3,4));
-        System.out.println("s1 = " + s1);
-        System.out.println("longueur de s1 : " + s1.longueur());
-        Point mil = s1.getDebut().milieu(s1.getFin());
-        double abmil = mil.getPx();
-        s1.getDebut().setPx(-3);
-        System.out.println("s1 nouveau = " + s1);
-    }
 
     public double minX() {
         return Math.min(this.getDebut().minX(), this.getFin().minX());
