@@ -305,6 +305,26 @@ public class Controleur {
      void activer(ActionEvent t) {
         this.vue.getTest().setVisible(true);
     }
+
+    void tt(ActionEvent t) {
+        this.vue.getTest().clear();
+        this.vue.getTest().appendText("Pour créer un \ntriangle terrain \ncliquer 3 fois \ndans la zone de dessin\n");
+    }
+    
+    void appui(ActionEvent t) {
+        this.vue.getTest().clear();
+        this.vue.getTest().appendText("Pour créer un \nappui cliquer sur le \nsegment terrain d'un \ntriangle terrain \n");
+    }
+    
+    void noeudSimple(ActionEvent t) {
+        this.vue.getTest().clear();
+        this.vue.getTest().appendText("Pour créer un \nnoeud simple \ncliquer sur la \nzone de dessin\n");
+    }
+    
+    void barre(ActionEvent t) {
+        this.vue.getTest().clear();
+        this.vue.getTest().appendText("Pour créer une \nbarre cliquer \nsur deux \nnoeud\n");
+    }
     
     
     }

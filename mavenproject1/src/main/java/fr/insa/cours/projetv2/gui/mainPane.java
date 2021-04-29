@@ -12,6 +12,12 @@ import javafx.scene.layout.VBox;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.ToggleGroup;
+import javafx.scene.layout.Border;
+import javafx.scene.layout.BorderStroke;
+import javafx.scene.layout.BorderStrokeStyle;
+import javafx.scene.layout.BorderWidths;
+import javafx.scene.layout.CornerRadii;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
 /**
@@ -54,9 +60,11 @@ public mainPane(Stage inStage) {
     this.inStage = inStage;
     this.curFile = fromFile;
     this.test = new TextArea();
-    test.setPrefHeight(200);
+    test.setPrefHeight(300);
     test.setPrefWidth(200);
     test.setEditable(false);
+    
+    test.appendText("Nouveau Treilli \nCliqué deux fois dans la zone \nde dessin pour définir la \nzone constructible\n");
  
     this.setRight(this.test);
     
@@ -110,14 +118,18 @@ public mainPane(Stage inStage) {
    
    
    VBox gauche = new VBox(Select,TriangleTerrain, AppuiSimple,AppuiDouble , AppuiEncastre, NoeudSimple, Barre);
-   gauche.setMaxSize(200, 200);
-   gauche.setMinSize(200, 200);
+   gauche.setMaxSize(200, 100);
+   gauche.setMinSize(200, 100);
    this.setLeft(gauche);
    
    
    //Debut dessin 
     this.cvtest = new DessinCanvas(this);
     this.setCenter(this.cvtest);
+    Border border = new Border(new BorderStroke(Color.BLACK,BorderStrokeStyle.SOLID,CornerRadii.EMPTY,BorderWidths.DEFAULT));
+    this.cvtest.setBorder(border);
+    
+    
     
     
     this.cvtest.setOnMouseClicked((t) -> {

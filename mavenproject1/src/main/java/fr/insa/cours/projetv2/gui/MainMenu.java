@@ -51,12 +51,30 @@ public class MainMenu extends MenuBar{
         });
         ZoneDeTexte.getItems().addAll(Activer,Desactiver);
         
+        Menu Aide = new Menu("Aide");
+        MenuItem TriangleTerrain = new MenuItem("Créer un triangle terrain");
+        TriangleTerrain.setOnAction((t) -> {
+            this.main.getControleur().tt(t);
+        });
+        MenuItem Appui = new MenuItem("Créer un appui");
+        Appui.setOnAction((t) -> {
+            this.main.getControleur().appui(t);
+        });
+        MenuItem NoeudSimple = new MenuItem("Créer un noeud simple");
+        NoeudSimple.setOnAction((t) -> {
+            this.main.getControleur().noeudSimple(t);
+        });
+        MenuItem barre = new MenuItem("Créer une barre");
+        barre.setOnAction((t) -> {
+            this.main.getControleur().barre(t);
+        });
+        
+        Aide.getItems().addAll(TriangleTerrain,Appui,NoeudSimple,barre);
         
         
         
         
-        
-        this.getMenus().addAll(file, ZoneDeTexte);
+        this.getMenus().addAll(file, ZoneDeTexte,Aide);
         
     }
     
