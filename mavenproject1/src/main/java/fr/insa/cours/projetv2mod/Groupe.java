@@ -7,8 +7,6 @@ import java.io.IOException;
 import java.io.Writer;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javafx.scene.canvas.GraphicsContext;
 
 /*
@@ -37,6 +35,16 @@ public class Groupe extends Treilli {
     public Groupe(int id) {
         this.contient = new ArrayList<Treilli>();
         this.id = id;
+    }
+    
+    public boolean ContientNoeud(){
+        boolean i = true;
+        for(Treilli t : this.contient){
+            if(t instanceof Noeud){
+                i =false;
+            }
+        }
+        return i;
     }
     
 
@@ -206,39 +214,40 @@ public class Groupe extends Treilli {
     }
    }
 
-    public Treilli NoeudplusProche(Point pclick, double MAX_VALUE) {
-        int z=0;
-        double min=0;
-        Treilli fmin = new SegmentTerrain();
-        if (this.contient.isEmpty()) {
+    
+    public Treilli NoeudplusProche(Point p, double distMax) {
+        int i = 0;
+        Treilli fmin = new Point();
+        double min = 0;
+        if (ContientNoeud()) {
             return null;
         } else {
-            for(int y=0;y<this.contient.size();y++){
-                if(this.contient.get(z) instanceof Noeud){
-                    fmin = this.contient.get(0);
-                    min = fmin.distancePoint(pclick);
-                    y=this.contient.size(); 
-                } else {
-                    z=z+1;
+            for(int z=0;z<this.contient.size();z++){
+            if(this.contient.get(i) instanceof Noeud){
+               fmin = this.contient.get(i);
+               min = fmin.distancePoint(p); 
+               z= this.contient.size();
+            } else {
+               i=i+1;
+            }
+            }
+            for (int y =i;y<this.contient.size(); y++){
+                if(this.contient.get(y) instanceof Noeud){
+                  Treilli fcur = this.contient.get(y);
+                  double cur = fcur.distancePoint(p);  
+                  if(cur<min){
+                  min = cur;
+                  fmin = fcur;
+                  }
                 }
             }
-        }
-        for (int i =z ;i<this.contient.size(); i++){
-             Treilli fcur = this.contient.get(i);
-            if (fcur instanceof Noeud){
-                double cur = fcur.distancePoint(pclick);
-                 if(cur<min){
-                 min = cur;
-                 fmin = fcur;
-                }
-             }
-            }
-            if (min <= MAX_VALUE) {
+            if (min <= distMax) {
                 return fmin;
             }else {
                 return null;
             }
-        }
+    }
+ }
 
     @Override
     public void Identificateur(Numeroteur<Treilli> num) {

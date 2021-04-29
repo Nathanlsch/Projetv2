@@ -78,7 +78,8 @@ public class Barre extends FigureSimple{
 
     @Override
     public void dessineSelection(GraphicsContext context) {
-        System.out.println("Barre select");
+       context.strokeLine(this.getNdepart().getcoordAppui().getPx(),this.getNdepart().getcoordAppui().getPy(),this.getNfin().getcoordAppui().getPx(),this.getNfin().getcoordAppui().getPy());
+        context.setStroke(Color.WHITE);   
     }
     
    

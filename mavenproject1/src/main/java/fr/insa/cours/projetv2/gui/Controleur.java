@@ -164,11 +164,11 @@ public class Controleur {
             }
         } else if (this.etat==71){ 
             pclick = new Point(t.getX(), t.getY()); 
-            Treilli proche = this.vue.getModel().plusProche(pclick, MAX_VALUE);
+            Treilli proche = this.vue.getModel().NoeudplusProche(pclick, MAX_VALUE);
             if(proche instanceof Noeud){
                 Groupe model = this.vue.getModel();
-                System.out.println(this.selection.get(0));
                 model.add(new Barre((Noeud) this.selection.get(0),(Noeud) proche));
+                this.selection.clear();
                 this.vue.redrawAll(); 
                 this.changeEtat(70);
             }
