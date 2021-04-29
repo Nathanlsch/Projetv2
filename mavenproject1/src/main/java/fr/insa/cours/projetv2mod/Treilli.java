@@ -190,14 +190,35 @@ public abstract class Treilli {
                         int idSous = Integer.parseInt(bouts[i]);
                         Treilli tre = num2.getObj(idSous);
                         ng.add(tre);
+                        if(tre instanceof Terrain){
+                            ng.setTerrain((Terrain) tre);
+                        }
                     }
                     Save.clear();
                     derniere = ng;
                 }
+                if(bouts[0].equals("Terrain")){
+                    int id = Integer.parseInt(bouts[1]);
+                    double pxmin = Double.parseDouble(bouts[2]);
+                    double pxmax = Double.parseDouble(bouts[3]);
+                    double pymin = Double.parseDouble(bouts[4]);
+                    double pymax = Double.parseDouble(bouts[5]);
+                    Color col = FigureSimple.parseColor(bouts[6],bouts[7],bouts[8]);
+                    Terrain terrain = new Terrain(id,pxmin,pxmax,pymin,pymax,col);
+                    num2.associe(id, terrain);
+                    for ( int i =9; i< bouts.length; i++){
+                        int idSous = Integer.parseInt(bouts[i]);
+                        Treilli tri = num2.getObj(idSous);
+                            terrain.getContientTriangle().add((TriangleTerrain) tri);
+                    }
+           
+             
+                    derniere = terrain;
             }
         }
         num = num2;
         return derniere;
+    }
     }
 
         

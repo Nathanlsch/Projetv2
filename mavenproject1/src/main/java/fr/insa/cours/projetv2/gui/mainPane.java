@@ -8,7 +8,6 @@ package fr.insa.cours.projetv2.gui;
 import fr.insa.cours.projetv2mod.Groupe;
 import java.io.File;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.VBox;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.ToggleGroup;
@@ -17,6 +16,8 @@ import javafx.scene.layout.BorderStroke;
 import javafx.scene.layout.BorderStrokeStyle;
 import javafx.scene.layout.BorderWidths;
 import javafx.scene.layout.CornerRadii;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
@@ -116,11 +117,14 @@ public mainPane(Stage inStage) {
    Barre.setToggleGroup(bgEtat);
    Select.setSelected(true);
    
+   HBox boutons = new HBox(Select,TriangleTerrain, AppuiSimple,AppuiDouble , AppuiEncastre, NoeudSimple, Barre);
+   boutons.setSpacing(10);
+   VBox Conteneur = new VBox(menu, boutons);
+   Conteneur.setSpacing(10);
    
-   VBox gauche = new VBox(Select,TriangleTerrain, AppuiSimple,AppuiDouble , AppuiEncastre, NoeudSimple, Barre);
-   gauche.setMaxSize(200, 100);
-   gauche.setMinSize(200, 100);
-   this.setLeft(gauche);
+   boutons.setMaxHeight(30);
+   boutons.setMinHeight(30);
+   this.setTop(Conteneur);
    
    
    //Debut dessin 

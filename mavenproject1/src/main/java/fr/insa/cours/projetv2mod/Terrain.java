@@ -9,6 +9,7 @@ package fr.insa.cours.projetv2mod;
 import fr.insa.cours.projetv2.recup.Lire;
 import java.io.IOException;
 import java.io.Writer;
+import java.util.ArrayList;
 import java.util.List;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
@@ -39,15 +40,27 @@ public class Terrain extends FigureSimple{
         this.maxX = maxX;
         this.minY = minY;
         this.maxY = maxY;
+        this.contientTriangle = new ArrayList<TriangleTerrain>();
+    }
+     
+    public Terrain(int id,double minX,double maxX,double minY,double maxY, Color col) {
+        super(col);
+        this.id = id;
+        this.minX = minX;
+        this.maxX = maxX;
+        this.minY = minY;
+        this.maxY = maxY;
+        this.contientTriangle = new ArrayList<TriangleTerrain>();
     }
     
     public Terrain(Point p1, Point p2) {
-        super(Color.BLACK);
+        super(Color.GREEN);
         this.Identificateur(num);
         this.minX = p1.getPx();
         this.maxX = p2.getPx();
         this.minY = p1.getPy();
         this.maxY = p2.getPy();
+        this.contientTriangle = new ArrayList<TriangleTerrain>();
     }
     
     
@@ -75,7 +88,7 @@ public class Terrain extends FigureSimple{
         context.strokeLine(this.maxX,this.maxY,this.maxX,this.minY);
         context.strokeLine(this.minX,this.minY,this.maxX,this.minY);
         context.strokeLine(this.minX,this.minY,this.minX,this.maxY);
-        context.setStroke(Color.BLACK);
+        context.setStroke(Color.GREEN);
         
     }
 
@@ -87,7 +100,7 @@ public class Terrain extends FigureSimple{
 
     @Override
     public void dessineSelection(GraphicsContext context) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        
     }
 
     @Override
@@ -97,7 +110,25 @@ public class Terrain extends FigureSimple{
 
     @Override
     public void save(Writer w) throws IOException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        if(! Save.contains(this)){
+            Save.add(this);
+            for(TriangleTerrain tri : this.contientTriangle){
+                tri.save(w);
+            }
+            w.append("Terrain;"+this.id+";"+this.minX+";"+this.maxX+";"+this.minY+";"+this.maxY+";"+FigureSimple.saveColor(this.getCouleur())+";");
+            for(int i=0; i<this.contientTriangle.size();i++){
+                w.append(num.getID(this.contientTriangle.get(i))+";");
+            }
+            w.append("\n");
+        }
+    }
+ 
+
+    /**
+     * @return the contientTriangle
+     */
+    public List<TriangleTerrain> getContientTriangle() {
+        return contientTriangle;
     }
        
     

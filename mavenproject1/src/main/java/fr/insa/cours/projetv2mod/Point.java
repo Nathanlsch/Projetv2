@@ -126,6 +126,7 @@ public final class Point extends FigureSimple{
             return !(neg && pos);
                        
         }
+        
 
     public String toString() {
         return "{Point ; abs : " + this.px + " ; ord : " + this.py + "}" ;
