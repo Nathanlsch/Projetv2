@@ -71,10 +71,15 @@ public class MainMenu extends MenuBar{
         
         Aide.getItems().addAll(TriangleTerrain,Appui,NoeudSimple,barre);
         
+        Menu TypeDeBarre = new Menu("Type de barre");
+        MenuItem nouveauTypeDeBarre = new MenuItem("Nouveau type de barre");
+        nouveauTypeDeBarre.setOnAction((t) -> {
+            this.main.getControleur().TypeDeBarre(t);
+        });
         
+        TypeDeBarre.getItems().addAll(nouveauTypeDeBarre);
         
-        
-        this.getMenus().addAll(file, ZoneDeTexte,Aide);
+        this.getMenus().addAll(file, ZoneDeTexte,TypeDeBarre,Aide);
         
     }
     

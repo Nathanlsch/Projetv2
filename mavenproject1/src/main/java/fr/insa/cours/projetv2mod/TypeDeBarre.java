@@ -12,6 +12,7 @@ package fr.insa.cours.projetv2mod;
 public class TypeDeBarre
 {
     private int id;
+    private String nom;
     private double coutAuMetre;
     private double longueurMin;
     private double longueurMax;

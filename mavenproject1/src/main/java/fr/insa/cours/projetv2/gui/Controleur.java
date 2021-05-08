@@ -326,6 +326,14 @@ public class Controleur {
         this.vue.getTest().clear();
         this.vue.getTest().appendText("Pour créer une \nbarre cliqué \nsur deux \nnoeud\n");
     }
+
+    void TypeDeBarre(ActionEvent t) {
+        Stage nouveau = new Stage();
+        Scene sc = new Scene(new CreationTypeDeBarre(),500,500);
+        nouveau.setScene(sc);
+        nouveau.setTitle("Creation type de barre");
+        nouveau.show();
+    }
     
     
     }

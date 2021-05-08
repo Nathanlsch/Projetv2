@@ -7,6 +7,7 @@ package fr.insa.cours.projetv2.gui;
 
 import fr.insa.cours.projetv2mod.Groupe;
 import java.io.File;
+import javafx.scene.control.Button;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextArea;
@@ -29,7 +30,7 @@ public class mainPane extends BorderPane {
     
     private Groupe model;
     private Controleur controleur;
-     private Stage inStage;
+    private Stage inStage;
     private File curFile;
     
     private MainMenu menu;
@@ -106,6 +107,8 @@ public mainPane(Stage inStage) {
    Barre.setOnAction((t) -> {
        this.controleur.Barre(t);
    });
+   
+   
    
    ToggleGroup bgEtat = new ToggleGroup();
    Select.setToggleGroup(bgEtat);
