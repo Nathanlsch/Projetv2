@@ -31,22 +31,22 @@ public class Numeroteur<TO> {
     }
     
     public int creeID(TO obj) {
-        if(this.objetversId.containsKey(obj)){
+        if(this.getObjetversId().containsKey(obj)){
             throw new Error("Objet" + obj + " déja dans le numéroteur");
         }
-        this.idversObjet.put(this.prochainID, obj);
-        this.objetversId.put(obj, this.prochainID);
-        this.prochainID = this.prochainID + 1;
-        return this.prochainID-1;
+        this.getIdversObjet().put(this.getProchainID(), obj);
+        this.getObjetversId().put(obj, this.getProchainID());
+        this.prochainID = this.getProchainID() + 1;
+        return this.getProchainID()-1;
     }
    
     public boolean objExist(TO obj){
-        return this.objetversId.containsKey(obj);
+        return this.getObjetversId().containsKey(obj);
     }
     
     public int getID(TO obj) {
         if(this.objExist(obj)){
-            return this.objetversId.get(obj);
+            return this.getObjetversId().get(obj);
         } else {
             throw new Error("Objet "+ obj+" inconnu dans numéroteur");
         }
@@ -54,7 +54,7 @@ public class Numeroteur<TO> {
     
      public int getOucreeID(TO obj) {
         if(this.objExist(obj)){
-            return this.objetversId.get(obj);
+            return this.getObjetversId().get(obj);
         } else {
             return this.creeID(obj);
         }
@@ -64,21 +64,42 @@ public class Numeroteur<TO> {
        if(! this.idExist(id)){
             throw new Error("Identificateur non existant");
         } else { 
-           return this.idversObjet.get(id);
+           return this.getIdversObjet().get(id);
        }
     }
     
     public boolean idExist(int id){
-        return this.idversObjet.containsKey(id);
+        return this.getIdversObjet().containsKey(id);
     }
             
     public void associe(int id,TO obj){
         if(this.idExist(id)){
             throw new Error("Identificateur existant");
         } else {
-            this.idversObjet.put(id, obj);
-            this.objetversId.put(obj, id);
+            this.getIdversObjet().put(id, obj);
+            this.getObjetversId().put(obj, id);
         }
+    }
+
+    /**
+     * @return the idversObjet
+     */
+    public TreeMap<Integer,TO> getIdversObjet() {
+        return idversObjet;
+    }
+
+    /**
+     * @return the objetversId
+     */
+    public Map<TO,Integer> getObjetversId() {
+        return objetversId;
+    }
+
+    /**
+     * @return the prochainID
+     */
+    public int getProchainID() {
+        return prochainID;
     }
     
     

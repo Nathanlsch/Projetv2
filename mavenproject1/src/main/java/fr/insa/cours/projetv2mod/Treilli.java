@@ -239,6 +239,16 @@ public abstract class Treilli {
         this.num = num;
     }
         
+    public static Matrice force(){
+        for(int i = 0; i< num.getIdversObjet().size();i++){
+            if(num.getObj(i) instanceof Noeud){
+                 
+               }
+            }
+        }
+        
+    
+
     
         
     

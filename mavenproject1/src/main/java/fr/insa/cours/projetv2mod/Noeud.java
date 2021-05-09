@@ -5,9 +5,9 @@
  */
 package fr.insa.cours.projetv2mod;
 
-import static fr.insa.cours.projetv2mod.Treilli.Save;
 import java.io.IOException;
 import java.io.Writer;
+import java.util.List;
 import javafx.scene.paint.Color;
 
 /**
@@ -15,8 +15,23 @@ import javafx.scene.paint.Color;
  * @author Steven
  */
 public abstract class Noeud extends FigureSimple{
+
+    /**
+     * @return the BarreAssos
+     */
+    public List<Barre> getBarreAssos() {
+        return BarreAssos;
+    }
+
+    /**
+     * @param BarreAssos the BarreAssos to set
+     */
+    public void setBarreAssos(List<Barre> BarreAssos) {
+        this.BarreAssos = BarreAssos;
+    }
    
     private int id;
+    private List<Barre> BarreAssos;
     
     public Noeud() {
       super(Color.BLACK);       

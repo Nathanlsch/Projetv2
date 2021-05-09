@@ -27,8 +27,10 @@ public class Barre extends FigureSimple{
     public Barre(Noeud ndepart, Noeud nfin) {
         super(Color.BLACK);
         this.Identificateur(num);
-        this.ndepart = ndepart; 
+        this.ndepart = ndepart;
+        this.ndepart.getBarreAssos().add(this);
         this.nfin = nfin; 
+        this.nfin.getBarreAssos().add(this);
     }
     
     public Barre(int id, Noeud ndepart, Noeud nfin, Color col) {
@@ -36,6 +38,8 @@ public class Barre extends FigureSimple{
         this.id = id;
         this.ndepart = ndepart; 
         this.nfin = nfin; 
+        this.ndepart.getBarreAssos().add(this);
+        this.nfin.getBarreAssos().add(this);
     }
     
     public Barre(Noeud ndepart, Noeud nfin, TypeDeBarre typeDeBarre) {
@@ -44,6 +48,8 @@ public class Barre extends FigureSimple{
         this.ndepart = ndepart; 
         this.nfin = nfin;
         this.typeDeBarre = typeDeBarre;
+        this.ndepart.getBarreAssos().add(this);
+        this.nfin.getBarreAssos().add(this);
         
     }
 
@@ -115,6 +121,14 @@ public class Barre extends FigureSimple{
             this.nfin.save(w);
              w.append("Barre;"+this.getId()+";"+this.ndepart.getId()+";"+this.nfin.getId()+";"+ FigureSimple.saveColor(this.getCouleur())+"\n");
         }
+    }
+    
+    public int getIdNdepart() {
+        return this.ndepart.getId();
+    }
+    
+    public int getIdNfin() {
+        return this.nfin.getId();
     }
     
 }
