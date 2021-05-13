@@ -8,6 +8,7 @@ package fr.insa.cours.projetv2mod;
 import static fr.insa.cours.projetv2mod.Treilli.Save;
 import java.io.IOException;
 import java.io.Writer;
+import java.util.ArrayList;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
 
@@ -25,7 +26,8 @@ public class NoeudSimple extends Noeud {
     public NoeudSimple (double px, double py) {
     this.Identificateur(num);
     this.px = px;
-    this.py = py;    
+    this.py = py; 
+    this.setBarreAssos(new ArrayList<Barre>());
 }
     
     public NoeudSimple (int id, double px, double py, Color col) {
@@ -33,6 +35,7 @@ public class NoeudSimple extends Noeud {
         this.px = px;
         this.py = py;
         this.setId(id);
+        this.setBarreAssos(new ArrayList<Barre>());
     }
 
     @Override

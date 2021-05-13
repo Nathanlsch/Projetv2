@@ -5,11 +5,15 @@
  */
 package fr.insa.cours.projetv2mod;
 
+import java.io.IOException;
+import java.io.Writer;
+import javafx.scene.canvas.GraphicsContext;
+
 /**
  *
  * @author celiajoy
  */
-public class TypeDeBarre
+public class TypeDeBarre extends Treilli
 {
     private int id;
     private String nom;
@@ -22,6 +26,16 @@ public class TypeDeBarre
 
     public TypeDeBarre(int id, double coutAuMetre, double longueurMin, double longueurMax, double resistanceMaxTension, double resistanceMaxCompression) {
         this.id = id;
+        this.coutAuMetre = coutAuMetre;
+        this.longueurMin = longueurMin;
+        this.longueurMax = longueurMax;
+        this.resistanceMaxTension = resistanceMaxTension;
+        this.resistanceMaxCompression = resistanceMaxCompression;
+    }
+    
+    public TypeDeBarre(String nom, double coutAuMetre, double longueurMin, double longueurMax, double resistanceMaxTension, double resistanceMaxCompression) {
+        this.Identificateur(num);
+        this.nom = nom;
         this.coutAuMetre = coutAuMetre;
         this.longueurMin = longueurMin;
         this.longueurMax = longueurMax;
@@ -70,6 +84,29 @@ public class TypeDeBarre
         return "TypeDeBarre;" + this.getId() + ";" + this.getLongueurMin() +";"+ this.getResistanceMaxTension()+";"+ this.getResistanceMaxCompression();
     }
     
+    public void Identificateur(Numeroteur<Treilli> num) {
+        this.id = num.creeID(this);
+    }
+
+    @Override
+    public void dessine(GraphicsContext context) {
+        
+    }
+
+    @Override
+    public double distancePoint(Point p2) {
+        return 1000000;
+    }
+
+    @Override
+    public void dessineSelection(GraphicsContext context) {
+        
+    }
+
+    @Override
+    public void save(Writer w) throws IOException {
+        
+    }
     
   
     

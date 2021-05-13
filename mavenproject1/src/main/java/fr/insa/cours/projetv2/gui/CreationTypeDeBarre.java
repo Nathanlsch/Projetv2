@@ -5,9 +5,12 @@
  */
 package fr.insa.cours.projetv2.gui;
 
+import javafx.geometry.Pos;
+import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
 /**
@@ -17,7 +20,7 @@ import javafx.scene.layout.VBox;
 public class CreationTypeDeBarre extends BorderPane {
     
     
-    private int longueurMin = 100;
+    private int longueurMin = 200;
     private int longueurMax = 200;
     private int hauteur = 30;
     private TextField TFnom;
@@ -26,6 +29,7 @@ public class CreationTypeDeBarre extends BorderPane {
     private TextField TFlongueurMax;
     private TextField TFresistanceMaxTension;
     private TextField TFresistanceMaxCompression;
+    private Button ajouter;
     
     private TextArea TAnom;
     private TextArea TAcoutAuMetre;
@@ -33,10 +37,14 @@ public class CreationTypeDeBarre extends BorderPane {
     private TextArea TAlongueurMax;
     private TextArea TAresistanceMaxTension;
     private TextArea TAresistanceMaxCompression;
+    
+    private mainPane main;
    
     
-    public CreationTypeDeBarre(){
-        
+    public CreationTypeDeBarre(mainPane main){
+    
+    this.main = main;
+            
     TFnom = new TextField();
     TFnom.setMaxSize(longueurMax, hauteur);
     TFnom.setMinSize(longueurMin, hauteur);
@@ -61,8 +69,8 @@ public class CreationTypeDeBarre extends BorderPane {
     TFresistanceMaxCompression.setMaxSize(longueurMax, hauteur);
     TFresistanceMaxCompression.setMinSize(longueurMin, hauteur);
     
-    VBox conteneur = new VBox(TFnom, TFcoutAuMetre, TFlongueurMin, TFlongueurMax, TFresistanceMaxTension, TFresistanceMaxCompression);
-    this.setCenter(conteneur);
+    VBox conteneur = new VBox(getTFnom(), getTFcoutAuMetre(), getTFlongueurMin(), getTFlongueurMax(), getTFresistanceMaxTension(), getTFresistanceMaxCompression());
+    //this.setCenter(conteneur);
     conteneur.setSpacing(10);
     
     TAnom = new TextArea("Nom du nouveau type");
@@ -95,10 +103,69 @@ public class CreationTypeDeBarre extends BorderPane {
     TAresistanceMaxCompression.setMaxSize(longueurMax, hauteur);
     TAresistanceMaxCompression.setEditable(false);
     
-    VBox conteneur2 = new VBox(TAnom, TAcoutAuMetre, TAlongueurMin, TAlongueurMax, TAresistanceMaxTension, TAresistanceMaxCompression);
-    this.setLeft(conteneur2);
-    conteneur2.setSpacing(10);
-            
-    }
     
+    VBox conteneur2 = new VBox(TAnom, TAcoutAuMetre, TAlongueurMin, TAlongueurMax, TAresistanceMaxTension, TAresistanceMaxCompression);
+    //this.setLeft(conteneur2);
+    conteneur2.setSpacing(10);
+    
+    ajouter = new Button("Ajouter");
+    HBox conteneur4 = new HBox(ajouter);
+    conteneur4.setAlignment(Pos.CENTER);
+    HBox conteneur3 = new HBox(conteneur2, conteneur);
+    VBox principal = new VBox(conteneur3, conteneur4);
+    this.setCenter(principal);
+    principal.setSpacing(10);  
+    
+    
+    ajouter.setOnAction((t) -> {
+        this.main.getControleur().ajouter(t);
+    });
+    
+    
+    
+    
+    }
+
+    /**
+     * @return the TFnom
+     */
+    public TextField getTFnom() {
+        return TFnom;
+    }
+
+    /**
+     * @return the TFcoutAuMetre
+     */
+    public TextField getTFcoutAuMetre() {
+        return TFcoutAuMetre;
+    }
+
+    /**
+     * @return the TFlongueurMin
+     */
+    public TextField getTFlongueurMin() {
+        return TFlongueurMin;
+    }
+
+    /**
+     * @return the TFlongueurMax
+     */
+    public TextField getTFlongueurMax() {
+        return TFlongueurMax;
+    }
+
+    /**
+     * @return the TFresistanceMaxTension
+     */
+    public TextField getTFresistanceMaxTension() {
+        return TFresistanceMaxTension;
+    }
+
+    /**
+     * @return the TFresistanceMaxCompression
+     */
+    public TextField getTFresistanceMaxCompression() {
+        return TFresistanceMaxCompression;
+    }
 }
+

@@ -9,6 +9,7 @@ import static fr.insa.cours.projetv2mod.NoeudSimple.RAYON_IN_DRAW;
 import static fr.insa.cours.projetv2mod.Treilli.Save;
 import java.io.IOException;
 import java.io.Writer;
+import java.util.ArrayList;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
 
@@ -20,10 +21,12 @@ public class AppuiEncastre extends Appui {
 
     public AppuiEncastre( TriangleTerrain triangleTerrain, int p1, double posSurSegment) {
         super(triangleTerrain, p1, posSurSegment);
+        this.setBarreAssos(new ArrayList<Barre>());
     }
     
     public AppuiEncastre( int id, TriangleTerrain triangleTerrain, int p1, double posSurSegment, Color col) {
         super(id, triangleTerrain, p1, posSurSegment, col);
+        this.setBarreAssos(new ArrayList<Barre>());
     }
     
     @Override

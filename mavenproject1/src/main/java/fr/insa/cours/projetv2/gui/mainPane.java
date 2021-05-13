@@ -136,14 +136,6 @@ public mainPane(Stage inStage) {
     Border border = new Border(new BorderStroke(Color.BLACK,BorderStrokeStyle.SOLID,CornerRadii.EMPTY,BorderWidths.DEFAULT));
     this.cvtest.setBorder(border);
     
-    
-    
-    
-    this.cvtest.setOnMouseClicked((t) -> {
-       System.out.println("click");
-    });
-   
-  
 }  
 
     public void redrawAll(){

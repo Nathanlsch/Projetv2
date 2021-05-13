@@ -17,6 +17,7 @@ import fr.insa.cours.projetv2mod.Point;
 import fr.insa.cours.projetv2mod.SegmentTerrain;
 import fr.insa.cours.projetv2mod.Terrain;
 import fr.insa.cours.projetv2mod.TriangleTerrain;
+import fr.insa.cours.projetv2mod.TypeDeBarre;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -46,6 +47,7 @@ public class Controleur {
     private List<Treilli> selection;
     
     private mainPane vue;
+    private CreationTypeDeBarre creabarre;
     private int etat;
     
     public Controleur(mainPane vue){
@@ -329,10 +331,65 @@ public class Controleur {
 
     void TypeDeBarre(ActionEvent t) {
         Stage nouveau = new Stage();
-        Scene sc = new Scene(new CreationTypeDeBarre(),500,500);
+        Scene sc = new Scene(this.creabarre = new CreationTypeDeBarre(this.vue),400,300);
         nouveau.setScene(sc);
         nouveau.setTitle("Creation type de barre");
         nouveau.show();
+    }
+    
+    public double convert(String test, String nom){
+        double res=0;
+        try {
+           res = Double.parseDouble(test);
+        } catch (NumberFormatException nfe){
+            Alert alert = new Alert(AlertType.ERROR);
+            alert.setTitle("Erreur");
+            alert.setHeaderText("la case "+nom+" ne peut pas rester vide \nou mauvais format saisie\n ");
+            alert.setContentText(nfe.getLocalizedMessage());
+            alert.showAndWait();
+        }
+        return res;
+    }
+    
+    public void test(String test, String nom){
+        if(test.isEmpty()){
+            Alert alert = new Alert(AlertType.ERROR);
+            alert.setTitle("Erreur");
+            alert.setHeaderText("La case "+nom+" ne peut pas rester vide");
+            alert.showAndWait();
+        }
+    }
+
+    void ajouter(ActionEvent t) {
+        
+        String nom = this.creabarre.getTFnom().getText();
+        String cout = this.creabarre.getTFcoutAuMetre().getText();
+        String longMin = this.creabarre.getTFlongueurMin().getText();
+        String longMax = this.creabarre.getTFlongueurMax().getText();
+        String maxTension = this.creabarre.getTFresistanceMaxTension().getText();
+        String maxCompression = this.creabarre.getTFresistanceMaxCompression().getText();
+        
+        System.out.println(nom);
+        test(nom, "nom");
+        double dCout = convert(cout, "Coût");
+        double dlongMin = convert(longMin, "longueur minimum");
+        double dlongMax = convert(longMax, "longeur maximum");
+        double dmaxTension = convert(maxTension, "Tension maximum");
+        double dmaxCompression = convert(maxCompression, "Compression maximum");
+        
+        if((dCout==0)||(dlongMin==0)||(dlongMax==0)||(dmaxTension==0)||(dmaxCompression==0)||(nom.isEmpty())){
+            
+        } else { TypeDeBarre ntdb = new TypeDeBarre(nom, dCout, dlongMin, dlongMax, dmaxTension, dmaxCompression);
+            Alert alert = new Alert(AlertType.CONFIRMATION);
+            alert.setHeaderText("Type de barre créé !");
+            alert.showAndWait();
+            this.creabarre.getTFnom().setText("");
+            this.creabarre.getTFcoutAuMetre().setText("");
+            this.creabarre.getTFlongueurMin().setText("");
+            this.creabarre.getTFlongueurMax().setText("");
+            this.creabarre.getTFresistanceMaxTension().setText("");
+            this.creabarre.getTFresistanceMaxCompression().setText("");
+        }
     }
     
     
