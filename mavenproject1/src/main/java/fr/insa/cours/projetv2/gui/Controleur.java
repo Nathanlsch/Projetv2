@@ -395,7 +395,11 @@ public class Controleur {
     }
 
     void listeTypeDeBarre(ActionEvent t) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        Stage nouveau = new Stage();
+        Scene sc = new Scene(new VueTypeDeBarre(),1000,300);
+        nouveau.setScene(sc);
+        nouveau.setTitle("Liste type de barre");
+        nouveau.show(); 
     }
     
     
