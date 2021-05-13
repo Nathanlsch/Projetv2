@@ -380,6 +380,8 @@ public class Controleur {
         if((dCout==0)||(dlongMin==0)||(dlongMax==0)||(dmaxTension==0)||(dmaxCompression==0)||(nom.isEmpty())){
             
         } else { TypeDeBarre ntdb = new TypeDeBarre(nom, dCout, dlongMin, dlongMax, dmaxTension, dmaxCompression);
+            vue.getModel().add(ntdb);
+            System.out.println(ntdb);
             Alert alert = new Alert(AlertType.CONFIRMATION);
             alert.setHeaderText("Type de barre créé !");
             alert.showAndWait();

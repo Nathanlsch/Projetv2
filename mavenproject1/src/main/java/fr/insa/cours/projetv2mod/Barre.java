@@ -119,6 +119,7 @@ public class Barre extends FigureSimple{
         if(! Save.contains(this)){
             this.ndepart.save(w);
             this.nfin.save(w);
+             Save.add(this);
              w.append("Barre;"+this.getId()+";"+this.ndepart.getId()+";"+this.nfin.getId()+";"+ FigureSimple.saveColor(this.getCouleur())+"\n");
         }
     }

@@ -8,13 +8,16 @@ package fr.insa.cours.projetv2mod;
 import java.io.IOException;
 import java.io.Writer;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.paint.Color;
+import static javafx.scene.paint.Color.color;
+import static fr.insa.cours.projetv2mod.Treilli.Save;
 
 /**
  *
  * @author celiajoy
  */
-public class TypeDeBarre extends Treilli
-{
+public class TypeDeBarre extends FigureSimple{
+    
     private int id;
     private String nom;
     private double coutAuMetre;
@@ -25,6 +28,7 @@ public class TypeDeBarre extends Treilli
 
 
     public TypeDeBarre(int id, double coutAuMetre, double longueurMin, double longueurMax, double resistanceMaxTension, double resistanceMaxCompression) {
+        super(Color.BLACK);
         this.id = id;
         this.coutAuMetre = coutAuMetre;
         this.longueurMin = longueurMin;
@@ -34,6 +38,7 @@ public class TypeDeBarre extends Treilli
     }
     
     public TypeDeBarre(String nom, double coutAuMetre, double longueurMin, double longueurMax, double resistanceMaxTension, double resistanceMaxCompression) {
+        super(Color.BLACK);
         this.Identificateur(num);
         this.nom = nom;
         this.coutAuMetre = coutAuMetre;
@@ -106,6 +111,11 @@ public class TypeDeBarre extends Treilli
     @Override
     public void save(Writer w) throws IOException {
         
+        if(! Save.contains(this)){
+             Save.add(this);
+             w.append("TypeDeBarre;"+this.getId()+";"+this.nom+";"+this.coutAuMetre+";"+this.longueurMin+
+                    ";"+this.longueurMax+";"+this.resistanceMaxTension+";"+this.resistanceMaxCompression+"\n");
+        }
     }
     
   
