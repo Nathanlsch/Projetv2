@@ -77,7 +77,12 @@ public class MainMenu extends MenuBar{
             this.main.getControleur().TypeDeBarre(t);
         });
         
-        TypeDeBarre.getItems().addAll(nouveauTypeDeBarre);
+        MenuItem listeTypeDeBarre = new MenuItem("Liste type de barre");
+        listeTypeDeBarre.setOnAction((t) -> {
+            this.main.getControleur().listeTypeDeBarre(t);
+        });
+        
+        TypeDeBarre.getItems().addAll(nouveauTypeDeBarre, listeTypeDeBarre);
         
         this.getMenus().addAll(file, ZoneDeTexte,TypeDeBarre,Aide);
         

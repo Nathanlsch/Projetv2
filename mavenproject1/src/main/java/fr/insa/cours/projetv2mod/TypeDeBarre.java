@@ -16,7 +16,7 @@ import static fr.insa.cours.projetv2mod.Treilli.Save;
  *
  * @author celiajoy
  */
-public class TypeDeBarre extends FigureSimple{
+public class TypeDeBarre extends Treilli{
     
     private int id;
     private String nom;
@@ -28,7 +28,6 @@ public class TypeDeBarre extends FigureSimple{
 
 
     public TypeDeBarre(int id, double coutAuMetre, double longueurMin, double longueurMax, double resistanceMaxTension, double resistanceMaxCompression) {
-        super(Color.BLACK);
         this.id = id;
         this.coutAuMetre = coutAuMetre;
         this.longueurMin = longueurMin;
@@ -38,7 +37,6 @@ public class TypeDeBarre extends FigureSimple{
     }
     
     public TypeDeBarre(String nom, double coutAuMetre, double longueurMin, double longueurMax, double resistanceMaxTension, double resistanceMaxCompression) {
-        super(Color.BLACK);
         this.Identificateur(num);
         this.nom = nom;
         this.coutAuMetre = coutAuMetre;
