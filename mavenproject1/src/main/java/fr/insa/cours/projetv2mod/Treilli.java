@@ -408,6 +408,7 @@ public abstract class Treilli {
             Matrice res = new Matrice(this.testForce(), this.testForce());
             int nbMax = BarreMax();
             int[][] info = new int[2][this.testForce()];
+            double valeur;
             Set<Integer> set = this.num.parcours();
             System.out.println("Etape1");
             for(Integer key: set){
@@ -416,7 +417,11 @@ public abstract class Treilli {
                    for(Barre barre : ((Noeud)num.getObj(key)).getBarreAssos()){
                        int id = barre.getId();
                        ajout(info,id,0);
-                       double valeur = barre.getNdepart().getAngleOriente(barre.getNfin());
+                       if(key == num.getID(barre.getNdepart())){
+                        valeur = barre.getNdepart().getAngleOriente(barre.getNfin());
+                       } else {
+                          valeur = barre.getNfin().getAngleOriente(barre.getNdepart()); 
+                       }
                        int col = numCol(info,id);
                        res.set(ligne, col, Math.cos(valeur));
                        res.set(ligne+1, col, Math.sin(valeur)); 
@@ -429,7 +434,11 @@ public abstract class Treilli {
                    for(Barre barre : ((Noeud)num.getObj(key)).getBarreAssos()){
                        int id = barre.getId();
                        ajout(info,id,0);
-                       double valeur = barre.getNdepart().getAngleOriente(barre.getNfin());
+                       if(key == num.getID(barre.getNdepart())){
+                        valeur = barre.getNdepart().getAngleOriente(barre.getNfin());
+                       } else {
+                          valeur = barre.getNfin().getAngleOriente(barre.getNdepart()); 
+                       }
                        int col = numCol(info,id);
                        res.set(ligne, col, Math.cos(valeur));
                        res.set(ligne+1, col, Math.sin(valeur)); 
@@ -442,7 +451,11 @@ public abstract class Treilli {
                    for(Barre barre : ((Noeud)num.getObj(key)).getBarreAssos()){
                        int id = barre.getId();
                        ajout(info,id,0);
-                       double valeur = barre.getNdepart().getAngleOriente(barre.getNfin());
+                       if(key == num.getID(barre.getNdepart())){
+                        valeur = barre.getNdepart().getAngleOriente(barre.getNfin());
+                       } else {
+                          valeur = barre.getNfin().getAngleOriente(barre.getNdepart()); 
+                       }
                        int col = numCol(info,id);
                        res.set(ligne, col, Math.cos(valeur));
                        res.set(ligne+1, -col, Math.sin(valeur));  
