@@ -7,7 +7,9 @@ package fr.insa.cours.projetv2mod;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Set;
 import java.util.TreeMap;
+
 
 /**
  *
@@ -80,6 +82,12 @@ public class Numeroteur<TO> {
             this.getObjetversId().put(obj, id);
         }
     }
+    
+    public void suprObj(TO obj) {
+        int id = getID(obj);
+        this.getIdversObjet().remove(id, obj);
+        this.getObjetversId().remove(obj, id);
+    }
 
     /**
      * @return the idversObjet
@@ -100,6 +108,10 @@ public class Numeroteur<TO> {
      */
     public int getProchainID() {
         return prochainID;
+    }
+    
+    public Set<Integer> parcours(){
+        return this.idversObjet.keySet(); 
     }
     
     

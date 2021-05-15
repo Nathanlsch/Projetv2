@@ -50,6 +50,17 @@ public class AppuiDouble extends Appui {
         w.append("AppuiDouble;"+this.getId()+";"+this.getTriangleTerrain().getId()+";"+this.getP1()+";"+this.getPosSurSegment()+";"+ FigureSimple.saveColor(this.getCouleur())+"\n");
         }
     }
+
+    @Override
+    public boolean dansTerrain(Terrain terrain) {
+        if(this.getTriangleTerrain().dansTerrain(terrain)){
+           return true; 
+        } else {
+            return false;
+        }
+    }
+
+    
     
     
     

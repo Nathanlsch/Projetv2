@@ -81,10 +81,19 @@ public class MainMenu extends MenuBar{
         listeTypeDeBarre.setOnAction((t) -> {
             this.main.getControleur().listeTypeDeBarre(t);
         });
+       
         
         TypeDeBarre.getItems().addAll(nouveauTypeDeBarre, listeTypeDeBarre);
         
-        this.getMenus().addAll(file, ZoneDeTexte,TypeDeBarre,Aide);
+        Menu Force = new Menu("Force");
+        MenuItem calculforce = new MenuItem("Calcul des forces");
+        calculforce.setOnAction((t) -> {
+            this.main.getControleur().calculdeforce(t);
+        });
+        
+        Force.getItems().addAll(calculforce);
+        
+        this.getMenus().addAll(file, ZoneDeTexte,TypeDeBarre,Force,Aide);
         
     }
     

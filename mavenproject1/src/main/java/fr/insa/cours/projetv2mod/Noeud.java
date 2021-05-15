@@ -14,6 +14,8 @@ import javafx.scene.paint.Color;
  *
  * @author Steven
  */
+
+
 public abstract class Noeud extends FigureSimple{
 
     /**
@@ -28,6 +30,10 @@ public abstract class Noeud extends FigureSimple{
      */
     public void setBarreAssos(List<Barre> BarreAssos) {
         this.BarreAssos = BarreAssos;
+    }
+    
+    public int nombreBarre(){
+       return this.getBarreAssos().size();
     }
    
     private int id;
@@ -59,6 +65,17 @@ public abstract class Noeud extends FigureSimple{
     public void setId(int id) {
         this.id = id;
     }
+    
+    public double getAngleOriente(Noeud N2) {
+            double P1x = this.getcoordAppui().getPx();
+            double P1y = this.getcoordAppui().getPy();
+            
+            double P2x = this.getcoordAppui().getPx();
+            double P2y = this.getcoordAppui().getPy();
+            
+            return Math.atan2(P1y - P2y, P1x - P2y);
+        }
+        
         
 
 }

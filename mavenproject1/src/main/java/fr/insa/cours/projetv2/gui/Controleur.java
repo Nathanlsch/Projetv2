@@ -13,6 +13,7 @@ import fr.insa.cours.projetv2mod.Treilli;
 import fr.insa.cours.projetv2mod.Groupe;
 import fr.insa.cours.projetv2mod.Noeud;
 import fr.insa.cours.projetv2mod.NoeudSimple;
+import fr.insa.cours.projetv2mod.Numeroteur;
 import fr.insa.cours.projetv2mod.Point;
 import fr.insa.cours.projetv2mod.SegmentTerrain;
 import fr.insa.cours.projetv2mod.Terrain;
@@ -23,6 +24,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import javafx.event.ActionEvent;
+import javafx.scene.Cursor;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
@@ -43,17 +45,22 @@ public class Controleur {
     private Point p1;
     private Point p2;
     private Point p3;
+    private Cursor cursor;
     
     private List<Treilli> selection;
     
     private mainPane vue;
     private CreationTypeDeBarre creabarre;
+    private ModificationTypeDeBarre modifbarre;
+    private VueTypeDeBarre vueBarre;
     private int etat;
+    private Numeroteur num;
     
     public Controleur(mainPane vue){
         this.vue = vue;
         this.selection = new ArrayList<>();
         this.changeEtat(80);
+        this.num = this.vue.getModel().getNum();
     }
     
     public void changeEtat(int nouvelEtat){
@@ -63,6 +70,9 @@ public class Controleur {
        }
        if(nouvelEtat == 70){
            this.selection.clear();
+       }
+       if(nouvelEtat == 80){
+          vue.setCursor(Cursor.DEFAULT);
        }
        this.etat = nouvelEtat; 
        }
@@ -91,24 +101,36 @@ public class Controleur {
            
        } else if (this.etat==20){
          double px = t.getX();
-         double py = t.getY(); 
-          p1 = new Point(px,py);
-         this.changeEtat(21);
+         double py = t.getY();
+         if(dansTerrain(px,py,this.vue.getModel().getTerrain())){
+            p1 = new Point(px,py);
+            this.changeEtat(21);
+         }  else {
+            System.out.println("pas dans le terrain");
+         }
        } else if (this.etat==21){
          double px = t.getX();
-         double py = t.getY(); 
-         this.changeEtat(22);
-          p2 = new Point(px,py);  
+         double py = t.getY();
+         if(dansTerrain(px,py,this.vue.getModel().getTerrain())){
+            p2 = new Point(px,py);
+            this.changeEtat(22);
+         }  else {
+            System.out.println("pas dans le terrain");
+         }  
        } else if (this.etat==22){
          double px = t.getX();
-         double py = t.getY(); 
-          p3 = new Point(px,py);
-         Groupe model = this.vue.getModel();
-         TriangleTerrain t1 = new TriangleTerrain(p1,p2,p3);
-         model.getTerrain().getContientTriangle().add(t1);
-         model.add(t1);
-         this.vue.redrawAll(); 
-         this.changeEtat(20);
+         double py = t.getY();
+         if(dansTerrain(px,py,this.vue.getModel().getTerrain())){
+            p3 = new Point(px,py);
+            Groupe model = this.vue.getModel();
+            TriangleTerrain t1 = new TriangleTerrain(p1,p2,p3);
+            model.getTerrain().getContientTriangle().add(t1);
+            model.add(t1);
+            this.vue.redrawAll(); 
+            this.changeEtat(20);
+         }  else {
+            System.out.println("pas dans le terrain");
+         }
          
        } else if (this.etat==30){
            pclick = new Point(t.getX(), t.getY());
@@ -155,10 +177,13 @@ public class Controleur {
        } else if (this.etat==60){    
        double px = t.getX();
        double py = t.getY();
-       Groupe model = this.vue.getModel();
-       model.add(new NoeudSimple(px,py));
-       this.vue.redrawAll();  
-       
+       if(dansTerrain(px,py,this.vue.getModel().getTerrain())){
+          Groupe model = this.vue.getModel();
+          model.add(new NoeudSimple(px,py));
+          this.vue.redrawAll();  
+       } else {
+           System.out.println("Pas dans terrain");
+       }
         } else if (this.etat==70){ 
             pclick = new Point(t.getX(), t.getY());
             Treilli proche = this.vue.getModel().NoeudplusProche(pclick, MAX_VALUE);
@@ -368,8 +393,7 @@ public class Controleur {
         String longMax = this.creabarre.getTFlongueurMax().getText();
         String maxTension = this.creabarre.getTFresistanceMaxTension().getText();
         String maxCompression = this.creabarre.getTFresistanceMaxCompression().getText();
-        
-        System.out.println(nom);
+       
         test(nom, "nom");
         double dCout = convert(cout, "Coût");
         double dlongMin = convert(longMin, "longueur minimum");
@@ -381,7 +405,6 @@ public class Controleur {
             
         } else { TypeDeBarre ntdb = new TypeDeBarre(nom, dCout, dlongMin, dlongMax, dmaxTension, dmaxCompression);
             vue.getModel().add(ntdb);
-            System.out.println(ntdb);
             Alert alert = new Alert(AlertType.CONFIRMATION);
             alert.setHeaderText("Type de barre créé !");
             alert.showAndWait();
@@ -396,12 +419,85 @@ public class Controleur {
 
     void listeTypeDeBarre(ActionEvent t) {
         Stage nouveau = new Stage();
-        Scene sc = new Scene(new VueTypeDeBarre(),1000,300);
+        Scene sc = new Scene(new VueTypeDeBarre(this.vue),1000,300);
         nouveau.setScene(sc);
         nouveau.setTitle("Liste type de barre");
         nouveau.show(); 
     }
-    
-    
+
+    public void boutonModifier(ActionEvent t, TypeDeBarre type) {
+        Stage nouveau = new Stage();
+        Scene sc = new Scene(this.modifbarre = new ModificationTypeDeBarre(this.vue, type),400,300);
+        nouveau.setScene(sc);
+        nouveau.setTitle("Modification type de barre");
+        nouveau.show();
     }
+
+    public void boutonSup(ActionEvent t, TypeDeBarre type) {
+        type.supr(); 
+        Alert alert = new Alert(AlertType.CONFIRMATION);
+        alert.setHeaderText("Type de barre supprimé !");
+        alert.showAndWait();
+    }
+
+    void appliquer(ActionEvent t, TypeDeBarre type) {
+        String nom = this.modifbarre.getTFnom().getText();
+        String cout = this.modifbarre.getTFcoutAuMetre().getText();
+        String longMin = this.modifbarre.getTFlongueurMin().getText();
+        String longMax = this.modifbarre.getTFlongueurMax().getText();
+        String maxTension = this.modifbarre.getTFresistanceMaxTension().getText();
+        String maxCompression = this.modifbarre.getTFresistanceMaxCompression().getText();
+        
+        test(nom, "nom");
+        double dCout = convert(cout, "Coût");
+        double dlongMin = convert(longMin, "longueur minimum");
+        double dlongMax = convert(longMax, "longeur maximum");
+        double dmaxTension = convert(maxTension, "Tension maximum");
+        double dmaxCompression = convert(maxCompression, "Compression maximum");
+        
+         if((dCout==0)||(dlongMin==0)||(dlongMax==0)||(dmaxTension==0)||(dmaxCompression==0)||(nom.isEmpty())){
+            
+        } else {
+             type.setNom(nom);
+             type.setCoutAuMetre(dCout);
+             type.setLongueurMin(dlongMin);
+             type.setLongueurMax(dlongMax);
+             type.setResistanceMaxTension(dmaxTension);
+             type.setResistanceMaxCompression(dmaxCompression);
+             Alert alert = new Alert(AlertType.CONFIRMATION);
+            alert.setHeaderText("Type de barre modifier !");
+            alert.showAndWait();
+            
+         }
+ 
+    }
+    
+    public boolean dansTerrain(double px, double py, Terrain terrain){
+        boolean test = false;
+        try{
+        if(((terrain.getMinX()<px)&&(px<terrain.getMaxX()))&&((terrain.getMinY()<py)&&(py<terrain.getMaxY()))){
+           test = true; 
+        } else {
+            //return false;
+        }
+        } catch (Exception e) {
+            this.vue.getTest().appendText("Terrain inexistant\nCliquez deux fois\ndans la zone de dessin\npour le créer");
+            this.changeEtat(80);
+        }
+        
+        return test;
+    }
+
+    void calculdeforce(ActionEvent t) {
+            vue.getModel().Force();
+            
+        }
+             
+        
+
+        
+    }
+    
+    
+    
 

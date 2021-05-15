@@ -94,5 +94,14 @@ public class NoeudSimple extends Noeud {
         w.append("NoeudSimple;"+this.getId()+";"+this.px+";"+this.py+";"+ FigureSimple.saveColor(this.getCouleur())+"\n");
         }
     }
+
+    @Override
+    public boolean dansTerrain(Terrain terrain) {
+        if(((terrain.getMinX()<this.px)&&(this.px<terrain.getMaxX()))&&((terrain.getMinY()<this.py)&&(this.py<terrain.getMaxY()))){
+           return true; 
+        } else {
+            return false;
+        }
+    }
   
 }

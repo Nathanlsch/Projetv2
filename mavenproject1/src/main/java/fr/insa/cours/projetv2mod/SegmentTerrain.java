@@ -157,5 +157,10 @@ public class SegmentTerrain extends FigureSimple {
     public int getId() {
         return id;
     }
+
+    @Override
+    public boolean dansTerrain(Terrain terrain) {
+        return true;
+    }
     
 }

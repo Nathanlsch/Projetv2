@@ -12,8 +12,11 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.Writer;
+import static java.lang.Math.cos;
+import static java.lang.Math.sin;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
 
@@ -77,6 +80,8 @@ public abstract class Treilli {
     public abstract void dessineSelection(GraphicsContext context); 
         
     public abstract void Identificateur(Numeroteur<Treilli> num);
+    
+    //public abstract void supr();
    
     public abstract void save(Writer w) throws IOException;
     
@@ -196,8 +201,7 @@ public abstract class Treilli {
                     }
                     Save.clear();
                     derniere = ng;
-                }
-                if(bouts[0].equals("Terrain")){
+                } else if(bouts[0].equals("Terrain")){
                     int id = Integer.parseInt(bouts[1]);
                     double pxmin = Double.parseDouble(bouts[2]);
                     double pxmax = Double.parseDouble(bouts[3]);
@@ -211,10 +215,18 @@ public abstract class Treilli {
                         Treilli tri = num2.getObj(idSous);
                             terrain.getContientTriangle().add((TriangleTerrain) tri);
                     }
-           
-             
                     derniere = terrain;
-            }
+                } else if (bouts[0].equals("TypeDeBarre")){
+                    int id = Integer.parseInt(bouts[1]);
+                    String nom = bouts[2];
+                    double cout = Double.parseDouble(bouts[3]);
+                    double longMin = Double.parseDouble(bouts[4]);
+                    double longMax = Double.parseDouble(bouts[5]);
+                    double maxTension = Double.parseDouble(bouts[6]);
+                    double maxCompression = Double.parseDouble(bouts[7]);
+                    TypeDeBarre ntdb = new TypeDeBarre(id,nom,cout,longMin,longMax,maxTension,maxCompression);
+                    num2.associe(id, ntdb);
+                }
         }
         num = num2;
         return derniere;
@@ -299,51 +311,163 @@ public abstract class Treilli {
                 }
                  
                }
-   }
- 
-   }
-   
-        /* public static void resoudExempleTreillisPortique() {
-        System.out.println("----- treillis portique du sujet de projet");
-        Matrice mat = new Matrice(6, 6);
-        double a = Math.sqrt(2) / 2;
-        int i = 0;
-        mat.coeffs[i][0] = a;
-        mat.coeffs[i][3] = 1;
-
-        i++;
-        mat.coeffs[i][0] = -a;
-        mat.coeffs[i][2] = -1;
-        mat.coeffs[i][4] = 1;
-
-        i++;
-        mat.coeffs[i][1] = a;
-        mat.coeffs[i][5] = 1;
-
-        i++;
-        mat.coeffs[i][1] = a;
-        mat.coeffs[i][2] = 1;
-
-        i++;
-        mat.coeffs[i][0] = -a;
-        mat.coeffs[i][1] = -a;
-
-        i++;
-        mat.coeffs[i][0] = a;
-        mat.coeffs[i][1] = -a;
-        System.out.println("mat : \n" + mat);
-
-        Matrice sm = new Matrice(6, 1);
-        sm.coeffs[5][0] = 1000;
-        System.out.println("second membre : \n" + sm);
-
-        ResSysLin res = mat.resoudSysLin(sm);
-        if (res.solUnique) {
-            System.out.println("sol : \n" + res.sol);
-        } else {
-            System.out.println("pas de sol");
+            }
+  
+    public int testForce(){
+      int nombreNS=0;
+      int nombreNB=0;
+      int nombreNAS=0;
+      int nombreNAD=0;
+      int nombreN=0;
+      boolean testAE=false;
+      Set<Integer> set = this.num.parcours();
+      for(Integer key: set){
+           if(num.getObj(key) instanceof NoeudSimple){
+               nombreNS = nombreNS + 1;
+               nombreN = nombreN+1;
+               
+           }
+           if(num.getObj(key) instanceof Barre){
+               nombreNB = nombreNB + 1;         
+           }
+           
+           if(num.getObj(key) instanceof AppuiDouble){
+               nombreNAD = nombreNAD + 1;
+               nombreN = nombreN+1;
+               
+           }
+           if(num.getObj(key) instanceof AppuiSimple){
+               nombreNAS = nombreNAS + 1;
+               nombreN = nombreN+1;
+               
+           }
+           if(num.getObj(key) instanceof AppuiEncastre){
+               testAE = true;  
+               nombreN = nombreN+1;
+           }
+      }
+      
+      if((2*nombreN == nombreNB+nombreNAS+2*nombreNAD)&&(testAE == false)){
+          return 2*nombreN;
+      } else {
+          return 0;
+      }  
+   } 
+  
+    public int BarreMax(){
+        System.out.println("Etape3");
+      int barre;
+      int barreMax=0;
+      Set<Integer> set = this.num.parcours();
+      for(Integer key: set){ 
+          if((num.getObj(key) instanceof NoeudSimple)||(num.getObj(key) instanceof AppuiSimple)||(num.getObj(key) instanceof AppuiDouble)){
+              barre = ((Noeud) num.getObj(key)).nombreBarre();
+              if(barreMax<barre){
+                  barreMax = barre;
+              }
+          }
+      }
+      return barreMax;
+    }
+    
+    public void ajout(int[][] tab, int id,int ligne){
+        System.out.println("Etape2");
+        System.out.println(ligne);
+        if(ligne==1){
+            int i=0;
+            while(tab[ligne][i]!=0){
+                i=i+2;
+            }
+            tab[ligne][i]=id;
+            tab[ligne][i+1]=id;
+            System.out.println(tab);
+        } else if (ligne==0){
+            int y=0;
+            while((tab[ligne][y]!=0)&&(tab[ligne][y]!=id)){
+                y=y+1;
+                System.out.println(y);
+            }
+            
+            System.out.println(y);
+            tab[ligne][y]=id;
+            System.out.println(tab);
         }
-        
-        */
+    }
+    
+    public int numCol(int[][] tab, int id){
+        int i=0;
+        while(tab[0][i]!=id){
+            i=i+1;
+        }
+        return i;
+    }
 
-}
+    public void Force(){
+        if(this.testForce() !=0){
+            int ligne =0;
+            Matrice res = new Matrice(this.testForce(), this.testForce());
+            int nbMax = BarreMax();
+            int[][] info = new int[2][this.testForce()];
+            Set<Integer> set = this.num.parcours();
+            System.out.println("Etape1");
+            for(Integer key: set){
+               if(num.getObj(key) instanceof NoeudSimple){
+                   ajout(info,key,1);
+                   for(Barre barre : ((Noeud)num.getObj(key)).getBarreAssos()){
+                       int id = barre.getId();
+                       ajout(info,id,0);
+                       double valeur = barre.getNdepart().getAngleOriente(barre.getNfin());
+                       int col = numCol(info,id);
+                       res.set(ligne, col, Math.cos(valeur));
+                       res.set(ligne+1, col, Math.sin(valeur)); 
+     
+                   }
+                ligne = ligne+2;   
+               }
+               if(num.getObj(key) instanceof AppuiSimple){
+                   ajout(info,key,1);
+                   for(Barre barre : ((Noeud)num.getObj(key)).getBarreAssos()){
+                       int id = barre.getId();
+                       ajout(info,id,0);
+                       double valeur = barre.getNdepart().getAngleOriente(barre.getNfin());
+                       int col = numCol(info,id);
+                       res.set(ligne, col, Math.cos(valeur));
+                       res.set(ligne+1, col, Math.sin(valeur)); 
+                       
+                   }
+                   ligne = ligne+2;
+               }
+               if(num.getObj(key) instanceof AppuiDouble){
+                   ajout(info,key,1);
+                   for(Barre barre : ((Noeud)num.getObj(key)).getBarreAssos()){
+                       int id = barre.getId();
+                       ajout(info,id,0);
+                       double valeur = barre.getNdepart().getAngleOriente(barre.getNfin());
+                       int col = numCol(info,id);
+                       res.set(ligne, col, Math.cos(valeur));
+                       res.set(ligne+1, -col, Math.sin(valeur));  
+                       
+                   }
+                   ligne = ligne+2;
+               }
+            
+            }
+        System.out.println(res);
+            
+            
+            
+            
+            
+        } else {
+            System.out.println("force du treilli non calculable");
+        }
+    }
+
+
+  
+      
+  }  
+        
+    
+    
+

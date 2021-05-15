@@ -5,11 +5,15 @@
  */
 package fr.insa.cours.projetv2mod;
 
+import com.sun.tools.javac.Main;
+import fr.insa.cours.projetv2.gui.Controleur;
+import fr.insa.cours.projetv2.gui.mainPane;
 import java.io.IOException;
 import java.io.Writer;
 import javafx.scene.canvas.GraphicsContext;
 import static fr.insa.cours.projetv2mod.Treilli.Save;
 import static fr.insa.cours.projetv2mod.CatalogueDeBarre.listTypeDeBarre;
+import javafx.scene.control.Button;
 
 /**
  *
@@ -24,17 +28,22 @@ public class TypeDeBarre extends Treilli {
     private double longueurMax;
     private double resistanceMaxTension;
     private double resistanceMaxCompression;
+    private  Button btMod = new Button("Modifier");
+    private  Button btSup = new Button("Supprimer");
+    
+    
 
 
-    public TypeDeBarre(int id, double coutAuMetre, double longueurMin, double longueurMax, double resistanceMaxTension, double resistanceMaxCompression) {
+    public TypeDeBarre(int id,String nom, double coutAuMetre, double longueurMin, double longueurMax, double resistanceMaxTension, double resistanceMaxCompression) {
         this.id = id;
+        this.nom = nom;
         this.coutAuMetre = coutAuMetre;
         this.longueurMin = longueurMin;
         this.longueurMax = longueurMax;
         this.resistanceMaxTension = resistanceMaxTension;
         this.resistanceMaxCompression = resistanceMaxCompression;
         listTypeDeBarre.add(this);
-    }
+       }
     
     public TypeDeBarre(String nom, double coutAuMetre, double longueurMin, double longueurMax, double resistanceMaxTension, double resistanceMaxCompression) {
         this.Identificateur(num);
@@ -172,8 +181,43 @@ public class TypeDeBarre extends Treilli {
     public void setResistanceMaxCompression(double resistanceMaxCompression) {
         this.resistanceMaxCompression = resistanceMaxCompression;
     }
+
+    /**
+     * @return the btMod
+     */
+    public Button getBtMod() {
+        return btMod;
+    }
+
+    /**
+     * @param btMod the btMod to set
+     */
+    public void setBtMod(Button btMod) {
+        this.btMod = btMod;
+    }
+
+    /**
+     * @return the btSup
+     */
+    public Button getBtSup() {
+        return btSup;
+    }
+
+    /**
+     * @param btSup the btSup to set
+     */
+    public void setBtSup(Button btSup) {
+        this.btSup = btSup;
+    }
     
-  
-    
-    
+    public void supr(){
+        num.suprObj(this);
+        this.nom = null;
+        this.coutAuMetre =0;
+        this.longueurMin =0;
+        this.longueurMax = 0;
+        this.resistanceMaxTension=0;
+        this.resistanceMaxCompression=0;
+        listTypeDeBarre.remove(this);
+}
 }
