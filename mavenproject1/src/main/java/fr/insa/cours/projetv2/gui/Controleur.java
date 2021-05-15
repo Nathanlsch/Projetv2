@@ -13,6 +13,7 @@ import fr.insa.cours.projetv2mod.Treilli;
 import fr.insa.cours.projetv2mod.Groupe;
 import fr.insa.cours.projetv2mod.Noeud;
 import fr.insa.cours.projetv2mod.NoeudSimple;
+import fr.insa.cours.projetv2mod.Numeroteur;
 import fr.insa.cours.projetv2mod.Point;
 import fr.insa.cours.projetv2mod.SegmentTerrain;
 import fr.insa.cours.projetv2mod.Terrain;
@@ -24,8 +25,6 @@ import java.util.ArrayList;
 import java.util.List;
 import javafx.event.ActionEvent;
 import javafx.scene.Cursor;
-import  javafx.scene.image.Image;
-import static javafx.scene.Cursor.CLOSED_HAND;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
@@ -55,11 +54,13 @@ public class Controleur {
     private ModificationTypeDeBarre modifbarre;
     private VueTypeDeBarre vueBarre;
     private int etat;
+    private Numeroteur num;
     
     public Controleur(mainPane vue){
         this.vue = vue;
         this.selection = new ArrayList<>();
         this.changeEtat(80);
+        this.num = this.vue.getModel().getNum();
     }
     
     public void changeEtat(int nouvelEtat){
@@ -489,9 +490,14 @@ public class Controleur {
 
     void calculdeforce(ActionEvent t) {
         
+            
+        }
+             
+        
+
         
     }
     
     
-    }
+    
 

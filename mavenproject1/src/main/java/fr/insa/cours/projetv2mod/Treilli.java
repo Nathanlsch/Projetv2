@@ -5,7 +5,6 @@
  */
 package fr.insa.cours.projetv2mod;
 
-import fr.insa.cours.projetv2.gui.Controleur;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
@@ -13,8 +12,10 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.Writer;
+import static java.lang.reflect.Array.set;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
 
@@ -258,11 +259,91 @@ public abstract class Treilli {
         }
         */
 
-    
+  public int testForce(){
+      int nombreNS=0;
+      int nombreNB=0;
+      int nombreNAS=0;
+      int nombreNAD=0;
+      boolean testAE=false;
+      Set<Integer> set = this.num.parcours();
+      for(Integer key: set){
+           if(num.getObj(key) instanceof NoeudSimple){
+               nombreNS = nombreNS + 1;
+               
+           }
+           if(num.getObj(key) instanceof Barre){
+               nombreNB = nombreNB + 1;
+               
+           }
+           if(num.getObj(key) instanceof AppuiDouble){
+               nombreNAD = nombreNAD + 1;
+               
+           }
+           if(num.getObj(key) instanceof AppuiSimple){
+               nombreNAS = nombreNAS + 1;
+               
+           }
+           if(num.getObj(key) instanceof AppuiEncastre){
+               testAE = true;   
+           }
+      }
+      if((2*nombreNS == nombreNB+nombreNAS+2*nombreNAD)&&(testAE == false)){
+          return 2*nombreNS;
+      } else {
+           return 0;
+      }  
+   } 
+  
+    public int BarreMax(){
+      int barre;
+      int barreMax=0;
+      Set<Integer> set = this.num.parcours();
+      for(Integer key: set){ 
+          if((num.getObj(key) instanceof NoeudSimple)||(num.getObj(key) instanceof AppuiSimple)||(num.getObj(key) instanceof AppuiDouble)){
+              barre = ((Noeud) num.getObj(key)).nombreBarre();
+              if(barreMax<barre){
+                  barreMax = barre;
+              }
+          }
+      }
+      return barreMax;
+    }
+
+    public void Force(){
+        if(this.testForce() !=0){
+            Matrice res = new Matrice(this.testForce(), this.testForce());
+            int nbMax = BarreMax();
+            Set<Integer> set = this.num.parcours();
+            for(Integer key: set){
+               if(num.getObj(key) instanceof NoeudSimple){
+                   
+               }
+               if(num.getObj(key) instanceof AppuiSimple){
+                   
+               }
+               if(num.getObj(key) instanceof AppuiDouble){
+                   
+               }
+            }
+            
+            
+            
+            
+            
+            
+        } else {
+            System.out.println("force du treilli non calculable");
+        }
+    }
+
+
+  
+      
+  }  
     
 
     
         
     
     
-}
+

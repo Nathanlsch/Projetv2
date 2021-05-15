@@ -14,6 +14,8 @@ import javafx.scene.paint.Color;
  *
  * @author Steven
  */
+
+
 public abstract class Noeud extends FigureSimple{
 
     /**
@@ -28,6 +30,10 @@ public abstract class Noeud extends FigureSimple{
      */
     public void setBarreAssos(List<Barre> BarreAssos) {
         this.BarreAssos = BarreAssos;
+    }
+    
+    public int nombreBarre(){
+       return this.getBarreAssos().size();
     }
    
     private int id;
