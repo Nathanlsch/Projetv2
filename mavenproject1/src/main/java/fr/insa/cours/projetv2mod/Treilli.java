@@ -238,19 +238,112 @@ public abstract class Treilli {
     public void setNum(Numeroteur<Treilli> num) {
         this.num = num;
     }
-        
-   /* public static Matrice force(){
+   
+    public static int getNombreBarre() {
+        int nbrBarre = 0;
+        for (int i=0; i < num.getIdversObjet().size();i++) {
+            if (num.getObj(i) instanceof Barre) {
+            nbrBarre++;
+        }
+        }
+        return nbrBarre;
+    }
+    
+   public static Matrice force(){
+    //Pour  chaque noeud S_i trouver les barres B_i qui passent par S_i
         for(int i = 0; i< num.getIdversObjet().size();i++){
+            Matrice Systeme = new Matrice(0,getNombreBarre()+2);
+            
             if(num.getObj(i) instanceof Noeud){
+                Noeud Noeud = (Noeud) num.getObj(i);
+               //Pour chaque barre
+               for (int j=0; i < Noeud.getBarreAssos().size(); j++) {
+                   
+                //Si c'est un noeud simple
+                if (Noeud instanceof NoeudSimple) {
+                    //POUR 1 NOEUD SIMPLE
+                        //On crée une première matrice système, correspondant à la première barre associée
+                        Matrice SystemeBarre = new Matrice(1,2);
+                        Barre Barrei = Noeud.getBarreAssos().get(i);
+                        Noeud nDepartBarrei = Barrei.getNdepart();
+                        Noeud nFinBarrei = Barrei.getNfin();
+
+                        double AngleBarrex = nDepartBarrei.getcoordAppui().getAngleOriente(nFinBarrei.getcoordAppui());
+                        Systeme.set(0,0,Math.cos(AngleBarrex));
+                        Systeme.set(0,1,Math.sin(AngleBarrex));
+
+                        //Pour les autres barres associées, on va concaténer les colonnes pour le système
+                        for (int y=1; i < Noeud.getBarreAssos().size(); y++) {
+                        Matrice SystemeBarrei = new Matrice(1,2);
+                                Barre Barrey = Noeud.getBarreAssos().get(y);
+                                Noeud nDepartBarrey = Barrey.getNdepart();
+                                Noeud nFinBarrey = Barrey.getNfin();
+
+                                double AngleBarrey = nDepartBarrey.getcoordAppui().getAngleOriente(nFinBarrey.getcoordAppui());
+                                SystemeBarrei.set(0,0,Math.cos(AngleBarrey));
+                                SystemeBarrei.set(0,1,Math.sin(AngleBarrey));
+
+                                SystemeBarre.concatCol(SystemeBarrei);
+                            }
+                        //Ensuite on concatène Rx et Ry 
+                        //>> Problème si la grande matrice est de taille plus grande, Rx et Ry ne sont pas à la bonne place
+                        //Ils devraient être à la dernière colonne de la grande matrice
+                        Matrice SystemeR = new Matrice (1,2);
+                        SystemeBarre.concatCol(SystemeR);
+                        
+                        //On obtient une matrice de [nbarres + 1] [nBarres + 1]
+                        //Il faut concaténer à la grande matrice 
+                        Systeme.concatLig(SystemeBarre);
+                }
+                    
+                }
                  
                }
-            }
-        }
-        */
-    
+   }
+ 
+   }
+   
+        /* public static void resoudExempleTreillisPortique() {
+        System.out.println("----- treillis portique du sujet de projet");
+        Matrice mat = new Matrice(6, 6);
+        double a = Math.sqrt(2) / 2;
+        int i = 0;
+        mat.coeffs[i][0] = a;
+        mat.coeffs[i][3] = 1;
 
-    
+        i++;
+        mat.coeffs[i][0] = -a;
+        mat.coeffs[i][2] = -1;
+        mat.coeffs[i][4] = 1;
+
+        i++;
+        mat.coeffs[i][1] = a;
+        mat.coeffs[i][5] = 1;
+
+        i++;
+        mat.coeffs[i][1] = a;
+        mat.coeffs[i][2] = 1;
+
+        i++;
+        mat.coeffs[i][0] = -a;
+        mat.coeffs[i][1] = -a;
+
+        i++;
+        mat.coeffs[i][0] = a;
+        mat.coeffs[i][1] = -a;
+        System.out.println("mat : \n" + mat);
+
+        Matrice sm = new Matrice(6, 1);
+        sm.coeffs[5][0] = 1000;
+        System.out.println("second membre : \n" + sm);
+
+        ResSysLin res = mat.resoudSysLin(sm);
+        if (res.solUnique) {
+            System.out.println("sol : \n" + res.sol);
+        } else {
+            System.out.println("pas de sol");
+        }
         
-    
-    
+        */
+
 }

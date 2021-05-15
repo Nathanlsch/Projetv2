@@ -99,6 +99,16 @@ public final class Point extends FigureSimple{
         return Math.acos(this.ProduitScalaire(Point1, Point2)/(A*B));
         
     }
+        public double getAngleOriente(Point P2) {
+            double P1x = this.getPx();
+            double P1y = this.getPy();
+            
+            double P2x = this.getPx();
+            double P2y = this.getPy();
+            
+            return Math.atan2(P1y - P2y, P1x - P2y);
+        }
+        
         public double signe (Point P1, Point P2) {
             double pNx = this.getPx();
             double pNy = this.getPy();

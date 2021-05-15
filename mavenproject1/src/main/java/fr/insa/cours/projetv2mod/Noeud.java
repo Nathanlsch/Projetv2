@@ -42,6 +42,7 @@ public abstract class Noeud extends FigureSimple{
     
     public abstract Point getcoordAppui();
     
+    
     @Override
     public abstract void save(Writer w) throws IOException;
 
