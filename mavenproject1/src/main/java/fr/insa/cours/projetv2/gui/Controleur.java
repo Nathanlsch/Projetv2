@@ -489,7 +489,7 @@ public class Controleur {
     }
 
     void calculdeforce(ActionEvent t) {
-        
+            vue.getModel().Force();
             
         }
              
