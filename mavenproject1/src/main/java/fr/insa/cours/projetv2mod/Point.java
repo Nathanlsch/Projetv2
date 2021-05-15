@@ -210,6 +210,15 @@ public static Point DemandePoint(){
        
     }
 
+    @Override
+    public boolean dansTerrain(Terrain terrain) {
+        if(((terrain.getMinX()<this.px)&&(this.px<terrain.getMaxX()))&&((terrain.getMinY()<this.py)&&(this.py<terrain.getMaxY()))){
+           return true; 
+        } else {
+            return false;
+        }
+    }
+
    
 
 }

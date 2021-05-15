@@ -177,6 +177,15 @@ public class TriangleTerrain extends FigureSimple{
                 +this.Segment1.getId()+";"+this.Segment2.getId()+";"+this.Segment3.getId()+";"+ FigureSimple.saveColor(this.getCouleur())+"\n");
         }
     }
+
+    @Override
+    public boolean dansTerrain(Terrain terrain) {
+        if((this.Point1.dansTerrain(terrain))&&(this.Point2.dansTerrain(terrain))&&(this.Point3.dansTerrain(terrain))){
+            return true;
+        } else {
+            return false;
+        }
+    }
    
 }
 

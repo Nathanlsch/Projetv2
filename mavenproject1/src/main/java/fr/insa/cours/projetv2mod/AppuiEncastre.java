@@ -45,4 +45,13 @@ public class AppuiEncastre extends Appui {
         }
     }
     
+    @Override
+    public boolean dansTerrain(Terrain terrain) {
+        if(this.getTriangleTerrain().dansTerrain(terrain)){
+           return true; 
+        } else {
+            return false;
+        }
+    }
+    
 }

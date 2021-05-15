@@ -40,4 +40,7 @@ public abstract class FigureSimple extends Treilli {
         double bleu = Double.parseDouble(sb);
         return Color.color(rouge, vert, bleu);
     }
+    
+    public abstract boolean dansTerrain(Terrain terrain);
+    
 }

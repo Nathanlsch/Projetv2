@@ -131,5 +131,15 @@ public class Barre extends FigureSimple{
     public int getIdNfin() {
         return this.nfin.getId();
     }
+
+    
+    public void supr() {
+        
+    }
+
+    @Override
+    public boolean dansTerrain(Terrain terrain) {
+        return true;
+    }
     
 }

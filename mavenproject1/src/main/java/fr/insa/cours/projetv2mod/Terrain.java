@@ -30,7 +30,7 @@ public class Terrain extends FigureSimple{
 
     @Override
     public String toString() {
-        return "ZoneConstructible;"+ minX + ";" + maxX + ";" + minY + ";" + maxY;
+        return "ZoneConstructible;"+ getMinX() + ";" + getMaxX() + ";" + getMinY() + ";" + getMaxY();
     }
 
     public Terrain(double minX,double maxX,double minY,double maxY) {
@@ -84,10 +84,10 @@ public class Terrain extends FigureSimple{
 
     @Override
     public void dessine(GraphicsContext context) {
-        context.strokeLine(this.maxX,this.maxY,this.minX,this.maxY);
-        context.strokeLine(this.maxX,this.maxY,this.maxX,this.minY);
-        context.strokeLine(this.minX,this.minY,this.maxX,this.minY);
-        context.strokeLine(this.minX,this.minY,this.minX,this.maxY);
+        context.strokeLine(this.getMaxX(), this.getMaxY(), this.getMinX(), this.getMaxY());
+        context.strokeLine(this.getMaxX(), this.getMaxY(), this.getMaxX(), this.getMinY());
+        context.strokeLine(this.getMinX(), this.getMinY(), this.getMaxX(), this.getMinY());
+        context.strokeLine(this.getMinX(), this.getMinY(), this.getMinX(), this.getMaxY());
         context.setStroke(Color.GREEN);
         
     }
@@ -115,7 +115,7 @@ public class Terrain extends FigureSimple{
             for(TriangleTerrain tri : this.contientTriangle){
                 tri.save(w);
             }
-            w.append("Terrain;"+this.id+";"+this.minX+";"+this.maxX+";"+this.minY+";"+this.maxY+";"+FigureSimple.saveColor(this.getCouleur())+";");
+            w.append("Terrain;"+this.id+";"+this.getMinX()+";"+this.getMaxX()+";"+this.getMinY()+";"+this.getMaxY()+";"+FigureSimple.saveColor(this.getCouleur())+";");
             for(int i=0; i<this.contientTriangle.size();i++){
                 w.append(num.getID(this.contientTriangle.get(i))+";");
             }
@@ -130,6 +130,40 @@ public class Terrain extends FigureSimple{
     public List<TriangleTerrain> getContientTriangle() {
         return contientTriangle;
     }
+
+    /**
+     * @return the minX
+     */
+    public double getMinX() {
+        return minX;
+    }
+
+    /**
+     * @return the maxX
+     */
+    public double getMaxX() {
+        return maxX;
+    }
+
+    /**
+     * @return the minY
+     */
+    public double getMinY() {
+        return minY;
+    }
+
+    /**
+     * @return the maxY
+     */
+    public double getMaxY() {
+        return maxY;
+    }
+
+    @Override
+    public boolean dansTerrain(Terrain terrain) {
+       return true;   
+    }
+
        
     
 }

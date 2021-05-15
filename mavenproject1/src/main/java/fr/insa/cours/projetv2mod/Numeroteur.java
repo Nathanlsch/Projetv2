@@ -80,6 +80,12 @@ public class Numeroteur<TO> {
             this.getObjetversId().put(obj, id);
         }
     }
+    
+    public void suprObj(TO obj) {
+        int id = getID(obj);
+        this.getIdversObjet().remove(id, obj);
+        this.getObjetversId().remove(obj, id);
+    }
 
     /**
      * @return the idversObjet

@@ -5,6 +5,7 @@
  */
 package fr.insa.cours.projetv2mod;
 
+import fr.insa.cours.projetv2.gui.Controleur;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
@@ -77,6 +78,8 @@ public abstract class Treilli {
     public abstract void dessineSelection(GraphicsContext context); 
         
     public abstract void Identificateur(Numeroteur<Treilli> num);
+    
+    //public abstract void supr();
    
     public abstract void save(Writer w) throws IOException;
     
@@ -196,8 +199,7 @@ public abstract class Treilli {
                     }
                     Save.clear();
                     derniere = ng;
-                }
-                if(bouts[0].equals("Terrain")){
+                } else if(bouts[0].equals("Terrain")){
                     int id = Integer.parseInt(bouts[1]);
                     double pxmin = Double.parseDouble(bouts[2]);
                     double pxmax = Double.parseDouble(bouts[3]);
@@ -211,10 +213,18 @@ public abstract class Treilli {
                         Treilli tri = num2.getObj(idSous);
                             terrain.getContientTriangle().add((TriangleTerrain) tri);
                     }
-           
-             
                     derniere = terrain;
-            }
+                } else if (bouts[0].equals("TypeDeBarre")){
+                    int id = Integer.parseInt(bouts[1]);
+                    String nom = bouts[2];
+                    double cout = Double.parseDouble(bouts[3]);
+                    double longMin = Double.parseDouble(bouts[4]);
+                    double longMax = Double.parseDouble(bouts[5]);
+                    double maxTension = Double.parseDouble(bouts[6]);
+                    double maxCompression = Double.parseDouble(bouts[7]);
+                    TypeDeBarre ntdb = new TypeDeBarre(id,nom,cout,longMin,longMax,maxTension,maxCompression);
+                    num2.associe(id, ntdb);
+                }
         }
         num = num2;
         return derniere;
@@ -247,6 +257,8 @@ public abstract class Treilli {
             }
         }
         */
+
+    
     
 
     

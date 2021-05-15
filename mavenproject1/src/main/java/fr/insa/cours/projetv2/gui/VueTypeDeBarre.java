@@ -15,9 +15,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import static fr.insa.cours.projetv2mod.CatalogueDeBarre.listTypeDeBarre;
-import javafx.beans.value.ObservableValue;
-import javafx.scene.control.TreeTableColumn.CellDataFeatures;
-import javafx.util.Callback;
+import javafx.scene.control.Button;
 
 /**
  *
@@ -26,20 +24,27 @@ import javafx.util.Callback;
 public class VueTypeDeBarre extends BorderPane{
     
     private TableView<TypeDeBarre> tableau;
-    
-    
+    private mainPane main;
+
     private ObservableList<TypeDeBarre> getList(ArrayList<TypeDeBarre> lf) {
       
        ObservableList<TypeDeBarre> list = FXCollections.observableArrayList();
-     for(TypeDeBarre t : lf) {
-         list.add(t);
+     for(TypeDeBarre h : lf) {
+         h.getBtMod().setOnAction((t) -> {
+             main.getControleur().boutonModifier(t,h);
+         });
+         h.getBtSup().setOnAction((t) -> {
+             main.getControleur().boutonSup(t,h);
+         });
+         list.add(h);
      }
      
       return list;
     }
     
-    public VueTypeDeBarre(){
+    public VueTypeDeBarre(mainPane main){
     
+    this.main = main;
     tableau = new TableView<TypeDeBarre>();
     tableau.setMinSize(1000, 300);
         
@@ -49,6 +54,8 @@ public class VueTypeDeBarre extends BorderPane{
     TableColumn<TypeDeBarre, Double> longMaxC = new TableColumn("Longueur maximum");
     TableColumn<TypeDeBarre, Double> maxTensionC = new TableColumn("Tension maximum");
     TableColumn<TypeDeBarre, Double> maxCompressionC = new TableColumn ("Compression maximum");
+    TableColumn<TypeDeBarre, Button> boutonModC = new TableColumn ("Modifier");
+    TableColumn<TypeDeBarre, Button> boutonSupC = new TableColumn ("Supprimer");
     
     nomC.setCellValueFactory(new PropertyValueFactory<>("nom"));
     coutC.setCellValueFactory(new PropertyValueFactory<>("coutAuMetre"));
@@ -56,13 +63,14 @@ public class VueTypeDeBarre extends BorderPane{
     longMaxC.setCellValueFactory(new PropertyValueFactory<>("longueurMax"));
     maxTensionC.setCellValueFactory(new PropertyValueFactory<>("resistanceMaxTension"));
     maxCompressionC.setCellValueFactory(new PropertyValueFactory<>("resistanceMaxCompression"));
+    boutonModC.setCellValueFactory(new PropertyValueFactory<>("btMod"));
+    boutonSupC.setCellValueFactory(new PropertyValueFactory<>("btSup"));
    
     ObservableList<TypeDeBarre> list = getList(listTypeDeBarre);
     tableau.setItems(list);
  
    
-    tableau.getColumns().addAll(nomC, coutC, longMinC,longMaxC,maxTensionC,maxCompressionC);
-    
+    tableau.getColumns().addAll(nomC, coutC, longMinC,longMaxC,maxTensionC,maxCompressionC, boutonModC, boutonSupC);
     HBox conteneur = new HBox(tableau);
     this.setTop(conteneur);
         
