@@ -95,6 +95,7 @@ public class MainMenu extends MenuBar{
         
         this.getMenus().addAll(file, ZoneDeTexte,TypeDeBarre,Force,Aide);
         
+        
     }
     
 }

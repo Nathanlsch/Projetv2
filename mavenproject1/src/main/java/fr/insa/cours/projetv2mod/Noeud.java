@@ -67,14 +67,13 @@ public abstract class Noeud extends FigureSimple{
     }
     
     public double getAngleOriente(Noeud N2) {
-            double P1x = this.getcoordAppui().getPx();
-            double P1y = this.getcoordAppui().getPy();
+            Point P1 = this.getcoordAppui();
+            Point P2 = N2.getcoordAppui();
             
-            double P2x = this.getcoordAppui().getPx();
-            double P2y = this.getcoordAppui().getPy();
-            
-            return Math.atan2(P1y - P2y, P1x - P2y);
+            return Math.atan2(P2.getPy() - P1.getPy(), P2.getPx() - P1.getPx());
         }
+
+   
         
         
 

@@ -23,6 +23,7 @@ public class Barre extends FigureSimple{
     private Noeud ndepart;
     private Noeud nfin;
     private TypeDeBarre typeDeBarre;
+    private double angle;
 
     public Barre(Noeud ndepart, Noeud nfin) {
         super(Color.BLACK);
@@ -31,6 +32,7 @@ public class Barre extends FigureSimple{
         this.ndepart.getBarreAssos().add(this);
         this.nfin = nfin; 
         this.nfin.getBarreAssos().add(this);
+        this.angle = this.getAngleOriente();
     }
     
     public Barre(int id, Noeud ndepart, Noeud nfin, Color col) {
@@ -40,6 +42,7 @@ public class Barre extends FigureSimple{
         this.nfin = nfin; 
         this.ndepart.getBarreAssos().add(this);
         this.nfin.getBarreAssos().add(this);
+        this.angle = this.getAngleOriente();
     }
     
     public Barre(Noeud ndepart, Noeud nfin, TypeDeBarre typeDeBarre) {
@@ -50,6 +53,7 @@ public class Barre extends FigureSimple{
         this.typeDeBarre = typeDeBarre;
         this.ndepart.getBarreAssos().add(this);
         this.nfin.getBarreAssos().add(this);
+        this.angle = this.getAngleOriente();
         
     }
 
@@ -140,6 +144,20 @@ public class Barre extends FigureSimple{
     @Override
     public boolean dansTerrain(Terrain terrain) {
         return true;
+    }
+    
+    public double getAngleOriente() {
+            Point P1 = this.ndepart.getcoordAppui();
+            Point P2 = this.nfin.getcoordAppui();
+            
+            return Math.atan2(P2.getPy() - P1.getPy(), P2.getPx() - P1.getPx());
+        }
+
+    /**
+     * @return the angle
+     */
+    public double getAngle() {
+        return angle;
     }
     
 }

@@ -7,7 +7,7 @@ package fr.insa.cours.projetv2.gui;
 
 import fr.insa.cours.projetv2mod.Groupe;
 import java.io.File;
-import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextArea;
@@ -39,11 +39,12 @@ public class mainPane extends BorderPane {
     private DessinCanvas cvtest;
     
     //Variable Bouton
-    private RadioButton Select;
-    private RadioButton TriangleTerrain;
-    private RadioButton AppuiSimple;
-    private RadioButton AppuiDouble;
-    private RadioButton AppuiEncastre;
+    
+    private RadioBoutonIcone Select;
+    private RadioBoutonIcone TriangleTerrain;
+    private RadioBoutonIcone AppuiSimple;
+    private RadioBoutonIcone AppuiDouble;
+    private RadioBoutonIcone AppuiEncastre;
     private RadioButton NoeudSimple;
     private RadioButton Barre;
     private TextArea test;
@@ -59,12 +60,14 @@ public mainPane(Stage inStage) {
    
     public mainPane(Stage inStage, File fromFile, Groupe model){ 
     
+    this.setStyle("-fx-background-color:steelblue;");
     this.inStage = inStage;
     this.curFile = fromFile;
     this.test = new TextArea();
     test.setPrefHeight(300);
     test.setPrefWidth(200);
     test.setEditable(false);
+    test.setStyle("-fx-background-color:black;");
     
     test.appendText("Nouveau Treilli \nCliqué deux fois dans la zone \nde dessin pour définir la \nzone constructible\n");
  
@@ -78,23 +81,27 @@ public mainPane(Stage inStage) {
     
    
    //Boite gauche
-   Select = new RadioButton("Select");
+   
+   
+   
+   Select = new RadioBoutonIcone("image/iconeSelect.png",60,24);
+
    Select.setOnAction((t) -> {
        this.controleur.boutonSelect(t);
    });
-   TriangleTerrain = new RadioButton("Triangle Terrain");
+   TriangleTerrain = new RadioBoutonIcone("image/iconeTriangle.png",120,18);
    TriangleTerrain.setOnAction((t) -> {
        this.controleur.boutonTriangleTerrain(t);
    });
-   AppuiSimple = new RadioButton("Appui Simple");
+   AppuiSimple = new RadioBoutonIcone("image/iconeAS.png",120,18);
    AppuiSimple.setOnAction((t) -> {
        this.controleur.AppuiSimple(t);
    });
-   AppuiDouble = new RadioButton("Appui Double");
+   AppuiDouble = new RadioBoutonIcone("image/iconeAD.png",120,18);
    AppuiDouble.setOnAction((t) -> {
        this.controleur.AppuiDouble(t);
    });
-   AppuiEncastre = new RadioButton("Appui Encastré");
+   AppuiEncastre = new RadioBoutonIcone("image/iconeAE.png",120,18);
    AppuiEncastre.setOnAction((t) -> {
        this.controleur.AppuiEncastre(t);
    });
@@ -128,13 +135,16 @@ public mainPane(Stage inStage) {
    boutons.setMaxHeight(30);
    boutons.setMinHeight(30);
    this.setTop(Conteneur);
+   Conteneur.setStyle("-fx-background-color:#444444;");
    
    
    //Debut dessin 
     this.cvtest = new DessinCanvas(this);
+    this.cvtest.setStyle("-fx-background-color:white;");
+    
     this.setCenter(this.cvtest);
     Border border = new Border(new BorderStroke(Color.BLACK,BorderStrokeStyle.SOLID,CornerRadii.EMPTY,BorderWidths.DEFAULT));
-    this.cvtest.setBorder(border);
+   this.cvtest.setBorder(border);
     
 }  
 

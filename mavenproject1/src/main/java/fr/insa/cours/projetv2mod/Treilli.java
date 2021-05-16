@@ -261,7 +261,7 @@ public abstract class Treilli {
         return nbrBarre;
     }
     
-   public static Matrice force(){
+  /* public static Matrice force(){
     //Pour  chaque noeud S_i trouver les barres B_i qui passent par S_i
         for(int i = 0; i< num.getIdversObjet().size();i++){
             Matrice Systeme = new Matrice(0,getNombreBarre()+2);
@@ -312,6 +312,7 @@ public abstract class Treilli {
                  
                }
             }
+   }*/
   
     public int testForce(){
       int nombreNS=0;
@@ -409,68 +410,24 @@ public abstract class Treilli {
             int nbMax = BarreMax();
             int[][] info = new int[2][this.testForce()];
             double valeur;
+            double valeur1;
+            double valeur2;
             Set<Integer> set = this.num.parcours();
             System.out.println("Etape1");
             for(Integer key: set){
-               if(num.getObj(key) instanceof NoeudSimple){
+               if(num.getObj(key) instanceof Noeud){
                    ajout(info,key,1);
                    for(Barre barre : ((Noeud)num.getObj(key)).getBarreAssos()){
                        int id = barre.getId();
                        ajout(info,id,0);
-                       if(key == num.getID(barre.getNdepart())){
-                        valeur = barre.getNdepart().getAngleOriente(barre.getNfin());
-                       } else {
-                          valeur = barre.getNfin().getAngleOriente(barre.getNdepart()); 
-                       }
                        int col = numCol(info,id);
-                       res.set(ligne, col, Math.cos(valeur));
-                       res.set(ligne+1, col, Math.sin(valeur)); 
-     
+                       res.set(ligne, col, Math.cos(barre.getAngle()));
+                       res.set(ligne+1, col, Math.sin(barre.getAngle())); 
                    }
                 ligne = ligne+2;   
                }
-               if(num.getObj(key) instanceof AppuiSimple){
-                   ajout(info,key,1);
-                   for(Barre barre : ((Noeud)num.getObj(key)).getBarreAssos()){
-                       int id = barre.getId();
-                       ajout(info,id,0);
-                       if(key == num.getID(barre.getNdepart())){
-                        valeur = barre.getNdepart().getAngleOriente(barre.getNfin());
-                       } else {
-                          valeur = barre.getNfin().getAngleOriente(barre.getNdepart()); 
-                       }
-                       int col = numCol(info,id);
-                       res.set(ligne, col, Math.cos(valeur));
-                       res.set(ligne+1, col, Math.sin(valeur)); 
-                       
-                   }
-                   ligne = ligne+2;
-               }
-               if(num.getObj(key) instanceof AppuiDouble){
-                   ajout(info,key,1);
-                   for(Barre barre : ((Noeud)num.getObj(key)).getBarreAssos()){
-                       int id = barre.getId();
-                       ajout(info,id,0);
-                       if(key == num.getID(barre.getNdepart())){
-                        valeur = barre.getNdepart().getAngleOriente(barre.getNfin());
-                       } else {
-                          valeur = barre.getNfin().getAngleOriente(barre.getNdepart()); 
-                       }
-                       int col = numCol(info,id);
-                       res.set(ligne, col, Math.cos(valeur));
-                       res.set(ligne+1, -col, Math.sin(valeur));  
-                       
-                   }
-                   ligne = ligne+2;
-               }
-            
             }
-        System.out.println(res);
-            
-            
-            
-            
-            
+        System.out.println(res);   
         } else {
             System.out.println("force du treilli non calculable");
         }

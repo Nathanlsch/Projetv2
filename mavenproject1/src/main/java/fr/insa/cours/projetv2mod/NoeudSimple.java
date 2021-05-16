@@ -28,6 +28,7 @@ public class NoeudSimple extends Noeud {
     this.px = px;
     this.py = py; 
     this.setBarreAssos(new ArrayList<Barre>());
+    
 }
     
     public NoeudSimple (int id, double px, double py, Color col) {
