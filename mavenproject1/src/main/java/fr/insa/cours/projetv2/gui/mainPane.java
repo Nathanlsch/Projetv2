@@ -45,8 +45,8 @@ public class mainPane extends BorderPane {
     private RadioBoutonIcone AppuiSimple;
     private RadioBoutonIcone AppuiDouble;
     private RadioBoutonIcone AppuiEncastre;
-    private RadioButton NoeudSimple;
-    private RadioButton Barre;
+    private RadioBoutonIcone NoeudSimple;
+    private RadioBoutonIcone Barre;
     private TextArea test;
     
 public mainPane(Stage inStage) {
@@ -105,12 +105,12 @@ public mainPane(Stage inStage) {
    AppuiEncastre.setOnAction((t) -> {
        this.controleur.AppuiEncastre(t);
    });
-   NoeudSimple = new RadioButton("Noeud Simple");
+   NoeudSimple = new RadioBoutonIcone("image/iconeNS.png",120,18);
    NoeudSimple.setOnAction((t) -> {
        this.controleur.NoeudSimple(t);
    });
    
-   Barre = new RadioButton("Barre");
+   Barre = new RadioBoutonIcone("image/iconeBarre.png",90,18);
    Barre.setOnAction((t) -> {
        this.controleur.Barre(t);
    });
