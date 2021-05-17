@@ -229,6 +229,11 @@ public static Point DemandePoint(){
         this.py=-1;
         return true;
     }
+    
+    public double getAngleOrientePoint(Point p2) {
+            
+        return Math.atan2(p2.getPy() - this.getPy(), p2.getPx() - this.getPx());
+    }
 
 
    

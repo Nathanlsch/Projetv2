@@ -133,6 +133,19 @@ public abstract class Appui extends Noeud {
         this.posSurSegment = -1;
         
     }
-  
+    
+    public SegmentTerrain SurSegment(){
+        SegmentTerrain res = null;
+        if (this.p1 == 1){
+            res = this.triangleTerrain.getSegment1();
+        }
+        if (this.p1 == 2){
+            res = this.triangleTerrain.getSegment2();
+        }
+        if (this.p1 == 3){
+            res =  this.triangleTerrain.getSegment3();
+        }
+        return res;
+    }
     
 }

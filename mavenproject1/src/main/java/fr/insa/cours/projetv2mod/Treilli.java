@@ -12,8 +12,6 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.Writer;
-import static java.lang.Math.cos;
-import static java.lang.Math.sin;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
@@ -374,24 +372,37 @@ public abstract class Treilli {
     public void ajout(int[][] tab, int id,int ligne){
         System.out.println("Etape2");
         System.out.println(ligne);
-        if(ligne==1){
+        if(ligne==11){
             int i=0;
-            while(tab[ligne][i]!=0){
+            while(tab[1][i]!=0){
                 i=i+2;
             }
-            tab[ligne][i]=id;
-            tab[ligne][i+1]=id;
+            tab[1][i]=id;
+            tab[1][i+1]=id;
             System.out.println(tab);
-        } else if (ligne==0){
+        } else if (ligne==10){
             int y=0;
-            while((tab[ligne][y]!=0)&&(tab[ligne][y]!=id)){
+            while((tab[0][y]!=0)&&(tab[0][y]!=id)){
                 y=y+1;
                 System.out.println(y);
             }
             
             System.out.println(y);
-            tab[ligne][y]=id;
+            tab[0][y]=id;
             System.out.println(tab);
+        } else if (ligne ==20) {
+            int i=0;
+            while(tab[0][i]!=0){
+                System.out.println(tab[0][i]);
+                i=i+1;
+                System.out.println(tab[0][i]);
+            }
+            if(num.getObj(id) instanceof AppuiSimple){
+               tab[0][i]=id; 
+            }
+            if(num.getObj(id) instanceof AppuiDouble){
+               tab[0][i]=id; 
+            }
         }
     }
     
@@ -404,9 +415,9 @@ public abstract class Treilli {
     }
 
     public void Force(){
+        Matrice res = new Matrice(this.testForce(), this.testForce());
         if(this.testForce() !=0){
             int ligne =0;
-            Matrice res = new Matrice(this.testForce(), this.testForce());
             int nbMax = BarreMax();
             int[][] info = new int[2][this.testForce()];
             double valeur;
@@ -416,13 +427,34 @@ public abstract class Treilli {
             System.out.println("Etape1");
             for(Integer key: set){
                if(num.getObj(key) instanceof Noeud){
-                   ajout(info,key,1);
+                   ajout(info,key,11);
                    for(Barre barre : ((Noeud)num.getObj(key)).getBarreAssos()){
                        int id = barre.getId();
-                       ajout(info,id,0);
+                       ajout(info,id,10);
                        int col = numCol(info,id);
                        res.set(ligne, col, Math.cos(barre.getAngle()));
                        res.set(ligne+1, col, Math.sin(barre.getAngle())); 
+                   }
+                ligne = ligne+2;   
+               }
+            }
+            ligne=0;
+            for(Integer key: set){
+               if(num.getObj(key) instanceof Noeud){
+                   
+                   if(num.getObj(key) instanceof AppuiSimple){
+                       ajout(info,key,20);
+                      int col = numCol(info,key);
+                      SegmentTerrain sgt = ((AppuiSimple) num.getObj(key)).SurSegment();
+                      double angle = sgt.getDebut().getAngleOrientePoint(sgt.getFin()) + Math.PI/2;
+                      res.set(ligne, col, Math.cos(angle));
+                      res.set(ligne+1, col, Math.sin(angle));
+                   }
+                   if(num.getObj(key) instanceof AppuiDouble){
+                       ajout(info,key,20);
+                       int col = numCol(info,key);
+                       res.set(ligne, col, 1);
+                       res.set(ligne+1, col+1, 1);
                    }
                 ligne = ligne+2;   
                }
@@ -431,6 +463,8 @@ public abstract class Treilli {
         } else {
             System.out.println("force du treilli non calculable");
         }
+        System.out.println(res.ResSysLin());
+        
     }
 
 

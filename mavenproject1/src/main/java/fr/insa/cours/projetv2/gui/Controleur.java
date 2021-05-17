@@ -516,6 +516,7 @@ public class Controleur {
         }
 
     void supprimer(ActionEvent t, GraphicsContext context) {
+            if(this.selection.size()<=1){
             for(Treilli y : this.selection){
             boolean test = y.supr(context);
             if (test==true){
@@ -525,7 +526,46 @@ public class Controleur {
             } else {
                  System.out.println("probleme") ;  
            }
-       }
+           }
+            } else {
+               for(Treilli y : this.selection){
+                   System.out.println("etape1");
+                   if(y instanceof Barre){
+                      boolean test = y.supr(context);
+                      if (test==true){
+                      this.vue.getModel().getContient().remove(y);
+                      this.selection.remove(y);
+                      this.vue.redrawAll();
+                      } else {
+                             System.out.println("probleme") ;  
+                      }   
+                }
+              }
+               for(Treilli y : this.selection){
+                   System.out.println("etape2");
+                   if(y instanceof Noeud){
+                      boolean test = y.supr(context);
+                      if (test==true){
+                      this.vue.getModel().getContient().remove(y);
+                      this.selection.remove(y);
+                      this.vue.redrawAll();
+                      } else {
+                             System.out.println("probleme") ;  
+                      }   
+                }
+              }
+              for(Treilli y : this.selection){
+                  System.out.println("etape3");
+                      boolean test = y.supr(context);
+                      if (test==true){
+                      this.vue.getModel().getContient().remove(y);
+                      this.selection.remove(y);
+                      this.vue.redrawAll();
+                      } else {
+                             System.out.println("probleme") ;  
+                      }   
+                }   
+            }
     }
              
         
