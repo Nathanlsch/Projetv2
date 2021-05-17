@@ -28,6 +28,13 @@ public abstract class Appui extends Noeud {
         this.triangleTerrain = triangleTerrain;
         this.p1 = p1;
         this.posSurSegment = posSurSegment;
+        if(p1 == 1){
+            this.triangleTerrain.getSegment1().getListAppui().add(this);
+        } else if( p1==2) {
+            this.triangleTerrain.getSegment2().getListAppui().add(this);
+        } else if (p1==3){
+            this.triangleTerrain.getSegment3().getListAppui().add(this);
+        } 
     }
      
      public Appui(int id, TriangleTerrain triangleTerrain, int p1, double posSurSegment, Color col) {
@@ -36,6 +43,13 @@ public abstract class Appui extends Noeud {
         this.triangleTerrain = triangleTerrain;
         this.p1 = p1;
         this.posSurSegment = posSurSegment;
+        if(p1 == 1){
+            this.triangleTerrain.getSegment1().getListAppui().add(this);
+        } else if( p1==2) {
+            this.triangleTerrain.getSegment2().getListAppui().add(this);
+        } else if (p1==3){
+            this.triangleTerrain.getSegment3().getListAppui().add(this);
+        }
     }
 
     public TriangleTerrain getTriangleTerrain() {
@@ -103,6 +117,21 @@ public abstract class Appui extends Noeud {
     @Override
     public void Identificateur(Numeroteur<Treilli> num) {
         this.setId(num.creeID(this));
+    }
+    
+    public void suprAppui(){
+        this.setId(-1);
+        if(p1 == 1){
+            this.triangleTerrain.getSegment1().getListAppui().remove(this);
+        } else if( p1==2) {
+            this.triangleTerrain.getSegment2().getListAppui().remove(this);
+        } else if (p1==3){
+            this.triangleTerrain.getSegment3().getListAppui().remove(this);
+        } 
+        this.triangleTerrain = null;
+        this.p1 = -1;
+        this.posSurSegment = -1;
+        
     }
   
     

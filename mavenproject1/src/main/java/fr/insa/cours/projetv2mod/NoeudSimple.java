@@ -110,12 +110,16 @@ public class NoeudSimple extends Noeud {
     }
 
     @Override
-    public void supr(GraphicsContext context) {
-        this.setId(-1);
-        this.px=5;
-        this.py=5;
-        this.getGroupe().getContient().remove(this);
-        //this.dessinesupr(context);
+    public boolean supr(GraphicsContext context) {
+        if(this.getBarreAssos().isEmpty()){
+            this.setId(-1);
+            this.px = -1;
+            this.py = -1;
+            return true;
+        } else {
+            System.out.println("Noeud associé a d'autre objet");
+            return false;
+        }
     }
-  
+
 }

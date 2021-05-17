@@ -223,12 +223,13 @@ public static Point DemandePoint(){
 
 
     @Override
-    public void supr(GraphicsContext context) {
-        this.id = -1;
-        this.px=0;
-        this.py=0;
-        remove(this);
+    public boolean supr(GraphicsContext context) {
+        this.id=-1;
+        this.px = -1;
+        this.py=-1;
+        return true;
     }
+
 
    
 

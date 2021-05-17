@@ -161,8 +161,16 @@ public class Barre extends FigureSimple{
     }
 
     @Override
-    public void supr(GraphicsContext context) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public boolean supr(GraphicsContext context) {
+        this.id = -1;
+        this.ndepart.getBarreAssos().remove(this);
+        this.nfin.getBarreAssos().remove(this);
+        this.ndepart = null;
+        this.nfin = null;
+        this.typeDeBarre = null;
+        this.angle = 0;
+        return true; 
     }
+
     
 }

@@ -26,6 +26,7 @@ import java.util.List;
 import javafx.event.ActionEvent;
 import javafx.scene.Cursor;
 import javafx.scene.Scene;
+import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.input.MouseEvent;
@@ -514,11 +515,18 @@ public class Controleur {
             
         }
 
-    void supprimer(ActionEvent t) {
-            this.vue.getModel().getContient().removeAll(this.selection);
+    void supprimer(ActionEvent t, GraphicsContext context) {
+            for(Treilli y : this.selection){
+            boolean test = y.supr(context);
+            if (test==true){
+            this.vue.getModel().getContient().remove(y);
             this.selection.clear();
             this.vue.redrawAll();
-        }
+            } else {
+                 System.out.println("probleme") ;  
+           }
+       }
+    }
              
         
 

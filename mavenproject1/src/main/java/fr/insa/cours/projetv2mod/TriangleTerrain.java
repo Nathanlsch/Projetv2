@@ -187,12 +187,27 @@ public class TriangleTerrain extends FigureSimple{
         }
     }
 
-    
-
-    @Override
-    public void supr(GraphicsContext context) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+     @Override
+    public boolean supr(GraphicsContext context) {
+        if(this.testAppuiTriangle() == true){
+            this.Segment1.supr(context);
+            this.Segment2.supr(context);
+            this.Segment3.supr(context);
+            return true;
+        } else {
+            System.out.println("Un segement contient un appui");
+            return false;
+        }
     }
-   
+    
+    public boolean testAppuiTriangle(){
+        if((this.Segment1.getListAppui().isEmpty())&&(this.Segment2.getListAppui().isEmpty())&&(this.Segment3.getListAppui().isEmpty())){
+            return true; 
+        } else {
+            return false;
+        }
+    }
+
+    
 }
 

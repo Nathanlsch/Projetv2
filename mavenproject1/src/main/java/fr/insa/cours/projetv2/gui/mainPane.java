@@ -87,7 +87,7 @@ public mainPane(Stage inStage) {
     });
     this.Supprimer = new Button("Supprimer");
     Supprimer.setOnAction((t) -> {
-        this.getControleur().supprimer(t);
+        this.getControleur().supprimer(t, cvtest.getRealCanvas().getGraphicsContext2D());
     });
     this.Supprimer.setMinWidth(200);
     VBox VBdroit = new VBox(Supprimer, attribut, test);

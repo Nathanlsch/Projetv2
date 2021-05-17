@@ -168,7 +168,7 @@ public class Terrain extends FigureSimple{
     
 
     @Override
-    public void supr(GraphicsContext context) {
+    public boolean supr(GraphicsContext context) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 

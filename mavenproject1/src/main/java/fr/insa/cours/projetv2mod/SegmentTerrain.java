@@ -9,6 +9,8 @@ package fr.insa.cours.projetv2mod;
 
 import java.io.IOException;
 import java.io.Writer;
+import java.util.ArrayList;
+import java.util.List;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
 
@@ -23,6 +25,7 @@ public class SegmentTerrain extends FigureSimple {
     private Point debut;
     private Point fin;
     private int id;
+    private List<Appui> listAppui;
     
     
     
@@ -31,6 +34,7 @@ public class SegmentTerrain extends FigureSimple {
         this.Identificateur(num);
         this.debut = new Point();
         this.fin = new Point();
+        this.listAppui = new ArrayList<Appui>();
     }
     
     public SegmentTerrain(Point debut,Point fin){
@@ -38,6 +42,7 @@ public class SegmentTerrain extends FigureSimple {
         this.Identificateur(num);
         this.debut = debut;
         this.fin = fin;
+        this.listAppui = new ArrayList<Appui>();
     }
     
     public SegmentTerrain(int id,Point debut,Point fin, Color col){
@@ -45,6 +50,7 @@ public class SegmentTerrain extends FigureSimple {
         this.id = id;
         this.debut = debut;
         this.fin = fin;
+        this.listAppui = new ArrayList<Appui>();
     }
     
     public double longueur() {
@@ -166,8 +172,33 @@ public class SegmentTerrain extends FigureSimple {
     }
 
     @Override
-    public void supr(GraphicsContext context) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public boolean supr(GraphicsContext context) {
+        if(this.getListAppui().isEmpty()){
+            this.id =-1;
+            this.debut = null;
+            this.fin = null;
+            return true;
+        } else {
+            System.out.println("Appui associé a d'autre objet");
+            return false;
+        }
     }
+
+    /**
+     * @return the listAppui
+     */
+    public List<Appui> getListAppui() {
+        return listAppui;
+    }
+
+    /**
+     * @param listAppui the listAppui to set
+     */
+    public void setListAppui(List<Appui> listAppui) {
+        this.listAppui = listAppui;
+    }
+    
+    
+
     
 }

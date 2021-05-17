@@ -64,10 +64,16 @@ public class AppuiSimple extends Appui {
    
 
     @Override
-    public void supr(GraphicsContext context) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public boolean supr(GraphicsContext context) {
+        if(this.getBarreAssos().isEmpty()){
+            this.suprAppui();
+            return true;
+        } else {
+            System.out.println("Appui associé a d'autre objet");
+            return false;
+        }
     }
-    
+
 
 
 }

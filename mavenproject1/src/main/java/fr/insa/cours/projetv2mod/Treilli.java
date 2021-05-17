@@ -81,7 +81,7 @@ public abstract class Treilli {
         
     public abstract void Identificateur(Numeroteur<Treilli> num);
     
-    public abstract void supr(GraphicsContext context);
+    public abstract boolean supr(GraphicsContext context);
    
     public abstract void save(Writer w) throws IOException;
     
