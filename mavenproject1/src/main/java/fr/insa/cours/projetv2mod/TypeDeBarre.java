@@ -220,4 +220,9 @@ public class TypeDeBarre extends Treilli {
         this.resistanceMaxCompression=0;
         listTypeDeBarre.remove(this);
 }
+
+    @Override
+    public void supr(GraphicsContext context) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 }

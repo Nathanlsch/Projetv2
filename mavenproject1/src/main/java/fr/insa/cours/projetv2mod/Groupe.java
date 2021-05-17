@@ -40,7 +40,7 @@ public class Groupe extends Treilli {
     
     public boolean ContientNoeud(){
         boolean i = true;
-        for(Treilli t : this.contient){
+        for(Treilli t : this.getContient()){
             if(t instanceof Noeud){
                 i =false;
             }
@@ -54,7 +54,7 @@ public class Groupe extends Treilli {
             if (f.getGroupe() != null) {
                 throw new Error("figure déja dans un autre groupe");
             }
-            this.contient.add(f);
+            this.getContient().add(f);
             f.setGroupe(this);
         }
     }
@@ -63,7 +63,7 @@ public class Groupe extends Treilli {
         if (f.getGroupe() != this) {
             throw new Error("la figure n'est pas dans le groupe");
         }
-        this.contient.remove(f);
+        this.getContient().remove(f);
         f.setGroupe(null);
     }
     
@@ -74,12 +74,12 @@ public class Groupe extends Treilli {
     }
     
     public void clear() {
-        List<Treilli> toRemove = new ArrayList<>(this.contient);
+        List<Treilli> toRemove = new ArrayList<>(this.getContient());
         this.removeAll(toRemove);
     }
 
     public int size() {
-        return this.contient.size();
+        return this.getContient().size();
     }
     
  public static Groupe groupeTest() {
@@ -124,16 +124,16 @@ public class Groupe extends Treilli {
     }
  
     public Treilli plusProche(Point p, double distMax) {
-        if (this.contient.isEmpty()) {
+        if (this.getContient().isEmpty()) {
             return null;
         } else {
-            Treilli fmin = this.contient.get(0);
+            Treilli fmin = this.getContient().get(0);
             double min = fmin.distancePoint(p);
             if (fmin instanceof Noeud){
                 min = min-0.5*min;
             }
-            for (int i =1;i<this.contient.size(); i++){
-             Treilli fcur = this.contient.get(i);
+            for (int i =1;i<this.getContient().size(); i++){
+             Treilli fcur = this.getContient().get(i);
              double cur = fcur.distancePoint(p);
              if (fcur instanceof Noeud){
                 cur = cur-0.5*cur;
@@ -153,12 +153,12 @@ public class Groupe extends Treilli {
             
     @Override
   public double distancePoint(Point p) {
-        if (this.contient.isEmpty()) {
+        if (this.getContient().isEmpty()) {
             return new Point(0,0).distancePoint(p);
         } else {
-            double dist = this.contient.get(0).distancePoint(p);
-            for (int i = 1; i < this.contient.size(); i++) {
-                double cur = this.contient.get(i).distancePoint(p);
+            double dist = this.getContient().get(0).distancePoint(p);
+            for (int i = 1; i < this.getContient().size(); i++) {
+                double cur = this.getContient().get(i).distancePoint(p);
                 if (cur < dist) {
                     dist = cur;
                 }
@@ -203,14 +203,14 @@ public class Groupe extends Treilli {
 
     @Override
     public void dessine(GraphicsContext context) {
-        for(Treilli f : this.contient){
+        for(Treilli f : this.getContient()){
             f.dessine(context);
         }
     }
 
     @Override
     public void dessineSelection(GraphicsContext context) {
-       for(Treilli f : this.contient){
+       for(Treilli f : this.getContient()){
             f.dessineSelection(context); 
     }
    }
@@ -223,18 +223,18 @@ public class Groupe extends Treilli {
         if (ContientNoeud()) {
             return null;
         } else {
-            for(int z=0;z<this.contient.size();z++){
-            if(this.contient.get(i) instanceof Noeud){
-               fmin = this.contient.get(i);
+            for(int z=0;z<this.getContient().size();z++){
+            if( this.getContient().get(i) instanceof Noeud){
+               fmin = this.getContient().get(i);
                min = fmin.distancePoint(p); 
-               z= this.contient.size();
+               z=   this.getContient().size();
             } else {
                i=i+1;
             }
             }
-            for (int y =i;y<this.contient.size(); y++){
-                if(this.contient.get(y) instanceof Noeud){
-                  Treilli fcur = this.contient.get(y);
+            for (int y =i;y<this.getContient().size(); y++){
+                if(this.getContient().get(y) instanceof Noeud){
+                  Treilli fcur = this.getContient().get(y);
                   double cur = fcur.distancePoint(p);  
                   if(cur<min){
                   min = cur;
@@ -259,11 +259,11 @@ public class Groupe extends Treilli {
     public void save(Writer w) throws IOException {
         if(! Save.contains(this)){
             Save.add(this);
-        for(Treilli t : this.contient){
+        for(Treilli t : this.getContient()){
             t.save(w);
         }
         w.append("Groupe;"+this.id);
-        for(Treilli t : this.contient){
+        for(Treilli t : this.getContient()){
             w.append(";"+num.getID(t));
         }
         w.append("\n");
@@ -277,8 +277,8 @@ public class Groupe extends Treilli {
  @Override
     public String toString() {
         String res = "Groupe {\n";
-        for (int i = 0; i < this.contient.size(); i++) {
-            res = res + indente(this.contient.get(i).toString(), "  ") + "\n";
+        for (int i = 0; i < this.getContient().size(); i++) {
+            res = res + indente(this.getContient().get(i).toString(), "  ") + "\n";
         }
         return res + "}";
     }
@@ -295,6 +295,19 @@ public class Groupe extends Treilli {
      */
     public void setTerrain(Terrain terrain) {
         this.terrain = terrain;
+    }
+
+    
+    /**
+     * @return the contient
+     */
+    public List<Treilli> getContient() {
+        return contient;
+    }
+
+    @Override
+    public void supr(GraphicsContext context) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
         
     }

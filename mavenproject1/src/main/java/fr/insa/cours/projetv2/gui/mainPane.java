@@ -7,9 +7,8 @@ package fr.insa.cours.projetv2.gui;
 
 import fr.insa.cours.projetv2mod.Groupe;
 import java.io.File;
-import javafx.scene.control.Label;
+import javafx.scene.control.Button;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.Border;
@@ -48,6 +47,8 @@ public class mainPane extends BorderPane {
     private RadioBoutonIcone NoeudSimple;
     private RadioBoutonIcone Barre;
     private TextArea test;
+    private Button attribut;
+    private Button Supprimer;
     
 public mainPane(Stage inStage) {
         this(inStage, new Groupe());
@@ -60,18 +61,18 @@ public mainPane(Stage inStage) {
    
     public mainPane(Stage inStage, File fromFile, Groupe model){ 
     
-    this.setStyle("-fx-background-color:steelblue;");
+    this.setStyle("-fx-background-color:#444444;");
     this.inStage = inStage;
     this.curFile = fromFile;
     this.test = new TextArea();
-    test.setPrefHeight(300);
+    test.setPrefHeight(600);
     test.setPrefWidth(200);
     test.setEditable(false);
     test.setStyle("-fx-background-color:black;");
     
     test.appendText("Nouveau Treilli \nCliqué deux fois dans la zone \nde dessin pour définir la \nzone constructible\n");
  
-    this.setRight(this.test);
+    
     
     this.model = model;
     this.controleur = new Controleur(this);
@@ -79,7 +80,19 @@ public mainPane(Stage inStage) {
     this.menu = new MainMenu(this);
     this.setTop(this.menu);
     
-   
+    this.attribut = new Button("Associer type de barre");
+    this.attribut.setMinWidth(200);
+    attribut.setOnAction((t) -> {
+        
+    });
+    this.Supprimer = new Button("Supprimer");
+    Supprimer.setOnAction((t) -> {
+        this.getControleur().supprimer(t);
+    });
+    this.Supprimer.setMinWidth(200);
+    VBox VBdroit = new VBox(Supprimer, attribut, test);
+    this.setRight(VBdroit);
+    
    //Boite gauche
    
    
@@ -149,7 +162,7 @@ public mainPane(Stage inStage) {
 }  
 
     public void redrawAll(){
-        this.cvtest.redrawAll();
+        this.getCvtest().redrawAll();
     }
 
     /**
@@ -190,6 +203,13 @@ public mainPane(Stage inStage) {
      */
     public TextArea getTest() {
         return test;
+    }
+
+    /**
+     * @return the cvtest
+     */
+    public DessinCanvas getCvtest() {
+        return cvtest;
     }
     
 }

@@ -27,14 +27,14 @@ public class SegmentTerrain extends FigureSimple {
     
     
     public SegmentTerrain(){
-        super(Color.BLACK);
+        super(Color.GREEN);
         this.Identificateur(num);
         this.debut = new Point();
         this.fin = new Point();
     }
     
     public SegmentTerrain(Point debut,Point fin){
-        super(Color.BLACK);
+        super(Color.GREEN);
         this.Identificateur(num);
         this.debut = debut;
         this.fin = fin;
@@ -104,14 +104,16 @@ public class SegmentTerrain extends FigureSimple {
 
     @Override
     public void dessine(GraphicsContext context) {
+        context.setStroke(this.getCouleur());
         context.strokeLine(this.getDebut().getPx(),this.getDebut().getPy(),this.getFin().getPx(),this.getFin().getPy());
-        context.setStroke(Color.GREEN);
+        
     }
 
     @Override
     public void dessineSelection(GraphicsContext context) {
-        context.strokeLine(this.getDebut().getPx(),this.getDebut().getPy(),this.getFin().getPx(),this.getFin().getPy());
         context.setStroke(Color.RED);
+        context.strokeLine(this.getDebut().getPx(),this.getDebut().getPy(),this.getFin().getPx(),this.getFin().getPy());
+        
     }
 
     /**
@@ -161,6 +163,11 @@ public class SegmentTerrain extends FigureSimple {
     @Override
     public boolean dansTerrain(Terrain terrain) {
         return true;
+    }
+
+    @Override
+    public void supr(GraphicsContext context) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
 }

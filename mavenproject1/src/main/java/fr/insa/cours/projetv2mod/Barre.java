@@ -81,15 +81,18 @@ public class Barre extends FigureSimple{
     
     @Override
     public void dessine(GraphicsContext context) {
+        context.setStroke(this.getCouleur()); 
         context.strokeLine(this.getNdepart().getcoordAppui().getPx(),this.getNdepart().getcoordAppui().getPy(),this.getNfin().getcoordAppui().getPx(),this.getNfin().getcoordAppui().getPy());
-        context.setStroke(Color.BLACK); 
+        
     }
 
 
     @Override
     public void dessineSelection(GraphicsContext context) {
+       context.setStroke(Color.RED);   
        context.strokeLine(this.getNdepart().getcoordAppui().getPx(),this.getNdepart().getcoordAppui().getPy(),this.getNfin().getcoordAppui().getPx(),this.getNfin().getcoordAppui().getPy());
-        context.setStroke(Color.WHITE);   
+        
+        System.out.println("Barre select");
     }
     
    
@@ -137,9 +140,6 @@ public class Barre extends FigureSimple{
     }
 
     
-    public void supr() {
-        
-    }
 
     @Override
     public boolean dansTerrain(Terrain terrain) {
@@ -158,6 +158,11 @@ public class Barre extends FigureSimple{
      */
     public double getAngle() {
         return angle;
+    }
+
+    @Override
+    public void supr(GraphicsContext context) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
 }

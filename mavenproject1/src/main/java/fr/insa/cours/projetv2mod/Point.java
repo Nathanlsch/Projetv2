@@ -220,6 +220,16 @@ public static Point DemandePoint(){
         }
     }
 
+
+
+    @Override
+    public void supr(GraphicsContext context) {
+        this.id = -1;
+        this.px=0;
+        this.py=0;
+        remove(this);
+    }
+
    
 
 }

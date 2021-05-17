@@ -49,6 +49,10 @@ public class NoeudSimple extends Noeud {
         context.setFill(this.getCouleur());
         context.fillOval(this.getPx()-RAYON_IN_DRAW, this.getPy()-RAYON_IN_DRAW, 2*RAYON_IN_DRAW, 2*RAYON_IN_DRAW);   
     }
+    
+    public void dessinesupr(GraphicsContext context) {
+          context.fillOval(this.getPx(),this.getPy(),0,0);
+    }
 
     /**
      * @return the px
@@ -73,7 +77,7 @@ public class NoeudSimple extends Noeud {
 
     @Override
     public void dessineSelection(GraphicsContext context) {
-        context.setFill(Color.WHITE);
+        context.setFill(Color.RED);
         context.fillOval(this.getPx()-RAYON_IN_DRAW, this.getPy()-RAYON_IN_DRAW, 2*RAYON_IN_DRAW, 2*RAYON_IN_DRAW);
     }
 
@@ -103,6 +107,15 @@ public class NoeudSimple extends Noeud {
         } else {
             return false;
         }
+    }
+
+    @Override
+    public void supr(GraphicsContext context) {
+        this.setId(-1);
+        this.px=5;
+        this.py=5;
+        this.getGroupe().getContient().remove(this);
+        //this.dessinesupr(context);
     }
   
 }

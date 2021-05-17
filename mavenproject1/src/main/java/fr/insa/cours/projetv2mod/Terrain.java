@@ -34,7 +34,7 @@ public class Terrain extends FigureSimple{
     }
 
     public Terrain(double minX,double maxX,double minY,double maxY) {
-        super(Color.BLACK);
+        super(Color.GREEN);
         this.Identificateur(num);
         this.minX = minX;
         this.maxX = maxX;
@@ -84,11 +84,12 @@ public class Terrain extends FigureSimple{
 
     @Override
     public void dessine(GraphicsContext context) {
+        context.setStroke(this.getCouleur());
         context.strokeLine(this.getMaxX(), this.getMaxY(), this.getMinX(), this.getMaxY());
         context.strokeLine(this.getMaxX(), this.getMaxY(), this.getMaxX(), this.getMinY());
         context.strokeLine(this.getMinX(), this.getMinY(), this.getMaxX(), this.getMinY());
         context.strokeLine(this.getMinX(), this.getMinY(), this.getMinX(), this.getMaxY());
-        context.setStroke(Color.GREEN);
+        
         
     }
 
@@ -100,7 +101,7 @@ public class Terrain extends FigureSimple{
 
     @Override
     public void dessineSelection(GraphicsContext context) {
-        
+        System.out.println("terrain select");
     }
 
     @Override
@@ -162,6 +163,13 @@ public class Terrain extends FigureSimple{
     @Override
     public boolean dansTerrain(Terrain terrain) {
        return true;   
+    }
+
+    
+
+    @Override
+    public void supr(GraphicsContext context) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
        

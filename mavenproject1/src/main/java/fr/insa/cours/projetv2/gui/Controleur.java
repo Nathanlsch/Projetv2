@@ -68,12 +68,34 @@ public class Controleur {
            this.selection.clear();
            this.vue.redrawAll();
        }
+       if(nouvelEtat == 20){
+           this.selection.clear();
+           this.vue.redrawAll();
+       }
+       if(nouvelEtat == 30){
+           this.selection.clear();
+           this.vue.redrawAll();
+       }
+       if(nouvelEtat == 40){
+           this.selection.clear();
+           this.vue.redrawAll();
+       }
+       if(nouvelEtat == 50){
+           this.selection.clear();
+           this.vue.redrawAll();
+       }
+       if(nouvelEtat == 60){
+           this.selection.clear();
+           this.vue.redrawAll();
+       }
        if(nouvelEtat == 70){
            this.selection.clear();
        }
        if(nouvelEtat == 80){
+          this.selection.clear();
           vue.setCursor(Cursor.DEFAULT);
        }
+       
        this.etat = nouvelEtat; 
        }
 
@@ -229,7 +251,6 @@ public class Controleur {
 
     void boutonSelect(ActionEvent t) {
         this.changeEtat(10);
-        this.vue.getTest().appendText("Bouton select"+"\n");
     }
 
     void boutonTriangleTerrain(ActionEvent t) {
@@ -491,6 +512,12 @@ public class Controleur {
     void calculdeforce(ActionEvent t) {
             vue.getModel().Force();
             
+        }
+
+    void supprimer(ActionEvent t) {
+            this.vue.getModel().getContient().removeAll(this.selection);
+            this.selection.clear();
+            this.vue.redrawAll();
         }
              
         
