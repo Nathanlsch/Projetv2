@@ -190,6 +190,7 @@ public class TriangleTerrain extends FigureSimple{
      @Override
     public boolean supr(GraphicsContext context) {
         if(this.testAppuiTriangle() == true){
+            num.suprObj(this);
             this.Segment1.supr(context);
             this.Segment2.supr(context);
             this.Segment3.supr(context);
@@ -206,6 +207,13 @@ public class TriangleTerrain extends FigureSimple{
         } else {
             return false;
         }
+    }
+
+    @Override
+    public String afficheInfo() {
+        String res = "Id TriangleTerrain : "+this.id+"\nId Point1 : "+this.Point1.getId()+"\nId Point2 : "+this.Point2.getId()+"\nId Point3 : "+this.Point3.getId()+"\nId Segment1 : "
+                +this.Segment1.getId()+"\nId Segment2 : "+this.Segment2.getId()+"\nId Segment3 : "+this.Segment3.getId();
+        return res;
     }
 
     

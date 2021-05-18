@@ -56,6 +56,9 @@ public class Controleur {
     private VueTypeDeBarre vueBarre;
     private int etat;
     private Numeroteur num;
+    private AffichageForce force;
+    private TypeDeBarre typeDeBarre;
+    private ForceNoeudSimple Force;
     
     public Controleur(mainPane vue){
         this.vue = vue;
@@ -236,6 +239,7 @@ public class Controleur {
           vue.getModel().add(terrain);
           this.vue.redrawAll(); 
           this.changeEtat(10);
+          this.vue.getTest().clear();
         }
      
        
@@ -511,7 +515,12 @@ public class Controleur {
     }
 
     void calculdeforce(ActionEvent t) {
-            vue.getModel().Force();
+            Stage nouveau = new Stage();
+            Scene sc = new Scene(this.force = new AffichageForce(vue.getControleur()),600,300);
+            nouveau.setScene(sc);
+            nouveau.setTitle("Affichage force");
+            nouveau.show();
+            vue.getModel().Force(this.force);
             
         }
 
@@ -566,6 +575,65 @@ public class Controleur {
                       }   
                 }   
             }
+    }
+
+    void visualiser(String text) {
+        this.selection.clear();
+        int id = Integer.parseInt(text);
+        Treilli res = (Treilli) num.getObj(id);
+        this.selection.add(res);
+        this.vue.redrawAll(); 
+        
+    }
+
+    void assosTypeDeBarre() {
+        if((this.selection.size() ==1)&&(this.selection.get(0) instanceof Barre)){
+            Barre b = (Barre)this.selection.get(0);
+          if((b.longueurBarre()<typeDeBarre.getLongueurMax())&&(b.longueurBarre()>typeDeBarre.getLongueurMin())){
+          ((Barre)this.selection.get(0)).setTypeDeBarre(typeDeBarre);
+          System.out.println(((Barre)this.selection.get(0)).getTypeDeBarre());
+        }
+       }
+    }
+
+    void boutonSelect(ActionEvent t, TypeDeBarre h) {
+        typeDeBarre = h;
+    }
+
+    void information() {
+        this.vue.getTest().clear();
+         if(this.selection.size() ==1){
+            String info = this.selection.get(0).afficheInfo();
+            this.vue.getTest().appendText(info);
+         }
+    }
+
+    void assosForce() {
+        if((this.selection.size() ==1)&&(this.selection.get(0) instanceof NoeudSimple)){
+            Stage nouveau = new Stage();
+            Scene sc = new Scene(this.Force = new ForceNoeudSimple(this.vue),400,120);
+            nouveau.setScene(sc);
+            nouveau.setTitle("Création force");
+            nouveau.show();
+        }
+    }
+
+    void ajouterForce(ActionEvent t) {
+        String X = this.Force.getTFcomposanteX().getText();
+        String Y = this.Force.getTFcomposanteY().getText();
+        
+        double x = convert(X, "Composante sur X");
+        double y = convert(Y, "Composante sur Y");
+        
+        ((NoeudSimple)this.selection.get(0)).setPx(x);
+        ((NoeudSimple)this.selection.get(0)).setPy(y);
+        
+         Alert alert = new Alert(AlertType.CONFIRMATION);
+            alert.setHeaderText("Force appliqué ! ");
+            alert.showAndWait();
+            this.Force.getTFcomposanteX().setText("");
+            this.Force.getTFcomposanteY().setText("");
+        
     }
              
         

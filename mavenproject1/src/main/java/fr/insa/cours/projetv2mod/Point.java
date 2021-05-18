@@ -224,6 +224,7 @@ public static Point DemandePoint(){
 
     @Override
     public boolean supr(GraphicsContext context) {
+        num.suprObj(this);
         this.id=-1;
         this.px = -1;
         this.py=-1;
@@ -233,6 +234,11 @@ public static Point DemandePoint(){
     public double getAngleOrientePoint(Point p2) {
             
         return Math.atan2(p2.getPy() - this.getPy(), p2.getPx() - this.getPx());
+    }
+
+    @Override
+    public String afficheInfo() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
 

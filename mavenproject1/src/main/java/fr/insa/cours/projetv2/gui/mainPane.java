@@ -47,8 +47,10 @@ public class mainPane extends BorderPane {
     private RadioBoutonIcone NoeudSimple;
     private RadioBoutonIcone Barre;
     private TextArea test;
-    private Button attribut;
+    private Button assosType;
     private Button Supprimer;
+    private Button assosForce;
+    private Button information;
     
 public mainPane(Stage inStage) {
         this(inStage, new Groupe());
@@ -80,17 +82,29 @@ public mainPane(Stage inStage) {
     this.menu = new MainMenu(this);
     this.setTop(this.menu);
     
-    this.attribut = new Button("Associer type de barre");
-    this.attribut.setMinWidth(200);
-    attribut.setOnAction((t) -> {
-        
+    this.assosType = new Button("Associer type de barre");
+    this.assosType.setMinWidth(200);
+    assosType.setOnAction((t) -> {
+        this.controleur.assosTypeDeBarre();
     });
+    
+    this.assosForce = new Button("Associer Force");
+    this.assosForce.setMinWidth(200);
+    assosForce.setOnAction((t) -> {
+        this.controleur.assosForce();
+    });
+    this.information = new Button("Information");
+    this.information.setMinWidth(200);
+    information.setOnAction((t) -> {
+        this.controleur.information();
+    });
+    
     this.Supprimer = new Button("Supprimer");
     Supprimer.setOnAction((t) -> {
         this.getControleur().supprimer(t, cvtest.getRealCanvas().getGraphicsContext2D());
     });
     this.Supprimer.setMinWidth(200);
-    VBox VBdroit = new VBox(Supprimer, attribut, test);
+    VBox VBdroit = new VBox(Supprimer, assosType,assosForce,information, test);
     this.setRight(VBdroit);
     
    //Boite gauche

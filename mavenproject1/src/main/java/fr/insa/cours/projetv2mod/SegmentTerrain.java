@@ -174,6 +174,7 @@ public class SegmentTerrain extends FigureSimple {
     @Override
     public boolean supr(GraphicsContext context) {
         if(this.getListAppui().isEmpty()){
+            num.suprObj(this);
             this.id =-1;
             this.debut = null;
             this.fin = null;
@@ -196,6 +197,11 @@ public class SegmentTerrain extends FigureSimple {
      */
     public void setListAppui(List<Appui> listAppui) {
         this.listAppui = listAppui;
+    }
+
+    @Override
+    public String afficheInfo() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
     

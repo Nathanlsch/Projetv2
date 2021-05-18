@@ -162,14 +162,41 @@ public class Barre extends FigureSimple{
 
     @Override
     public boolean supr(GraphicsContext context) {
+        num.suprObj(this);
         this.id = -1;
         this.ndepart.getBarreAssos().remove(this);
         this.nfin.getBarreAssos().remove(this);
         this.ndepart = null;
         this.nfin = null;
-        this.typeDeBarre = null;
+        this.setTypeDeBarre(null);
         this.angle = 0;
         return true; 
+    }
+
+    /**
+     * @param typeDeBarre the typeDeBarre to set
+     */
+    public void setTypeDeBarre(TypeDeBarre typeDeBarre) {
+        this.typeDeBarre = typeDeBarre;
+    }
+    
+    public double longueurBarre(){
+        Point p1 = this.nfin.getcoordAppui();
+        Point p2 = this.ndepart.getcoordAppui();
+        return Math.sqrt((p1.getPx()-p2.getPx())*(p1.getPx()-p2.getPx())+(p1.getPy()-p2.getPy())*(p1.getPy()-p2.getPy()));
+    }
+
+    @Override
+    public String afficheInfo() {
+        String type = "";
+        if(this.typeDeBarre == null){
+            type = "Type de barre non défini";
+        } else{
+            type = this.typeDeBarre.afficheInfo();
+        }
+        String res = "Id barre: "+this.getId()+"\nLongueur barre : "+this.longueurBarre()+"\nId Noeud départ : "+this.ndepart.getId()+"\nId NoeudFin : "+this.nfin.getId()+"\n"+type;
+                
+        return res;
     }
 
     

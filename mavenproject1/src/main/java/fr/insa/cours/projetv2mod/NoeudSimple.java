@@ -21,12 +21,16 @@ public class NoeudSimple extends Noeud {
     
     public static double RAYON_IN_DRAW = 5;
     private double px;
-    private double py; 
+    private double py;
+    private double Px;
+    private double Py;
      
     public NoeudSimple (double px, double py) {
     this.Identificateur(num);
     this.px = px;
     this.py = py; 
+    this.Px=0;
+    this.Py = 0;
     this.setBarreAssos(new ArrayList<Barre>());
     
 }
@@ -35,6 +39,8 @@ public class NoeudSimple extends Noeud {
         super(col);
         this.px = px;
         this.py = py;
+        this.Px=0;
+        this.Py = 0;
         this.setId(id);
         this.setBarreAssos(new ArrayList<Barre>());
     }
@@ -112,6 +118,7 @@ public class NoeudSimple extends Noeud {
     @Override
     public boolean supr(GraphicsContext context) {
         if(this.getBarreAssos().isEmpty()){
+            num.suprObj(this);
             this.setId(-1);
             this.px = -1;
             this.py = -1;
@@ -120,6 +127,26 @@ public class NoeudSimple extends Noeud {
             System.out.println("Noeud associé a d'autre objet");
             return false;
         }
+    }
+
+    @Override
+    public String afficheInfo() {
+        String res = "Id NoeudSimple : "+this.getId()+"\nCoordonné x : "+this.px+"\nCoordonné y : "+this.py+"\nForce sur x : "+this.Px+"\nForce sur y : "+this.Py;
+        return res;
+    }
+
+    /**
+     * @param Px the Px to set
+     */
+    public void setPx(double Px) {
+        this.Px = Px;
+    }
+
+    /**
+     * @param Py the Py to set
+     */
+    public void setPy(double Py) {
+        this.Py = Py;
     }
 
 }

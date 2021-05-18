@@ -13,6 +13,8 @@ import java.io.Writer;
 import javafx.scene.canvas.GraphicsContext;
 import static fr.insa.cours.projetv2mod.Treilli.Save;
 import static fr.insa.cours.projetv2mod.CatalogueDeBarre.listTypeDeBarre;
+import static fr.insa.cours.projetv2mod.Treilli.num;
+import java.util.Set;
 import javafx.scene.control.Button;
 
 /**
@@ -30,6 +32,7 @@ public class TypeDeBarre extends Treilli {
     private double resistanceMaxCompression;
     private  Button btMod = new Button("Modifier");
     private  Button btSup = new Button("Supprimer");
+    private  Button btSelect = new Button("Selectionner");
     
     
 
@@ -211,6 +214,14 @@ public class TypeDeBarre extends Treilli {
     }
     
     public void supr(){
+        Set<Integer> set = this.num.parcours();
+        for(Integer key: set){
+           if(num.getObj(key) instanceof Barre){
+               if(((Barre)num.getObj(key)).getTypeDeBarre()==this){
+                   ((Barre)num.getObj(key)).setTypeDeBarre(null);
+               }
+           }
+        }
         num.suprObj(this);
         this.nom = null;
         this.coutAuMetre =0;
@@ -224,5 +235,26 @@ public class TypeDeBarre extends Treilli {
     @Override
     public boolean supr(GraphicsContext context) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    /**
+     * @return the btSelect
+     */
+    public Button getBtSelect() {
+        return btSelect;
+    }
+
+    /**
+     * @param btSelect the btSelect to set
+     */
+    public void setBtSelect(Button btSelect) {
+        this.btSelect = btSelect;
+    }
+
+    @Override
+    public String afficheInfo() {
+        String res = "TypeDeBarre : "+this.getNom()+"\nId : "+this.getId()+"\nLongueurMin : "+this.getLongueurMin()+"\nLongueurMax : "+this.getLongueurMax()+
+                    "\nCout au mètre : "+this.getCoutAuMetre()+"\nResistanceMaxTension : "+this.getResistanceMaxTension()+"\nResistanceMaxCompression : "+this.getResistanceMaxCompression()+"\n";
+        return res;
     }
 }

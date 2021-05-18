@@ -36,6 +36,9 @@ public class VueTypeDeBarre extends BorderPane{
          h.getBtSup().setOnAction((t) -> {
              main.getControleur().boutonSup(t,h);
          });
+         h.getBtSelect().setOnAction((t) -> {
+             main.getControleur().boutonSelect(t,h);
+         });
          list.add(h);
      }
      
@@ -56,6 +59,7 @@ public class VueTypeDeBarre extends BorderPane{
     TableColumn<TypeDeBarre, Double> maxCompressionC = new TableColumn ("Compression maximum");
     TableColumn<TypeDeBarre, Button> boutonModC = new TableColumn ("Modifier");
     TableColumn<TypeDeBarre, Button> boutonSupC = new TableColumn ("Supprimer");
+    TableColumn<TypeDeBarre, Button> boutonSelectC = new TableColumn ("Selectionner");
     
     nomC.setCellValueFactory(new PropertyValueFactory<>("nom"));
     coutC.setCellValueFactory(new PropertyValueFactory<>("coutAuMetre"));
@@ -65,12 +69,13 @@ public class VueTypeDeBarre extends BorderPane{
     maxCompressionC.setCellValueFactory(new PropertyValueFactory<>("resistanceMaxCompression"));
     boutonModC.setCellValueFactory(new PropertyValueFactory<>("btMod"));
     boutonSupC.setCellValueFactory(new PropertyValueFactory<>("btSup"));
+    boutonSelectC.setCellValueFactory(new PropertyValueFactory<>("btSelect"));
    
     ObservableList<TypeDeBarre> list = getList(listTypeDeBarre);
     tableau.setItems(list);
  
    
-    tableau.getColumns().addAll(nomC, coutC, longMinC,longMaxC,maxTensionC,maxCompressionC, boutonModC, boutonSupC);
+    tableau.getColumns().addAll(nomC, coutC, longMinC,longMaxC,maxTensionC,maxCompressionC, boutonModC, boutonSupC, boutonSelectC);
     HBox conteneur = new HBox(tableau);
     this.setTop(conteneur);
         

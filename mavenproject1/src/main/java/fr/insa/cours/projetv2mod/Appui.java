@@ -128,6 +128,7 @@ public abstract class Appui extends Noeud {
         } else if (p1==3){
             this.triangleTerrain.getSegment3().getListAppui().remove(this);
         } 
+        num.suprObj(this);
         this.triangleTerrain = null;
         this.p1 = -1;
         this.posSurSegment = -1;

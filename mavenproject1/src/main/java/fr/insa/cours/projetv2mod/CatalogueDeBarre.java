@@ -16,5 +16,5 @@ public abstract class CatalogueDeBarre extends Treilli{
     
     public static ArrayList<TypeDeBarre> listTypeDeBarre = new ArrayList<TypeDeBarre>();
 
-  
+    public int idTypeDeBarre;
 }

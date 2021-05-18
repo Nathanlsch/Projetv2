@@ -5,6 +5,7 @@
  */
 package fr.insa.cours.projetv2mod;
 
+import fr.insa.cours.projetv2.gui.AffichageForce;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
@@ -402,6 +403,7 @@ public abstract class Treilli {
             }
             if(num.getObj(id) instanceof AppuiDouble){
                tab[0][i]=id; 
+               tab[0][i+1]=id; 
             }
         }
     }
@@ -414,12 +416,12 @@ public abstract class Treilli {
         return i;
     }
 
-    public void Force(){
+    public void Force(AffichageForce force){
         Matrice res = new Matrice(this.testForce(), this.testForce());
+        int[][] info = new int[2][this.testForce()];
         if(this.testForce() !=0){
             int ligne =0;
             int nbMax = BarreMax();
-            int[][] info = new int[2][this.testForce()];
             double valeur;
             double valeur1;
             double valeur2;
@@ -463,9 +465,25 @@ public abstract class Treilli {
         } else {
             System.out.println("force du treilli non calculable");
         }
+        Matrice resSys = res.ResSysLin();
         System.out.println(res.ResSysLin());
-        
+        for(int i = 0; i<this.testForce();i++){
+            if(num.getObj(info[0][i]) instanceof Barre){
+                force.getTA().appendText("La barre d'identificateur "+info[0][i]+" subit une force de "+resSys.get(i, 0)+" Newton\n");
+            }
+            if(num.getObj(info[0][i]) instanceof AppuiSimple){
+                force.getTA().appendText("L'appui simple d'identificateur "+info[0][i]+" a une réaction de "+resSys.get(i, 0)+" Newton\n");
+            }
+            if(num.getObj(info[0][i]) instanceof AppuiDouble){
+                force.getTA().appendText("L'appui double d'identificateur "+info[0][i]+" a une réaction sur x de "+resSys.get(i, 0)+" et sur y de "+resSys.get(i+1, 0)+" Newton\n");
+                i=i+1;
+            }
+            
+            
+        }
     }
+    
+    public abstract String afficheInfo();
 
 
   
