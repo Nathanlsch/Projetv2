@@ -515,13 +515,19 @@ public class Controleur {
     }
 
     void calculdeforce(ActionEvent t) {
+            int test = vue.getModel().testForce();
+            if(test == 0){
+                this.vue.getTest().clear();
+                this.vue.getTest().appendText("Force du treilli\nnon calculable");
+            } else {
+            vue.getModel().Force(this.force);
             Stage nouveau = new Stage();
             Scene sc = new Scene(this.force = new AffichageForce(vue.getControleur()),600,300);
             nouveau.setScene(sc);
             nouveau.setTitle("Affichage force");
             nouveau.show();
-            vue.getModel().Force(this.force);
             
+            }  
         }
 
     void supprimer(ActionEvent t, GraphicsContext context) {
@@ -587,13 +593,24 @@ public class Controleur {
     }
 
     void assosTypeDeBarre() {
+        if(typeDeBarre == null){
+            this.vue.getTest().clear();
+            this.vue.getTest().appendText("Aucun type de barre\ncréé ou selectionné");
+        } else {  
         if((this.selection.size() ==1)&&(this.selection.get(0) instanceof Barre)){
             Barre b = (Barre)this.selection.get(0);
           if((b.longueurBarre()<typeDeBarre.getLongueurMax())&&(b.longueurBarre()>typeDeBarre.getLongueurMin())){
           ((Barre)this.selection.get(0)).setTypeDeBarre(typeDeBarre);
           System.out.println(((Barre)this.selection.get(0)).getTypeDeBarre());
-        }
-       }
+          this.vue.getTest().clear();
+          this.vue.getTest().appendText("Type de barre associé !");
+        } else
+          {  
+              this.vue.getTest().clear();
+              this.vue.getTest().appendText("Ce type de barre\nne peut pas être\nasssocié à cette barre");
+          }
+      }
+    }
     }
 
     void boutonSelect(ActionEvent t, TypeDeBarre h) {
@@ -625,8 +642,8 @@ public class Controleur {
         double x = convert(X, "Composante sur X");
         double y = convert(Y, "Composante sur Y");
         
-        ((NoeudSimple)this.selection.get(0)).setPx(x);
-        ((NoeudSimple)this.selection.get(0)).setPy(y);
+        ((NoeudSimple)this.selection.get(0)).setForcePx(x);
+        ((NoeudSimple)this.selection.get(0)).setForcePy(y);
         
          Alert alert = new Alert(AlertType.CONFIRMATION);
             alert.setHeaderText("Force appliqué ! ");
