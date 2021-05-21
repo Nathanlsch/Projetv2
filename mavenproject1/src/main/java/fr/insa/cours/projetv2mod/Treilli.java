@@ -417,7 +417,8 @@ public abstract class Treilli {
     }
 
     public void Force(AffichageForce force){
-        Matrice res = new Matrice(this.testForce(), this.testForce());
+        Matrice carre = new Matrice(this.testForce(), this.testForce());
+        Matrice vecteur = new Matrice(this.testForce(),1);
         int[][] info = new int[2][this.testForce()];
         if(this.testForce() !=0){
             int ligne =0;
@@ -430,12 +431,14 @@ public abstract class Treilli {
             for(Integer key: set){
                if(num.getObj(key) instanceof Noeud){
                    ajout(info,key,11);
+                   vecteur.set(ligne, 0, ((Noeud)num.getObj(key)).getForcePx());
+                   vecteur.set(ligne+1, 0, ((Noeud)num.getObj(key)).getForcePy());
                    for(Barre barre : ((Noeud)num.getObj(key)).getBarreAssos()){
                        int id = barre.getId();
                        ajout(info,id,10);
                        int col = numCol(info,id);
-                       res.set(ligne, col, Math.cos(barre.getAngle()));
-                       res.set(ligne+1, col, Math.sin(barre.getAngle())); 
+                       carre.set(ligne, col, Math.cos(barre.getAngle()));
+                       carre.set(ligne+1, col, Math.sin(barre.getAngle())); 
                    }
                 ligne = ligne+2;   
                }
@@ -449,24 +452,24 @@ public abstract class Treilli {
                       int col = numCol(info,key);
                       SegmentTerrain sgt = ((AppuiSimple) num.getObj(key)).giveSegmentTerrain();
                       double angle = sgt.getDebut().getAngleOrientePoint(sgt.getFin()) + Math.PI/2;
-                      res.set(ligne, col, Math.cos(angle));
-                      res.set(ligne+1, col, Math.sin(angle));
+                      carre.set(ligne, col, Math.cos(angle));
+                      carre.set(ligne+1, col, Math.sin(angle));
                    }
                    if(num.getObj(key) instanceof AppuiDouble){
                        ajout(info,key,20);
                        int col = numCol(info,key);
-                       res.set(ligne, col, 1);
-                       res.set(ligne+1, col+1, 1);
+                       carre.set(ligne, col, 1);
+                       carre.set(ligne+1, col+1, 1);
                    }
                 ligne = ligne+2;   
                }
             }
-        System.out.println(res);   
+        System.out.println(carre);   
         } 
           
-        
-        Matrice resSys = res.ResSysLin();
-        System.out.println(res.ResSysLin());
+        Matrice concat = carre.concatCol(vecteur);
+        Matrice resSys = concat.ResSysLin();
+        System.out.println(concat.ResSysLin());
         for(int i = 0; i<this.testForce();i++){
             if(num.getObj(info[0][i]) instanceof Barre){
                 force.getTA().appendText("La barre d'identificateur "+info[0][i]+" subit une force de "+resSys.get(i, 0)+" Newton\n");

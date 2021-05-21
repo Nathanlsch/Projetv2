@@ -74,11 +74,7 @@ public class AppuiSimple extends Appui {
         }
     }
 
-    @Override
-    public String afficheInfo() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
+  
 
 
 }

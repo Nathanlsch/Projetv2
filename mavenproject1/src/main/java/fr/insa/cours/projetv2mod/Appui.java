@@ -154,4 +154,10 @@ public abstract class Appui extends Noeud {
         return res;
     }
     
+    @Override
+     public String afficheInfo() {
+        String res = "AppuiDouble : "+this.getId()+"\nTriangle porteur : "+this.getTriangleTerrain().getId()+"\nPoint du plus proche : "+this.getP1()+"\nPosition sur le segment : "+this.getPosSurSegment();
+        return res;
+    }
+    
 }

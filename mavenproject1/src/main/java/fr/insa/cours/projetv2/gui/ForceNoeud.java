@@ -17,7 +17,7 @@ import javafx.scene.layout.VBox;
  *
  * @author lasch
  */
-public class ForceNoeudSimple extends BorderPane{
+public class ForceNoeud extends BorderPane{
     
     private int longueurMin = 200;
     private int longueurMax = 200;
@@ -29,7 +29,7 @@ public class ForceNoeudSimple extends BorderPane{
     private Button ajouter;
     private mainPane main;
     
-    public ForceNoeudSimple(mainPane main){
+    public ForceNoeud(mainPane main){
     
     this.main = main;
     

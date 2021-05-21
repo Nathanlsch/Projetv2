@@ -27,29 +27,31 @@ public class AffichageForce extends BorderPane{
         
         this.controleur = vue;
         
+        //Zone de texte
         this.TA = new TextArea();
         TA.setPrefHeight(400);
         TA.setPrefWidth(200);
         TA.setEditable(false);
         
+        //Zone de saisie
         this.TF = new TextField();
         
-        
-        
-        
+        //Bouton visualiser
         visualiser = new Button("Visualiser");
-        
         visualiser.setOnAction((t) -> {
             this.controleur.visualiser(TF.getText());
         });
         
+        //Conteneur du bas 
         HBox conteneur1 = new HBox(visualiser, TF);
         
+        //Conteneur du princpal
         VBox conteneur = new VBox(TA, conteneur1);
-        this.setCenter(conteneur);
-        
+        this.setCenter(conteneur);  
     }
 
+    
+    //Accesseur
     /**
      * @return the TA
      */

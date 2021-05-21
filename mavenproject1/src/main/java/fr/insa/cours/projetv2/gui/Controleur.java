@@ -58,8 +58,10 @@ public class Controleur {
     private Numeroteur num;
     private AffichageForce force;
     private TypeDeBarre typeDeBarre;
-    private ForceNoeudSimple Force;
+    private ForceNoeud Force;
     
+    
+    //Constructeur controleur 
     public Controleur(mainPane vue){
         this.vue = vue;
         this.selection = new ArrayList<>();
@@ -67,6 +69,11 @@ public class Controleur {
         this.num = this.vue.getModel().getNum();
     }
     
+      public List<Treilli> getSelection() {
+        return selection;
+    }
+      
+    //Methode modifiant l'état du controleur
     public void changeEtat(int nouvelEtat){
        if(nouvelEtat == 10){
            this.selection.clear();
@@ -99,12 +106,14 @@ public class Controleur {
           this.selection.clear();
           vue.setCursor(Cursor.DEFAULT);
        }
-       
        this.etat = nouvelEtat; 
        }
 
+    
+    //Methode définissant les actions a effectuer quand il recoit un click dans la zone de dessin selon l'état
     void clicDansZoneDessin(MouseEvent t) {
        
+       //Etat de selection
        if(this.etat==10){
            pclick = new Point(t.getX(), t.getY());
            proche = this.vue.getModel().plusProche(pclick, MAX_VALUE);
@@ -124,7 +133,8 @@ public class Controleur {
               }
               this.vue.redrawAll();
           }
-           
+       
+       //Etat de création d'un triangle terrain
        } else if (this.etat==20){
          double px = t.getX();
          double py = t.getY();
@@ -157,7 +167,8 @@ public class Controleur {
          }  else {
             System.out.println("pas dans le terrain");
          }
-         
+       
+       //Création d'un appui simple
        } else if (this.etat==30){
            pclick = new Point(t.getX(), t.getY());
            Treilli proche = this.vue.getModel().plusProche(pclick, MAX_VALUE);
@@ -171,7 +182,8 @@ public class Controleur {
               this.vue.redrawAll();
               this.changeEtat(30);
            }
-           
+       
+       //Création d'un appui double
        } else if (this.etat==40){
            pclick = new Point(t.getX(), t.getY());
            Treilli proche = this.vue.getModel().plusProche(pclick, MAX_VALUE);
@@ -185,7 +197,8 @@ public class Controleur {
               this.vue.redrawAll();
               this.changeEtat(40);  
            }
-           
+       
+       //Création d'un appui encastré
        } else if (this.etat==50){
            pclick = new Point(t.getX(), t.getY());
            Treilli proche = this.vue.getModel().plusProche(pclick, MAX_VALUE);
@@ -199,7 +212,8 @@ public class Controleur {
               this.vue.redrawAll();
               this.changeEtat(50);
             }
-           
+       
+       //Création d'un noeud simple
        } else if (this.etat==60){    
        double px = t.getX();
        double py = t.getY();
@@ -210,6 +224,8 @@ public class Controleur {
        } else {
            System.out.println("Pas dans terrain");
        }
+       
+       //Création d'une barre
         } else if (this.etat==70){ 
             pclick = new Point(t.getX(), t.getY());
             Treilli proche = this.vue.getModel().NoeudplusProche(pclick, MAX_VALUE);
@@ -228,7 +244,9 @@ public class Controleur {
                 this.selection.clear();
                 this.vue.redrawAll(); 
                 this.changeEtat(70);
-            }  
+            } 
+            
+        //Création d'un terrain
         } else if (this.etat==80){
           pclick = new Point(t.getX(), t.getY()); 
           this.changeEtat(81);
@@ -241,19 +259,12 @@ public class Controleur {
           this.changeEtat(10);
           this.vue.getTest().clear();
         }
-     
-       
-        }   
+    }   
            
            
        
     
-    
-
-    public List<Treilli> getSelection() {
-        return selection;
-    }
-
+   
     void boutonSelect(ActionEvent t) {
         this.changeEtat(10);
     }
@@ -520,12 +531,12 @@ public class Controleur {
                 this.vue.getTest().clear();
                 this.vue.getTest().appendText("Force du treilli\nnon calculable");
             } else {
-            vue.getModel().Force(this.force);
             Stage nouveau = new Stage();
             Scene sc = new Scene(this.force = new AffichageForce(vue.getControleur()),600,300);
             nouveau.setScene(sc);
             nouveau.setTitle("Affichage force");
             nouveau.show();
+            vue.getModel().Force(this.force);
             
             }  
         }
@@ -626,9 +637,9 @@ public class Controleur {
     }
 
     void assosForce() {
-        if((this.selection.size() ==1)&&(this.selection.get(0) instanceof NoeudSimple)){
+        if((this.selection.size() ==1)&&(this.selection.get(0) instanceof Noeud)){
             Stage nouveau = new Stage();
-            Scene sc = new Scene(this.Force = new ForceNoeudSimple(this.vue),400,120);
+            Scene sc = new Scene(this.Force = new ForceNoeud(this.vue),400,120);
             nouveau.setScene(sc);
             nouveau.setTitle("Création force");
             nouveau.show();
@@ -642,8 +653,8 @@ public class Controleur {
         double x = convert(X, "Composante sur X");
         double y = convert(Y, "Composante sur Y");
         
-        ((NoeudSimple)this.selection.get(0)).setForcePx(x);
-        ((NoeudSimple)this.selection.get(0)).setForcePy(y);
+        ((Noeud)this.selection.get(0)).setForcePx(x);
+        ((Noeud)this.selection.get(0)).setForcePy(y);
         
          Alert alert = new Alert(AlertType.CONFIRMATION);
             alert.setHeaderText("Force appliqué ! ");
