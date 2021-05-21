@@ -17,6 +17,9 @@ import javafx.scene.paint.Color;
 
 
 public abstract class Noeud extends FigureSimple{
+    
+    private double ForcePx;
+    private double ForcePy;
 
     /**
      * @return the BarreAssos
@@ -72,6 +75,36 @@ public abstract class Noeud extends FigureSimple{
             
             return Math.atan2(P2.getPy() - P1.getPy(), P2.getPx() - P1.getPx());
         }
+
+    /**
+     * @return the ForcePx
+     */
+    public double getForcePx() {
+        return ForcePx;
+    }
+
+    /**
+     * @param ForcePx the ForcePx to set
+     */
+    public void setForcePx(double ForcePx) {
+        this.ForcePx = ForcePx;
+    }
+
+    /**
+     * @return the ForcePy
+     */
+    public double getForcePy() {
+        return ForcePy;
+    }
+
+    /**
+     * @param ForcePy the ForcePy to set
+     */
+    public void setForcePy(double ForcePy) {
+        this.ForcePy = ForcePy;
+    }
+
+ 
 
    
         

@@ -22,15 +22,13 @@ public class NoeudSimple extends Noeud {
     public static double RAYON_IN_DRAW = 5;
     private double px;
     private double py;
-    private double Px;
-    private double Py;
      
     public NoeudSimple (double px, double py) {
     this.Identificateur(num);
     this.px = px;
     this.py = py; 
-    this.Px=0;
-    this.Py = 0;
+    this.setForcePx(0);
+    this.setForcePy(0);
     this.setBarreAssos(new ArrayList<Barre>());
     
 }
@@ -39,40 +37,28 @@ public class NoeudSimple extends Noeud {
         super(col);
         this.px = px;
         this.py = py;
-        this.Px=0;
-        this.Py = 0;
+        this.setForcePx(0);
+        this.setForcePy(0);
         this.setId(id);
         this.setBarreAssos(new ArrayList<Barre>());
     }
 
     @Override
     public String toString() {
-        return "NoeudSimple;" + this.getId() + ";(" + this.getPx() + "," + this.getPy() + ')';
+        return "NoeudSimple;" + this.getId() + ";(" + this.px + "," + this.py + ')';
     } 
 
     @Override
     public void dessine(GraphicsContext context) {
         context.setFill(this.getCouleur());
-        context.fillOval(this.getPx()-RAYON_IN_DRAW, this.getPy()-RAYON_IN_DRAW, 2*RAYON_IN_DRAW, 2*RAYON_IN_DRAW);   
+        context.fillOval(this.px-RAYON_IN_DRAW, this.py-RAYON_IN_DRAW, 2*RAYON_IN_DRAW, 2*RAYON_IN_DRAW);   
     }
     
     public void dessinesupr(GraphicsContext context) {
-          context.fillOval(this.getPx(),this.getPy(),0,0);
+          context.fillOval(this.px,this.py,0,0);
     }
 
-    /**
-     * @return the px
-     */
-    public double getPx() {
-        return px;
-    }
-
-    /**
-     * @return the py
-     */
-    public double getPy() {
-        return py;
-    }
+ 
 
     @Override
     public double distancePoint(Point p2) {
@@ -84,7 +70,7 @@ public class NoeudSimple extends Noeud {
     @Override
     public void dessineSelection(GraphicsContext context) {
         context.setFill(Color.RED);
-        context.fillOval(this.getPx()-RAYON_IN_DRAW, this.getPy()-RAYON_IN_DRAW, 2*RAYON_IN_DRAW, 2*RAYON_IN_DRAW);
+        context.fillOval(this.px-RAYON_IN_DRAW, this.py-RAYON_IN_DRAW, 2*RAYON_IN_DRAW, 2*RAYON_IN_DRAW);
     }
 
     @Override
@@ -131,22 +117,9 @@ public class NoeudSimple extends Noeud {
 
     @Override
     public String afficheInfo() {
-        String res = "Id NoeudSimple : "+this.getId()+"\nCoordonné x : "+this.px+"\nCoordonné y : "+this.py+"\nForce sur x : "+this.Px+"\nForce sur y : "+this.Py;
+        String res = "Id NoeudSimple : "+this.getId()+"\nCoordonné x : "+this.px+"\nCoordonné y : "+this.py+"\nForce sur x : "+this.getForcePx()+"\nForce sur y : "+this.getForcePy();
         return res;
     }
 
-    /**
-     * @param Px the Px to set
-     */
-    public void setPx(double Px) {
-        this.Px = Px;
-    }
-
-    /**
-     * @param Py the Py to set
-     */
-    public void setPy(double Py) {
-        this.Py = Py;
-    }
-
+  
 }

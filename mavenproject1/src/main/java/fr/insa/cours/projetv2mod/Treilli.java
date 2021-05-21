@@ -350,6 +350,7 @@ public abstract class Treilli {
       if((2*nombreN == nombreNB+nombreNAS+2*nombreNAD)&&(testAE == false)){
           return 2*nombreN;
       } else {
+          
           return 0;
       }  
    } 
@@ -462,9 +463,9 @@ public abstract class Treilli {
                }
             }
         System.out.println(res);   
-        } else {
-            System.out.println("force du treilli non calculable");
-        }
+        } 
+          
+        
         Matrice resSys = res.ResSysLin();
         System.out.println(res.ResSysLin());
         for(int i = 0; i<this.testForce();i++){

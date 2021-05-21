@@ -28,6 +28,8 @@ public abstract class Appui extends Noeud {
         this.triangleTerrain = triangleTerrain;
         this.p1 = p1;
         this.posSurSegment = posSurSegment;
+        this.setForcePx(0);
+        this.setForcePy(0);
         if(p1 == 1){
             this.triangleTerrain.getSegment1().getListAppui().add(this);
         } else if( p1==2) {
@@ -43,6 +45,8 @@ public abstract class Appui extends Noeud {
         this.triangleTerrain = triangleTerrain;
         this.p1 = p1;
         this.posSurSegment = posSurSegment;
+        this.setForcePx(0);
+        this.setForcePy(0);
         if(p1 == 1){
             this.triangleTerrain.getSegment1().getListAppui().add(this);
         } else if( p1==2) {
@@ -84,7 +88,7 @@ public abstract class Appui extends Noeud {
     @Override
     public void dessineSelection(GraphicsContext context) {
         Point p = this.getcoordAppui(this.getP1(),this.getTriangleTerrain(),this.getPosSurSegment());
-        context.setFill(Color.WHITE);
+        context.setFill(Color.RED);
         context.fillOval(p.getPx()-RAYON_IN_DRAW, p.getPy()-RAYON_IN_DRAW, 2*RAYON_IN_DRAW, 2*RAYON_IN_DRAW);  
     }
 
