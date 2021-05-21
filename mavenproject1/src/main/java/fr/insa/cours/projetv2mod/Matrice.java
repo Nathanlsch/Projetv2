@@ -200,10 +200,7 @@ public class Matrice {
         }
         return LPGP;
     }
-    
-      
-    
-    
+
     
     public Matrice ResSysLin()
     {
@@ -247,23 +244,5 @@ public class Matrice {
         System.out.println("Solutions du système linéaire :");
         return res;
     }
-  
-
     
-    /*public static void main(String[] args) {
-        int n = 2;
-        int m = 3;
-        Matrice M = new Matrice(n,m);
-        System.out.println("Valeurs ?");
-        for (int i=0;i<n;i++)
-        {
-            for (int j=0;j<m;j++)
-            {
-                M.set(i, j, Lire.d());
-            }
-        }
-       System.out.println(M);
-       System.out.println(M.ResSysLin());
-    }*/
-
 } 

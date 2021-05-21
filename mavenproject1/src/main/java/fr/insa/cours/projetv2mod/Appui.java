@@ -139,7 +139,8 @@ public abstract class Appui extends Noeud {
         
     }
     
-    public SegmentTerrain SurSegment(){
+    //Renvoie le segment du triangle terrrain sur lequel l'appui est positionné
+    public SegmentTerrain giveSegmentTerrain(){
         SegmentTerrain res = null;
         if (this.p1 == 1){
             res = this.triangleTerrain.getSegment1();

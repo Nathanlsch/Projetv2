@@ -312,7 +312,6 @@ public abstract class Treilli {
                }
             }
    }*/
-  
     public int testForce(){
       int nombreNS=0;
       int nombreNB=0;
@@ -448,7 +447,7 @@ public abstract class Treilli {
                    if(num.getObj(key) instanceof AppuiSimple){
                        ajout(info,key,20);
                       int col = numCol(info,key);
-                      SegmentTerrain sgt = ((AppuiSimple) num.getObj(key)).SurSegment();
+                      SegmentTerrain sgt = ((AppuiSimple) num.getObj(key)).giveSegmentTerrain();
                       double angle = sgt.getDebut().getAngleOrientePoint(sgt.getFin()) + Math.PI/2;
                       res.set(ligne, col, Math.cos(angle));
                       res.set(ligne+1, col, Math.sin(angle));
