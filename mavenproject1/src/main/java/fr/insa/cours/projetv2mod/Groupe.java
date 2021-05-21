@@ -82,46 +82,6 @@ public class Groupe extends Treilli {
         return this.getContient().size();
     }
     
- public static Groupe groupeTest() {
-        NoeudSimple n1 = new NoeudSimple(11,15);
-        NoeudSimple n2 = new NoeudSimple(100, 20);
-        NoeudSimple n3 = new NoeudSimple(120, 100);
-        NoeudSimple n4 = new NoeudSimple(10, 110);
-        NoeudSimple n5 = new NoeudSimple(60, 50);
-        Point p1 = new Point(10,10);
-        Point p2 = new Point(100, 10);
-        Point p3 = new Point(100, 100);
-        Point p4 = new Point(10, 100);
-        Point p5 = new Point(50, 50);
-        TriangleTerrain t1 = new TriangleTerrain(p1,p2,p3);
-        TriangleTerrain t2 = new TriangleTerrain(p1,p3,p4);
-        TriangleTerrain t3 = new TriangleTerrain(p5,p2,p1);
-        Barre b1 = new Barre(n1,n2);
-        Groupe res = new Groupe();
-        res.add(b1);
-        res.add(n1);
-        res.add(n2);
-        res.add(n3);
-        res.add(n5);
-        res.add(t3);
-        res.add(t2);
-        res.add(t1);
-        try {
-            res.sauvegarde(new File("Groupe1.txt"));
-        } catch (IOException ex) {
-            throw new Error("problème : "+ex.getMessage());
-        }
-        return res;
-    }
- 
-    public static void testLecture(){
-        try {
-            Treilli lue = Treilli.lecture(new File("Groupe1.txt"));
-            System.out.print("Treilli lue : "+ lue);
-        } catch (IOException ex) {
-            throw new Error(ex);
-        }
-    }
  
     public Treilli plusProche(Point p, double distMax) {
         if (this.getContient().isEmpty()) {
@@ -167,40 +127,6 @@ public class Groupe extends Treilli {
         }
   }
         
-  public static void menuTexte() {
-        int rep = -1;
-        while (rep != 0) {
-            System.out.println("1) créer un terrain");
-            System.out.println("2) ajouter un triangle terrain");
-            System.out.println("3) ajouter un appui");
-            System.out.println("4) afficher le rectangle englobant");
-            System.out.println("0) quitter");
-            System.out.println("votre choix : ");
-            rep = Lire.i();
-            if (rep == 1) {
-              
-                Terrain terrain = Terrain.DemandeTerrain();
-                 
-            } else if (rep == 2) {
-                
-                TriangleTerrain triangle = TriangleTerrain.DemandeTriangle();
-                //add(triangle);
-                
-            } else if (rep == 3) {
-                
-                
-            } else if (rep == 4) {
-                
-                
-            }
-        }
-    }  
-
-    
-    public static void main(String[] args) {
-        testLecture();
-    }
-
     @Override
     public void dessine(GraphicsContext context) {
         for(Treilli f : this.getContient()){
@@ -307,12 +233,12 @@ public class Groupe extends Treilli {
 
     @Override
     public boolean supr(GraphicsContext context) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return false;
     }
 
     @Override
     public String afficheInfo() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return "";
     }
         
     }

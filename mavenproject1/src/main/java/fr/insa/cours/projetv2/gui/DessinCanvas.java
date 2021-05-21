@@ -22,8 +22,7 @@ public class DessinCanvas extends Pane{
     private mainPane main;
     private Canvas realCanvas;
     
-
-    
+    //Constructeur zone de dessin
     public DessinCanvas(mainPane main){
         this.main = main;
         this.realCanvas = new Canvas(this.getWidth(), this.getHeight());
@@ -43,6 +42,8 @@ public class DessinCanvas extends Pane{
         this.redrawAll();
     }
     
+    
+    //Redessine la zone de dessin
     public void redrawAll(){
     
     GraphicsContext context = this.realCanvas.getGraphicsContext2D();
@@ -57,6 +58,8 @@ public class DessinCanvas extends Pane{
     }
     }
 
+    
+    //Accesseur
     /**
      * @return the realCanvas
      */

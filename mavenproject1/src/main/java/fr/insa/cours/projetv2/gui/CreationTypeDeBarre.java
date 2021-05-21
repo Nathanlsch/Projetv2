@@ -44,7 +44,9 @@ public class CreationTypeDeBarre extends BorderPane {
     public CreationTypeDeBarre(mainPane main){
     
     this.main = main;
-            
+      
+    
+    //Declaration de toutes les cases
     TFnom = new TextField();
     TFnom.setMaxSize(longueurMax, hauteur);
     TFnom.setMinSize(longueurMin, hauteur);
@@ -120,12 +122,9 @@ public class CreationTypeDeBarre extends BorderPane {
     ajouter.setOnAction((t) -> {
         this.main.getControleur().ajouter(t);
     });
-    
-    
-    
-    
     }
-
+    
+    //Accesseur
     /**
      * @return the TFnom
      */

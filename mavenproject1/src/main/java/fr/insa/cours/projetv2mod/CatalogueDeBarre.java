@@ -12,7 +12,7 @@ import java.util.List;
  *
  * @author lasch
  */
-public abstract class CatalogueDeBarre extends Treilli{
+public abstract class CatalogueDeBarre {
     
     public static ArrayList<TypeDeBarre> listTypeDeBarre = new ArrayList<TypeDeBarre>();
 

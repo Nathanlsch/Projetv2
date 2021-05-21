@@ -261,38 +261,42 @@ public class Controleur {
         }
     }   
            
-           
-       
-    
-   
+    //Le bouton select change l'état à 10
     void boutonSelect(ActionEvent t) {
         this.changeEtat(10);
     }
-
+    
+    //Le bouton TriangleTerrain change l'état à 20
     void boutonTriangleTerrain(ActionEvent t) {
         this.changeEtat(20);
     }
 
+    //Le bouton Appui Simple change l'état à 30
     void AppuiSimple(ActionEvent t) {
         this.changeEtat(30);
     }
-
+    
+    //Le bouton Appui Double change l'état à 40
     void AppuiDouble(ActionEvent t) {
         this.changeEtat(40);
     }
-
+    
+    //Le bouton Appui Encastre change l'état à 50
     void AppuiEncastre(ActionEvent t) {
         this.changeEtat(50);
     }
-
+    
+    //Le bouton Noeud Simple change l'état à 60
     void NoeudSimple(ActionEvent t) {
         this.changeEtat(60);
     }
 
+    //Le bouton Barre change l'état à 70
     void Barre(ActionEvent t) {
         this.changeEtat(70);
     }
     
+    //Permet de sauvegarder un fichier
     void realSave(File f) {
         try {
             this.vue.getModel().sauvegarde(f);
@@ -310,6 +314,7 @@ public class Controleur {
         }
     }
 
+    //Permet de créer un fichier
     void menuNouveau(ActionEvent t) {
         Stage nouveau = new Stage();
         Scene sc = new Scene(new mainPane(nouveau),800,600);
@@ -319,7 +324,7 @@ public class Controleur {
         this.changeEtat(80);
     }
     
-    
+    //Permet de sauvegarder un fichier
     void menuSave(ActionEvent t) {
         if (this.vue.getCurFile() == null) {
             this.menuSaveAs(t);
@@ -328,6 +333,7 @@ public class Controleur {
         }
     }
     
+    //Permet de sauvegarder un fichier 
     void menuSaveAs(ActionEvent t) {
         FileChooser chooser = new FileChooser();
         File f = chooser.showSaveDialog(this.vue.getInStage());
@@ -336,6 +342,7 @@ public class Controleur {
         }
     }
     
+    //Permet d'ouvrir un fichier
     void menuOpen(ActionEvent t) {
         FileChooser chooser = new FileChooser();
         File f = chooser.showOpenDialog(this.vue.getInStage());
@@ -362,35 +369,43 @@ public class Controleur {
             }
         }
     }
-
+    
+    //Permet de rendre invisible la zone d'aafichage du texte
     void desactiver(ActionEvent t) {
         this.vue.getTest().setVisible(false);
     }
     
+    //Permet de rendre visible la zone d'afichage du texte
      void activer(ActionEvent t) {
         this.vue.getTest().setVisible(true);
     }
-
+     
+    
+    //Affiche l'indication quand le bouton aide triangle terrain est cliqué
     void tt(ActionEvent t) {
         this.vue.getTest().clear();
         this.vue.getTest().appendText("Pour créer un \ntriangle terrain \ncliqué 3 fois \ndans la zone de dessin\n");
     }
     
+    //Affiche l'indication quand le bouton aide appui est cliqué
     void appui(ActionEvent t) {
         this.vue.getTest().clear();
         this.vue.getTest().appendText("Pour créer un \nappui cliqué sur le \nsegment terrain d'un \ntriangle terrain \n");
     }
     
+    //Affiche l'indication quand le bouton aide noeud simple est cliqué
     void noeudSimple(ActionEvent t) {
         this.vue.getTest().clear();
         this.vue.getTest().appendText("Pour créer un \nnoeud simple \ncliqué sur la \nzone de dessin\n");
     }
     
+    //Affiche l'indication quand le bouton aide  barre est cliqué
     void barre(ActionEvent t) {
         this.vue.getTest().clear();
         this.vue.getTest().appendText("Pour créer une \nbarre cliqué \nsur deux \nnoeud\n");
     }
 
+    //Affiche l'interface de création d'un type de barre
     void TypeDeBarre(ActionEvent t) {
         Stage nouveau = new Stage();
         Scene sc = new Scene(this.creabarre = new CreationTypeDeBarre(this.vue),400,300);
@@ -399,6 +414,7 @@ public class Controleur {
         nouveau.show();
     }
     
+    //Convertie une string en double si possible sinon affiche une erreur.
     public double convert(String test, String nom){
         double res=0;
         try {
@@ -413,6 +429,7 @@ public class Controleur {
         return res;
     }
     
+    //verifie que la case n'est pas vide
     public void test(String test, String nom){
         if(test.isEmpty()){
             Alert alert = new Alert(AlertType.ERROR);
@@ -421,7 +438,8 @@ public class Controleur {
             alert.showAndWait();
         }
     }
-
+    
+    //creer le nouveau type de barre avec les donnée deja saisie 
     void ajouter(ActionEvent t) {
         
         String nom = this.creabarre.getTFnom().getText();
@@ -453,7 +471,8 @@ public class Controleur {
             this.creabarre.getTFresistanceMaxCompression().setText("");
         }
     }
-
+    
+    //affiche l'interface de visualisation des types de barres
     void listeTypeDeBarre(ActionEvent t) {
         Stage nouveau = new Stage();
         Scene sc = new Scene(new VueTypeDeBarre(this.vue),1000,300);
@@ -462,6 +481,7 @@ public class Controleur {
         nouveau.show(); 
     }
 
+    //Ouvre l'interface permettant de modifier un type de barre
     public void boutonModifier(ActionEvent t, TypeDeBarre type) {
         Stage nouveau = new Stage();
         Scene sc = new Scene(this.modifbarre = new ModificationTypeDeBarre(this.vue, type),400,300);
@@ -470,13 +490,15 @@ public class Controleur {
         nouveau.show();
     }
 
+    //supprime un type de barre 
     public void boutonSup(ActionEvent t, TypeDeBarre type) {
         type.supr(); 
         Alert alert = new Alert(AlertType.CONFIRMATION);
         alert.setHeaderText("Type de barre supprimé !");
         alert.showAndWait();
     }
-
+    
+    //Applique les modification au type de barre
     void appliquer(ActionEvent t, TypeDeBarre type) {
         String nom = this.modifbarre.getTFnom().getText();
         String cout = this.modifbarre.getTFcoutAuMetre().getText();
@@ -509,6 +531,8 @@ public class Controleur {
  
     }
     
+    
+    //Verifie que l'objet est dans le terrain 
     public boolean dansTerrain(double px, double py, Terrain terrain){
         boolean test = false;
         try{
@@ -525,6 +549,7 @@ public class Controleur {
         return test;
     }
 
+    //Affiche l'interface de visualisation des forces et appel la méthode les calculants 
     void calculdeforce(ActionEvent t) {
             int test = vue.getModel().testForce();
             if(test == 0){
@@ -541,6 +566,7 @@ public class Controleur {
             }  
         }
 
+    //Suprimme un objet ou un groupe d'objet selectionné du canvas 
     void supprimer(ActionEvent t, GraphicsContext context) {
             if(this.selection.size()<=1){
             for(Treilli y : this.selection){
@@ -549,51 +575,42 @@ public class Controleur {
             this.vue.getModel().getContient().remove(y);
             this.selection.clear();
             this.vue.redrawAll();
-            } else {
-                 System.out.println("probleme") ;  
-           }
+            } 
            }
             } else {
                for(Treilli y : this.selection){
-                   System.out.println("etape1");
                    if(y instanceof Barre){
                       boolean test = y.supr(context);
                       if (test==true){
                       this.vue.getModel().getContient().remove(y);
                       this.selection.remove(y);
                       this.vue.redrawAll();
-                      } else {
-                             System.out.println("probleme") ;  
-                      }   
+                      }    
                 }
               }
                for(Treilli y : this.selection){
-                   System.out.println("etape2");
                    if(y instanceof Noeud){
                       boolean test = y.supr(context);
                       if (test==true){
                       this.vue.getModel().getContient().remove(y);
                       this.selection.remove(y);
                       this.vue.redrawAll();
-                      } else {
-                             System.out.println("probleme") ;  
+                      }
                       }   
                 }
               }
               for(Treilli y : this.selection){
-                  System.out.println("etape3");
                       boolean test = y.supr(context);
                       if (test==true){
                       this.vue.getModel().getContient().remove(y);
                       this.selection.remove(y);
                       this.vue.redrawAll();
-                      } else {
-                             System.out.println("probleme") ;  
-                      }   
+                      } 
                 }   
             }
-    }
+    
 
+    //Permet de mettre en evidence l'objet dont l'id est saisi
     void visualiser(String text) {
         this.selection.clear();
         int id = Integer.parseInt(text);
@@ -602,7 +619,8 @@ public class Controleur {
         this.vue.redrawAll(); 
         
     }
-
+    
+    //Associe un type de barre a une barre
     void assosTypeDeBarre() {
         if(typeDeBarre == null){
             this.vue.getTest().clear();
@@ -623,11 +641,13 @@ public class Controleur {
       }
     }
     }
-
+    
+    //Selectionne le type de barre a associé 
     void boutonSelect(ActionEvent t, TypeDeBarre h) {
         typeDeBarre = h;
     }
-
+    
+    //Affiche des informations sur l'objet selectionné 
     void information() {
         this.vue.getTest().clear();
          if(this.selection.size() ==1){
@@ -635,7 +655,8 @@ public class Controleur {
             this.vue.getTest().appendText(info);
          }
     }
-
+    
+    //Ouvre l'interface permattant de definir les forces exterieures a un noeud
     void assosForce() {
         if((this.selection.size() ==1)&&(this.selection.get(0) instanceof Noeud)){
             Stage nouveau = new Stage();
@@ -645,7 +666,8 @@ public class Controleur {
             nouveau.show();
         }
     }
-
+    
+    //Ajoute la force exterieure a un noeud
     void ajouterForce(ActionEvent t) {
         String X = this.Force.getTFcomposanteX().getText();
         String Y = this.Force.getTFcomposanteY().getText();
@@ -663,10 +685,7 @@ public class Controleur {
             this.Force.getTFcomposanteY().setText("");
         
     }
-             
-        
-
-        
+ 
     }
     
     
