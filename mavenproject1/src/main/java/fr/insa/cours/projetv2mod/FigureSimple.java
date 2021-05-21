@@ -13,7 +13,7 @@ import javafx.scene.paint.Color;
  *
  * @author francois
  */
-public abstract class FigureSimple extends Treilli {
+public abstract class FigureSimple extends Treillis {
 
     private Color couleur;
 

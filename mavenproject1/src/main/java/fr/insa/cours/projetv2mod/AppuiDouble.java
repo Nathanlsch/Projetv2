@@ -6,7 +6,7 @@
 package fr.insa.cours.projetv2mod;
 
 import static fr.insa.cours.projetv2mod.NoeudSimple.RAYON_IN_DRAW;
-import static fr.insa.cours.projetv2mod.Treilli.Save;
+import static fr.insa.cours.projetv2mod.Treillis.Save;
 import java.io.IOException;
 import java.io.Writer;
 import java.util.ArrayList;
@@ -61,7 +61,7 @@ public class AppuiDouble extends Appui {
     }
 
     @Override
-    public boolean supr(GraphicsContext context) {
+    public boolean suppr(GraphicsContext context) {
         if(this.getBarreAssos().isEmpty()){
             this.suprAppui();
             return true;

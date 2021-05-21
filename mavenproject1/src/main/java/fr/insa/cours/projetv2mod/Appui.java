@@ -119,7 +119,7 @@ public abstract class Appui extends Noeud {
     }
 
     @Override
-    public void Identificateur(Numeroteur<Treilli> num) {
+    public void Identificateur(Numeroteur<Treillis> num) {
         this.setId(num.creeID(this));
     }
     

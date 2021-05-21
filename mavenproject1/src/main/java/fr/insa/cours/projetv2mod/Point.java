@@ -190,7 +190,7 @@ public static Point DemandePoint(){
     }
 
     @Override
-    public void Identificateur(Numeroteur<Treilli> num) {
+    public void Identificateur(Numeroteur<Treillis> num) {
         this.id = num.creeID(this);
     }
 
@@ -223,7 +223,7 @@ public static Point DemandePoint(){
 
 
     @Override
-    public boolean supr(GraphicsContext context) {
+    public boolean suppr(GraphicsContext context) {
         num.suprObj(this);
         this.id=-1;
         this.px = -1;

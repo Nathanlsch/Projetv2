@@ -6,7 +6,7 @@
 package fr.insa.cours.projetv2.gui;
 
 
-import fr.insa.cours.projetv2mod.Treilli;
+import fr.insa.cours.projetv2mod.Treillis;
 import fr.insa.cours.projetv2mod.Groupe;
 import java.util.List;
 import javafx.scene.canvas.Canvas;
@@ -50,9 +50,9 @@ public class DessinCanvas extends Pane{
     context.clearRect(0, 0, this.realCanvas.getWidth(), this.realCanvas.getHeight());
     Groupe model = this.main.getModel();
     model.dessine(context);
-    List<Treilli> select = this.main.getControleur().getSelection();
+    List<Treillis> select = this.main.getControleur().getSelection();
     if(! select.isEmpty()){
-        for (Treilli f : select){
+        for (Treillis f : select){
             f.dessineSelection(context);
         }
     }

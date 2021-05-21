@@ -5,7 +5,7 @@
  */
 package fr.insa.cours.projetv2mod;
 
-import static fr.insa.cours.projetv2mod.Treilli.Save;
+import static fr.insa.cours.projetv2mod.Treillis.Save;
 import java.io.IOException;
 import java.io.Writer;
 import javafx.scene.canvas.GraphicsContext;
@@ -117,7 +117,7 @@ public class Barre extends FigureSimple{
     }
     
     @Override
-    public void Identificateur(Numeroteur<Treilli> num) {
+    public void Identificateur(Numeroteur<Treillis> num) {
         this.id = num.creeID(this);
     }
     
@@ -161,7 +161,7 @@ public class Barre extends FigureSimple{
     }
 
     @Override
-    public boolean supr(GraphicsContext context) {
+    public boolean suppr(GraphicsContext context) {
         num.suprObj(this);
         this.id = -1;
         this.ndepart.getBarreAssos().remove(this);

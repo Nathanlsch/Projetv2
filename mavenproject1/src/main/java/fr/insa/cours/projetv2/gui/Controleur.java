@@ -9,7 +9,7 @@ import fr.insa.cours.projetv2mod.AppuiDouble;
 import fr.insa.cours.projetv2mod.AppuiEncastre;
 import fr.insa.cours.projetv2mod.AppuiSimple;
 import fr.insa.cours.projetv2mod.Barre;
-import fr.insa.cours.projetv2mod.Treilli;
+import fr.insa.cours.projetv2mod.Treillis;
 import fr.insa.cours.projetv2mod.Groupe;
 import fr.insa.cours.projetv2mod.Noeud;
 import fr.insa.cours.projetv2mod.NoeudSimple;
@@ -41,14 +41,14 @@ public class Controleur {
     
     private Point pclick;
     private Point pclick2;
-    private Treilli proche;
+    private Treillis proche;
     private double MAX_VALUE = 50;
     private Point p1;
     private Point p2;
     private Point p3;
     private Cursor cursor;
     
-    private List<Treilli> selection;
+    private List<Treillis> selection;
     
     private mainPane vue;
     private CreationTypeDeBarre creabarre;
@@ -69,7 +69,7 @@ public class Controleur {
         this.num = this.vue.getModel().getNum();
     }
     
-      public List<Treilli> getSelection() {
+      public List<Treillis> getSelection() {
         return selection;
     }
       
@@ -171,7 +171,7 @@ public class Controleur {
        //Création d'un appui simple
        } else if (this.etat==30){
            pclick = new Point(t.getX(), t.getY());
-           Treilli proche = this.vue.getModel().plusProche(pclick, MAX_VALUE);
+           Treillis proche = this.vue.getModel().plusProche(pclick, MAX_VALUE);
            if(proche instanceof TriangleTerrain){
               int p1 = ((TriangleTerrain) proche).distancePointInt(pclick);
               SegmentTerrain segment = ((TriangleTerrain) proche).distancePointSegment(pclick);
@@ -186,7 +186,7 @@ public class Controleur {
        //Création d'un appui double
        } else if (this.etat==40){
            pclick = new Point(t.getX(), t.getY());
-           Treilli proche = this.vue.getModel().plusProche(pclick, MAX_VALUE);
+           Treillis proche = this.vue.getModel().plusProche(pclick, MAX_VALUE);
            if(proche instanceof TriangleTerrain){
               int p1 = ((TriangleTerrain) proche).distancePointInt(pclick);
               SegmentTerrain segment = ((TriangleTerrain) proche).distancePointSegment(pclick);
@@ -201,7 +201,7 @@ public class Controleur {
        //Création d'un appui encastré
        } else if (this.etat==50){
            pclick = new Point(t.getX(), t.getY());
-           Treilli proche = this.vue.getModel().plusProche(pclick, MAX_VALUE);
+           Treillis proche = this.vue.getModel().plusProche(pclick, MAX_VALUE);
            if(proche instanceof TriangleTerrain){
               int p1 = ((TriangleTerrain) proche).distancePointInt(pclick);
               SegmentTerrain segment = ((TriangleTerrain) proche).distancePointSegment(pclick);
@@ -228,7 +228,7 @@ public class Controleur {
        //Création d'une barre
         } else if (this.etat==70){ 
             pclick = new Point(t.getX(), t.getY());
-            Treilli proche = this.vue.getModel().NoeudplusProche(pclick, MAX_VALUE);
+            Treillis proche = this.vue.getModel().NoeudplusProche(pclick, MAX_VALUE);
             if(proche instanceof Noeud){
                 this.selection.add(proche);
                 System.out.println(this.selection.get(0));
@@ -237,7 +237,7 @@ public class Controleur {
             }
         } else if (this.etat==71){ 
             pclick = new Point(t.getX(), t.getY()); 
-            Treilli proche = this.vue.getModel().NoeudplusProche(pclick, MAX_VALUE);
+            Treillis proche = this.vue.getModel().NoeudplusProche(pclick, MAX_VALUE);
             if(proche instanceof Noeud){
                 Groupe model = this.vue.getModel();
                 model.add(new Barre((Noeud) this.selection.get(0),(Noeud) proche));
@@ -349,7 +349,7 @@ public class Controleur {
         if (f != null) {
             try {
                 System.out.println("Avant");
-                Treilli lue = Treilli.lecture(f);
+                Treillis lue = Treillis.lecture(f);
                 System.out.println("Apres");
                 Groupe glu = (Groupe) lue;
                 Stage nouveau = new Stage();
@@ -569,8 +569,8 @@ public class Controleur {
     //Suprimme un objet ou un groupe d'objet selectionné du canvas 
     void supprimer(ActionEvent t, GraphicsContext context) {
             if(this.selection.size()<=1){
-            for(Treilli y : this.selection){
-            boolean test = y.supr(context);
+            for(Treillis y : this.selection){
+            boolean test = y.suppr(context);
             if (test==true){
             this.vue.getModel().getContient().remove(y);
             this.selection.clear();
@@ -578,9 +578,9 @@ public class Controleur {
             } 
            }
             } else {
-               for(Treilli y : this.selection){
+               for(Treillis y : this.selection){
                    if(y instanceof Barre){
-                      boolean test = y.supr(context);
+                      boolean test = y.suppr(context);
                       if (test==true){
                       this.vue.getModel().getContient().remove(y);
                       this.selection.remove(y);
@@ -588,9 +588,9 @@ public class Controleur {
                       }    
                 }
               }
-               for(Treilli y : this.selection){
+               for(Treillis y : this.selection){
                    if(y instanceof Noeud){
-                      boolean test = y.supr(context);
+                      boolean test = y.suppr(context);
                       if (test==true){
                       this.vue.getModel().getContient().remove(y);
                       this.selection.remove(y);
@@ -599,8 +599,8 @@ public class Controleur {
                       }   
                 }
               }
-              for(Treilli y : this.selection){
-                      boolean test = y.supr(context);
+              for(Treillis y : this.selection){
+                      boolean test = y.suppr(context);
                       if (test==true){
                       this.vue.getModel().getContient().remove(y);
                       this.selection.remove(y);
@@ -614,7 +614,7 @@ public class Controleur {
     void visualiser(String text) {
         this.selection.clear();
         int id = Integer.parseInt(text);
-        Treilli res = (Treilli) num.getObj(id);
+        Treillis res = (Treillis) num.getObj(id);
         this.selection.add(res);
         this.vue.redrawAll(); 
         

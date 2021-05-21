@@ -11,9 +11,9 @@ import fr.insa.cours.projetv2.gui.mainPane;
 import java.io.IOException;
 import java.io.Writer;
 import javafx.scene.canvas.GraphicsContext;
-import static fr.insa.cours.projetv2mod.Treilli.Save;
+import static fr.insa.cours.projetv2mod.Treillis.Save;
 import static fr.insa.cours.projetv2mod.CatalogueDeBarre.listTypeDeBarre;
-import static fr.insa.cours.projetv2mod.Treilli.num;
+import static fr.insa.cours.projetv2mod.Treillis.num;
 import java.util.Set;
 import javafx.scene.control.Button;
 
@@ -21,7 +21,7 @@ import javafx.scene.control.Button;
  *
  * @author celiajoy
  */
-public class TypeDeBarre extends Treilli {
+public class TypeDeBarre extends Treillis {
     
     private int id;
     private String nom;
@@ -100,7 +100,7 @@ public class TypeDeBarre extends Treilli {
         return "TypeDeBarre;" + this.getId() + ";" + this.getLongueurMin() +";"+ this.getResistanceMaxTension()+";"+ this.getResistanceMaxCompression();
     }
     
-    public void Identificateur(Numeroteur<Treilli> num) {
+    public void Identificateur(Numeroteur<Treillis> num) {
         this.setId(num.creeID(this));
     }
 
@@ -233,7 +233,7 @@ public class TypeDeBarre extends Treilli {
 }
 
     @Override
-    public boolean supr(GraphicsContext context) {
+    public boolean suppr(GraphicsContext context) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 

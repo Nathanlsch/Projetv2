@@ -5,7 +5,7 @@
  */
 package fr.insa.cours.projetv2mod;
 
-import static fr.insa.cours.projetv2mod.Treilli.Save;
+import static fr.insa.cours.projetv2mod.Treillis.Save;
 import java.io.IOException;
 import java.io.Writer;
 import java.util.ArrayList;
@@ -80,7 +80,7 @@ public class NoeudSimple extends Noeud {
     }
     
     @Override
-    public void Identificateur(Numeroteur<Treilli> num) {
+    public void Identificateur(Numeroteur<Treillis> num) {
         this.setId(num.creeID(this));
     }
     
@@ -102,7 +102,7 @@ public class NoeudSimple extends Noeud {
     }
 
     @Override
-    public boolean supr(GraphicsContext context) {
+    public boolean suppr(GraphicsContext context) {
         if(this.getBarreAssos().isEmpty()){
             num.suprObj(this);
             this.setId(-1);

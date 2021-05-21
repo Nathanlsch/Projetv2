@@ -23,7 +23,7 @@ import javafx.scene.paint.Color;
  *
  * @author francois
  */
-public abstract class Treilli {
+public abstract class Treillis {
 
     /**
      * null si aucun Groupe
@@ -31,11 +31,11 @@ public abstract class Treilli {
     private Groupe groupe;
     
     
-    public static Numeroteur<Treilli> num = new Numeroteur();
+    public static Numeroteur<Treillis> num = new Numeroteur();
     
-    public static Numeroteur<Treilli> num2 = new Numeroteur();
+    public static Numeroteur<Treillis> num2 = new Numeroteur();
     
-    public static ArrayList<Treilli> Save = new ArrayList<Treilli>();
+    public static ArrayList<Treillis> Save = new ArrayList<Treillis>();
 
     public Groupe getGroupe() {
         return groupe;
@@ -46,17 +46,17 @@ public abstract class Treilli {
     }
     
     public void clear() {
-        List<Treilli> toRemove = new ArrayList<>(this.Save);
+        List<Treillis> toRemove = new ArrayList<>(this.Save);
         this.removeAll(toRemove);
     }
     
-    public void removeAll(List<Treilli> lf) {
-        for(Treilli f : lf) {
+    public void removeAll(List<Treillis> lf) {
+        for(Treillis f : lf) {
             this.remove(f);
         }
     }
     
-     public void remove(Treilli f) {
+     public void remove(Treillis f) {
         if (f.getGroupe() != this) {
             throw new Error("la figure n'est pas dans le groupe");
         }
@@ -78,9 +78,9 @@ public abstract class Treilli {
 
     public abstract void dessineSelection(GraphicsContext context); 
         
-    public abstract void Identificateur(Numeroteur<Treilli> num);
+    public abstract void Identificateur(Numeroteur<Treillis> num);
     
-    public abstract boolean supr(GraphicsContext context);
+    public abstract boolean suppr(GraphicsContext context);
    
     public abstract void save(Writer w) throws IOException;
     
@@ -90,8 +90,8 @@ public abstract class Treilli {
         }
     }
     
-    public static Treilli lecture(File fin) throws IOException {
-        Treilli derniere = null;
+    public static Treillis lecture(File fin) throws IOException {
+        Treillis derniere = null;
         try(BufferedReader bin = new BufferedReader(new FileReader(fin))) {
             String line;
             while((line = bin.readLine())!= null && line.length() != 0){
@@ -192,7 +192,7 @@ public abstract class Treilli {
                     num2.associe(id, ng);
                     for ( int i =2; i< bouts.length; i++){
                         int idSous = Integer.parseInt(bouts[i]);
-                        Treilli tre = num2.getObj(idSous);
+                        Treillis tre = num2.getObj(idSous);
                         ng.add(tre);
                         if(tre instanceof Terrain){
                             ng.setTerrain((Terrain) tre);
@@ -211,7 +211,7 @@ public abstract class Treilli {
                     num2.associe(id, terrain);
                     for ( int i =9; i< bouts.length; i++){
                         int idSous = Integer.parseInt(bouts[i]);
-                        Treilli tri = num2.getObj(idSous);
+                        Treillis tri = num2.getObj(idSous);
                             terrain.getContientTriangle().add((TriangleTerrain) tri);
                     }
                     derniere = terrain;
@@ -239,14 +239,14 @@ public abstract class Treilli {
     /**
      * @return the num
      */
-    public Numeroteur<Treilli> getNum() {
+    public Numeroteur<Treillis> getNum() {
         return num;
     }
 
     /**
      * @param num the num to set
      */
-    public void setNum(Numeroteur<Treilli> num) {
+    public void setNum(Numeroteur<Treillis> num) {
         this.num = num;
     }
    
@@ -259,59 +259,7 @@ public abstract class Treilli {
         }
         return nbrBarre;
     }
-    
-  /* public static Matrice force(){
-    //Pour  chaque noeud S_i trouver les barres B_i qui passent par S_i
-        for(int i = 0; i< num.getIdversObjet().size();i++){
-            Matrice Systeme = new Matrice(0,getNombreBarre()+2);
-            
-            if(num.getObj(i) instanceof Noeud){
-                Noeud Noeud = (Noeud) num.getObj(i);
-               //Pour chaque barre
-               for (int j=0; i < Noeud.getBarreAssos().size(); j++) {
-                   
-                //Si c'est un noeud simple
-                if (Noeud instanceof NoeudSimple) {
-                    //POUR 1 NOEUD SIMPLE
-                        //On crée une première matrice système, correspondant à la première barre associée
-                        Matrice SystemeBarre = new Matrice(1,2);
-                        Barre Barrei = Noeud.getBarreAssos().get(i);
-                        Noeud nDepartBarrei = Barrei.getNdepart();
-                        Noeud nFinBarrei = Barrei.getNfin();
-
-                        double AngleBarrex = nDepartBarrei.getcoordAppui().getAngleOriente(nFinBarrei.getcoordAppui());
-                        Systeme.set(0,0,Math.cos(AngleBarrex));
-                        Systeme.set(0,1,Math.sin(AngleBarrex));
-
-                        //Pour les autres barres associées, on va concaténer les colonnes pour le système
-                        for (int y=1; i < Noeud.getBarreAssos().size(); y++) {
-                        Matrice SystemeBarrei = new Matrice(1,2);
-                                Barre Barrey = Noeud.getBarreAssos().get(y);
-                                Noeud nDepartBarrey = Barrey.getNdepart();
-                                Noeud nFinBarrey = Barrey.getNfin();
-
-                                double AngleBarrey = nDepartBarrey.getcoordAppui().getAngleOriente(nFinBarrey.getcoordAppui());
-                                SystemeBarrei.set(0,0,Math.cos(AngleBarrey));
-                                SystemeBarrei.set(0,1,Math.sin(AngleBarrey));
-
-                                SystemeBarre.concatCol(SystemeBarrei);
-                            }
-                        //Ensuite on concatène Rx et Ry 
-                        //>> Problème si la grande matrice est de taille plus grande, Rx et Ry ne sont pas à la bonne place
-                        //Ils devraient être à la dernière colonne de la grande matrice
-                        Matrice SystemeR = new Matrice (1,2);
-                        SystemeBarre.concatCol(SystemeR);
-                        
-                        //On obtient une matrice de [nbarres + 1] [nBarres + 1]
-                        //Il faut concaténer à la grande matrice 
-                        Systeme.concatLig(SystemeBarre);
-                }
-                    
-                }
-                 
-               }
-            }
-   }*/
+  
     public int testForce(){
       int nombreNS=0;
       int nombreNB=0;

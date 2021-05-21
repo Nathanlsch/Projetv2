@@ -105,7 +105,7 @@ public class Terrain extends FigureSimple{
     }
 
     @Override
-    public void Identificateur(Numeroteur<Treilli> num) {
+    public void Identificateur(Numeroteur<Treillis> num) {
         this.id = num.creeID(this);
     }
 
@@ -168,7 +168,7 @@ public class Terrain extends FigureSimple{
     
 
     @Override
-    public boolean supr(GraphicsContext context) {
+    public boolean suppr(GraphicsContext context) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 

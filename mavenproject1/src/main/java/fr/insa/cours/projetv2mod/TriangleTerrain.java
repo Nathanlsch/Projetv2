@@ -6,7 +6,7 @@
 package fr.insa.cours.projetv2mod;
 
 import fr.insa.cours.projetv2.recup.Lire;
-import static fr.insa.cours.projetv2mod.Treilli.Save;
+import static fr.insa.cours.projetv2mod.Treillis.Save;
 import java.io.IOException;
 import java.io.Writer;
 import javafx.scene.canvas.GraphicsContext;
@@ -159,7 +159,7 @@ public class TriangleTerrain extends FigureSimple{
     }
     
     @Override
-    public void Identificateur(Numeroteur<Treilli> num) {
+    public void Identificateur(Numeroteur<Treillis> num) {
         this.id = num.creeID(this);
     }
     
@@ -188,12 +188,12 @@ public class TriangleTerrain extends FigureSimple{
     }
 
      @Override
-    public boolean supr(GraphicsContext context) {
+    public boolean suppr(GraphicsContext context) {
         if(this.testAppuiTriangle() == true){
             num.suprObj(this);
-            this.Segment1.supr(context);
-            this.Segment2.supr(context);
-            this.Segment3.supr(context);
+            this.Segment1.suppr(context);
+            this.Segment2.suppr(context);
+            this.Segment3.suppr(context);
             return true;
         } else {
             System.out.println("Un segement contient un appui");
