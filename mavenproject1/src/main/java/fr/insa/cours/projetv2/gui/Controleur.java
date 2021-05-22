@@ -384,25 +384,25 @@ public class Controleur {
     //Affiche l'indication quand le bouton aide triangle terrain est cliqué
     void tt(ActionEvent t) {
         this.vue.getTest().clear();
-        this.vue.getTest().appendText("Pour créer un \ntriangle terrain \ncliqué 3 fois \ndans la zone de dessin\n");
+        this.vue.getTest().appendText("Pour créer un \ntriangle terrain, \ncliquez 3 fois \ndans la zone de dessin\n");
     }
     
     //Affiche l'indication quand le bouton aide appui est cliqué
     void appui(ActionEvent t) {
         this.vue.getTest().clear();
-        this.vue.getTest().appendText("Pour créer un \nappui cliqué sur le \nsegment terrain d'un \ntriangle terrain \n");
+        this.vue.getTest().appendText("Pour créer un \nappui, cliquez sur le \nsegment terrain d'un \ntriangle terrain \n");
     }
     
     //Affiche l'indication quand le bouton aide noeud simple est cliqué
     void noeudSimple(ActionEvent t) {
         this.vue.getTest().clear();
-        this.vue.getTest().appendText("Pour créer un \nnoeud simple \ncliqué sur la \nzone de dessin\n");
+        this.vue.getTest().appendText("Pour créer un \nnoeud simple \n,cliquez sur la \nzone de dessin\n");
     }
     
     //Affiche l'indication quand le bouton aide  barre est cliqué
     void barre(ActionEvent t) {
         this.vue.getTest().clear();
-        this.vue.getTest().appendText("Pour créer une \nbarre cliqué \nsur deux \nnoeud\n");
+        this.vue.getTest().appendText("Pour créer une \nbarre, cliquez \nsur deux \nnoeud\n");
     }
 
     //Affiche l'interface de création d'un type de barre
