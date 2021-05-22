@@ -153,9 +153,6 @@ public class Barre extends FigureSimple{
             return Math.atan2(P2.getPy() - P1.getPy(), P2.getPx() - P1.getPx());
         }
 
-    /**
-     * @return the angle
-     */
     public double getAngle() {
         return angle;
     }

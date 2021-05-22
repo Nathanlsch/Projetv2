@@ -19,34 +19,29 @@ import javafx.scene.paint.Color;
 public abstract class Noeud extends FigureSimple{
     
     private double ForcePx;
-    private double ForcePy;
-
-    /**
-     * @return the BarreAssos
-     */
-    public List<Barre> getBarreAssos() {
-        return BarreAssos;
-    }
-
-    /**
-     * @param BarreAssos the BarreAssos to set
-     */
-    public void setBarreAssos(List<Barre> BarreAssos) {
-        this.BarreAssos = BarreAssos;
-    }
-    
-    public int nombreBarre(){
-       return this.getBarreAssos().size();
-    }
-   
+    private double ForcePy;  
     private int id;
     private List<Barre> BarreAssos;
     
     public Noeud() {
       super(Color.BLACK);       
     }
+    
     public Noeud(Color col) {
       super(col);       
+    }
+    
+    
+    public List<Barre> getBarreAssos() {
+        return BarreAssos;
+    }
+
+    public void setBarreAssos(List<Barre> BarreAssos) {
+        this.BarreAssos = BarreAssos;
+    }
+    
+    public int nombreBarre(){
+       return this.getBarreAssos().size();
     }
     
     public abstract Point getcoordAppui();
@@ -55,16 +50,10 @@ public abstract class Noeud extends FigureSimple{
     @Override
     public abstract void save(Writer w) throws IOException;
 
-    /**
-     * @return the id
-     */
     public int getId() {
         return id;
     }
 
-    /**
-     * @param id the id to set
-     */
     public void setId(int id) {
         this.id = id;
     }
@@ -76,30 +65,18 @@ public abstract class Noeud extends FigureSimple{
             return Math.atan2(P2.getPy() - P1.getPy(), P2.getPx() - P1.getPx());
         }
 
-    /**
-     * @return the ForcePx
-     */
     public double getForcePx() {
         return ForcePx;
     }
 
-    /**
-     * @param ForcePx the ForcePx to set
-     */
     public void setForcePx(double ForcePx) {
         this.ForcePx = ForcePx;
     }
 
-    /**
-     * @return the ForcePy
-     */
     public double getForcePy() {
         return ForcePy;
     }
 
-    /**
-     * @param ForcePy the ForcePy to set
-     */
     public void setForcePy(double ForcePy) {
         this.ForcePy = ForcePy;
     }

@@ -89,23 +89,15 @@ public class Numeroteur<TO> {
         this.getObjetversId().remove(obj, id);
     }
 
-    /**
-     * @return the idversObjet
-     */
+
     public TreeMap<Integer,TO> getIdversObjet() {
         return idversObjet;
     }
 
-    /**
-     * @return the objetversId
-     */
     public Map<TO,Integer> getObjetversId() {
         return objetversId;
     }
 
-    /**
-     * @return the prochainID
-     */
     public int getProchainID() {
         return prochainID;
     }

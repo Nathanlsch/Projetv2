@@ -69,7 +69,7 @@ public final class Point extends FigureSimple{
         res.py = (this.py + p2.py) / 2;
         return res;
     }
-    
+    /*
      //Calculer le produit scalaire entre les vecteurs formés par a(PNoeud,P1), b(PNoeud,P2)
         public double ProduitScalaire (Point P1, Point P2) {
             //Calculer les coordonnées du vecteur a(PNoeud,P1)
@@ -99,6 +99,7 @@ public final class Point extends FigureSimple{
         return Math.acos(this.ProduitScalaire(Point1, Point2)/(A*B));
         
     }
+    */
         
         public double signe (Point P1, Point P2) {
             double pNx = this.getPx();
@@ -113,7 +114,7 @@ public final class Point extends FigureSimple{
             return (p1x - pNx) * (p2y - pNy) - (p2x - pNx) * (p1y - pNy);
         }
         
-        public boolean PointDansTriangle (Point P1, Point P2, Point P3) {
+        public boolean dansTriangle (Point P1, Point P2, Point P3) {
             double d1, d2, d3;
             boolean neg, pos;
             
@@ -133,40 +134,11 @@ public final class Point extends FigureSimple{
         return "{Point ; abs : " + this.px + " ; ord : " + this.py + "}" ;
     }
 
-    public static void testDistance() {
-        Point p1;
-        Point point2;
-        Point pp, mi;
-        p1 = new Point(0, 0);
-        point2 = new Point(1, 2);
-        pp = new Point(1, 1);
-        double dist = p1.distancePoint(point2);
-        double dist2 = pp.distancePoint(p1);
-        System.out.println("distance : " + dist);
-        mi = p1.milieu(pp);
-        System.out.println("milieu : " + mi);
-    }
-
+    
     public double minX() {
         return this.px;
     }
     
-    public static void testConstructeur() {
-        Point p1;
-        Point p2;
-        Point p3;
-        p1 = new Point();
-        p2 = new Point(1, 2);
-        p3 = new Point(0, 0);
-        System.out.println("p1 = " + p1);
-        System.out.println("p2 = " + p2);
-        System.out.println("p3 = " + p3);
-    }
-
-    public static void main(String[] args) {
-//        testDistance();
-testConstructeur();
-    }
 public static Point DemandePoint(){
     
     System.out.println("Donner l'abscisse");
@@ -177,7 +149,6 @@ public static Point DemandePoint(){
     return point;
   
 }
-
 
     @Override
     public void dessine(GraphicsContext context) {

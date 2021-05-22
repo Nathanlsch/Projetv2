@@ -64,7 +64,7 @@ public class Terrain extends FigureSimple{
     }
     
     
-    public static Terrain DemandeTerrain(){
+    public static Terrain demandeTerrain(){
         
         System.out.println("Donner l'abscisse minimum");
            double minX = Lire.d();
