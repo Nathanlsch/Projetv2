@@ -396,13 +396,13 @@ public class Controleur {
     //Affiche l'indication quand le bouton aide noeud simple est cliqué
     void noeudSimple(ActionEvent t) {
         this.vue.getTest().clear();
-        this.vue.getTest().appendText("Pour créer un \nnoeud simple \n,cliquez sur la \nzone de dessin\n");
+        this.vue.getTest().appendText("Pour créer un \nnoeud simple, \ncliquez sur la \nzone de dessin\n");
     }
     
     //Affiche l'indication quand le bouton aide  barre est cliqué
     void barre(ActionEvent t) {
         this.vue.getTest().clear();
-        this.vue.getTest().appendText("Pour créer une \nbarre, cliquez \nsur deux \nnoeud\n");
+        this.vue.getTest().appendText("Pour créer une \nbarre, cliquez \nsur deux \nnoeuds\n");
     }
 
     //Affiche l'interface de création d'un type de barre
