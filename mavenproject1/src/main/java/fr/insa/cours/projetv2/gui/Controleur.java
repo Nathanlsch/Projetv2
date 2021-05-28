@@ -396,7 +396,7 @@ public class Controleur {
     //Affiche l'indication quand le bouton aide noeud simple est cliqué
     void noeudSimple(ActionEvent t) {
         this.vue.getTest().clear();
-        this.vue.getTest().appendText("Pour créer un \nnoeud simple, \ncliquez sur la \nzone de dessin\n");
+        this.vue.getTest().appendText("Pour créer un \nnoeud simple, \nclique sur la \nzone de dessin\n");
     }
     
     //Affiche l'indication quand le bouton aide  barre est cliqué
